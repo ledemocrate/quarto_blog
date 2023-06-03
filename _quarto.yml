@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Artisanat de la Data - GOLLENTZ Quentin"
+  description: "Blog sur les travaux réalisés dans le cadre de la data"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: reddit
+        href: https://www.reddit.com/user/goldentzgrahams
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+editor: visual
+
