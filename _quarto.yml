@@ -22,6 +22,5 @@ website:
 format:
   html:
     theme: darkly
-    
-editor: visual
+    css: styles.css
 
