@@ -2,19 +2,25 @@ project:
   type: website
 
 website:
-  title: "Artisanat de la Data - GOLLENTZ Quentin"
+  title: "Société Alsacienne d'Artisanat de la Data"
   description: "Blog sur les travaux réalisés dans le cadre de la data"
   navbar:
     right:
-      - about.qmd
+      - text: Journal
+        href: blog.qmd 
       - icon: github
-        href: https://github.com/
+      - href : /posts/
+      - icon: github
+        href: https://github.com/ledemocrate
       - icon: reddit
         href: https://www.reddit.com/user/goldentzgrahams
+      - icon: linkedin
+        href: https://www.linkedin.com/in/quentin-gollentz-697993172/
+      - icon: playstation
+        href: https://www.playstation.com/fr-fr/playstation-network/
 format:
   html:
-    theme: cosmo
-    css: styles.css
-
+    theme: darkly
+    
 editor: visual
 

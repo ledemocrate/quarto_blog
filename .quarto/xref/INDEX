@@ -13,5 +13,14 @@
   },
   "blog.qmd": {
     "blog.html": "b0a8021a"
+  },
+  "posts/formation_data_talend/quarto_document_formation_talend.qmd": {
+    "quarto_document_formation_talend.html": "1068fd98"
+  },
+  "posts/formation_data_talend/new_post.qmd": {
+    "new_post.html": "2237fee9"
+  },
+  "posts/test/quarto_document_formation_talend.qmd": {
+    "quarto_document_formation_talend.html": "6ed08e1e"
   }
 }

@@ -1,0 +1,515 @@
+---
+title: "Formation DATA"
+subtitle: "Utilisation d'un ETL : Talend"
+categories: ['talend', 'data science']
+author:
+    name: GOLLENTZ Quentin
+    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@daka-team.com
+    affiliations:
+        name: DAKA-TEAM
+        url: https://www.linkedin.com/company/daka%E2%80%A2tec/
+        city: Lille
+        state: France
+        postal-code: 5900
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Application sur l'Open Data de l'Assemblée Nationale"
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+    self_contained: no
+css: css/styles.css
+bibliography: references.bib
+---
+
+# 0. Introduction et prérequis
+
+Dans la suite du document, nous proposons des exercices qui sont liés les uns des autres.\
+Il est donc nécessaire de suivre dans l'ordre le document car certains exercices sont conditionnés aux précédents.\
+Nous proposons le traitement de données issus de l'Open Data de l'Assemblée Nationale.
+
+Pour la réalisation des exercices, il sera nécessaire d'avoir :
+
+-   Talend en version 7.3
+-   Notepad++
+-   Dbeaver
+-   Postman
+-   PostgreSQL
+-   Connexion internet
+-   Une compréhension basique de l'anglais technique
+-   Une compréhension basique de la science des données
+
+# 1. Prise en main
+
+## 1.1 Présentation
+
+**L'ETL est un acronyme pour EXTRACT TRANSFORM AND LOAD.**
+
+C'est un concept signifiant le chargement de données d'un point A vers un point B ou les données de A sont éventuellement transformé afin d'être chargés dans B.\
+Un logiciel ETL (Extract, Transform, Load) permet d'extraire des données brutes depuis une base de données, pour ensuite les restructurer, et enfin les charger.\
+Les premiers ETL ont fait leur apparition dans les années 1970, mais ont beaucoup évolué pour répondre aux nouveaux besoins liés à l'essor du Cloud, des [SaaS (logiciels en tant que service)](https://www.lebigdata.fr/definition-saas) et du Big Data.\
+Désormais, les ETL doivent permettre l'ingestion en temps réel, l'enrichissement de données, la prise en charge de milliards de transactions. Ils prennent aussi en charge les données structurées ou non structurées en provenance de sources sur site ou sur le Cloud.\
+De même, ces plateformes doivent désormais être scalables, flexibles, résistantes aux pannes, et sécurisées.
+
+**Talend est donc un logiciel ETL de manière simplifier afin que le développeur ne s'occupe que de la partie règle de métier.**
+
+## 1.2 Installation de l'outil
+
+#### TALEND
+
+-   **Etape 1** : Se rendre le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 2** : Télécharger l'archive *ESB_731.7z*
+-   **Etape 3** : Extraire l'archive téléchargé précédemment à la racine du disque C:/
+
+À la fin de ces étapes, vous devriez obtenir le dossier suivant :
+
+![](img/resultat_installation_talend.png)
+
+Également les sous-dossiers suivants :
+
+![](img/resultat_installation_talend_subfolder.png)
+
+#### JAVA
+
+Talend peut être vu comme un générateur de code Java, ainsi il est donc nécessaire de disposer d'une version de machine java adapté à la version de Talend utilisé.
+
+-   **Etape 1** : Se rendre le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 2** : Télécharger l'archive *jdk-20.zip*
+-   **Etape 3** : Extraire l'archive téléchargé précédemment à la racine du disque C:/
+-   **Etape 4** : Lancer une invite de commande (Rappel : cmd dans une fenêtre)
+-   **Etape 5** : Lancer les commandes suivantes :
+    -   `set PATH=C:\jdk-20\bin;%PATH%`
+    -   `java -version`
+    -   `where java`
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_java.png)
+
+#### NOTEPAD++
+
+-   **Etape 1** : Se rendre le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 2** : Télécharger l'archive *Notepad++.7z*
+-   **Etape 3** : Extraire l'archive téléchargé précédemment à la racine du disque C:/
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_notepad.png)
+
+Également les sous-dossiers suivants :
+
+![](img/resultat_installation_notepad_subfolder.png)
+
+#### DBEAVER
+
+-   **Etape 1** : Se rendre le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 2** : Télécharger l'archive *Dbeaver.7z*
+-   **Etape 3** : Extraire l'archive téléchargé précédemment à la racine du disque C:/
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_dbeaver.png)
+
+Également les sous-dossiers suivants :
+
+![](img/resultat_installation_dbeaver_subfolder.png)
+
+#### POSTGRESQL
+
+Expliquer les procédures serait un peu compliqué et redondant par rapport à la documentation qu'on peut trouver sur le web.\
+Vous pouvez suivre la procédure ici :\
+[`postgresql`](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql)
+
+Vous pouvez également regarder la vidéo ci-dessous :
+
+```{=html}
+<video 
+  src="video/postgresql.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+[Source : \@waytolearn](https://www.youtube.com/watch?v=H_TFWZo-I5w)
+
+## 1.3 Création d'un WORKSPACE
+
+[Les projet Talend sont stockés dans un espace de travail (workspace)](https://business-intelligence.developpez.com/faq/talend/?page=I).
+
+Chaque projet Talend contient un ensemble de Jobs (traduit sous forme de "classe"), ces jobs Talend sont stockés dans un projet Talend.
+
+Ci-dessous, vous verrez l'arborescence d'un projet Talend :
+
+-   workspace
+    -   projet1
+        -   businessProcess (les Business Models)
+        -   code (les Routines)
+        -   configuration (les fichiers de configuration)
+        -   context (les contextes)
+        -   documentations (les documentations créés dans les jobs)
+        -   images (les images des tMap par exemple)
+        -   joblets (les joblets pour les version TIS)
+        -   metadata (les metadata)
+        -   process (les jobs)
+        -   sqlPatterns (les patterns sql)
+        -   temp (les fichiers temporaires)
+    -   projet2
+        -   businessProcess
+        -   code
+        -   ...
+
+Avant de créer son premier WORKSPACE, il convient de lancer Talend Studio.\
+En supposant que les étapes précédentes ont été respectées, il convient de :\
+
+-   Se rendre dans ce chemin : `C:\ESB_731\Studio`
+-   Faire un double clic gauche sur l'exécutable `TOS_ESB-win-x86_64.exe` afin de démarrer Talend Studio.
+
+Remarque : Il est recommandé de créer un Raccourci vers exécutable dans son Bureau afin d'éviter une navigation inutile. (Rappel : CTRL+C sur exécutable puis CTRL+V sur le Bureau)
+
+À l'exécution vous devriez avoir la fenêtre suivante qui s'ouvre :
+
+![](img/demarrage_talend.png) Par défaut, le WORKSPACE sera situé dans le chemin suivant :
+
+-   `C:\ESB_731\Studio\workspace`
+
+Pour pouvoir changer d'endroit, il convient de :
+
+-   Cliquer sur : Gérer les connexions
+-   Dans la partie Espace de travail : Mettre le chemin souhaité
+
+![](img/set_workspace_path.png)
+
+## 1.4 Présentation du Talend Studio
+
+Rappel commande utile :
+
+-   CTRL + A : Tout sélectionner
+-   CTRL + C : Copier
+-   CTRL + V : Coller
+-   CTRL + Z : Revenir à l'état précédent une action
+-   CTRL + Y : Revenir à l'état succèdent une action
+-   CTRL + S : Sauvegarder
+
+#### BARRE PRINCIPALE
+
+![](img/barre_principale.png)
+
+-   FICHIER : Permet de changer de WORKSPACE et de modifier les propriétés du projet (Non utile)
+-   EDITER : Revenir en arrière, Copier, Coller, ect... (Non utile)
+-   FENÊTRE :
+    -   Modifier les éléments visuelles du Studio (Plutôt utile)
+    -   Dans Préférences l'ensemble des paramètres pour les jobs du projet (Trop vaste pour être traité dans exhaustivité) (Très utile)
+
+#### QUADRANT NORD OUEST
+
+![](img/quadrant_nord_ouest.png)
+
+-   BUSINESS MODELS : (Aucune idée de l'utilité ou non)\
+-   JOBS : L'endroit où l'on peut retrouver les différents JOB, par JOB on entend un traitement de données. Dans d'autres langage de programmation on parle de script.\
+-   ROUTES : L'équivalent d'un Job mais le mode d'exécution n'est pas le même, un job sera lancé une fois tandis qu'une ROUTE est un service qui s'exécute en permanence\
+-   SERVICES : On appelle cela communément une API permet de faire le lien avec d'autres application par exemple une BDD\
+-   CONTEXTE : L'endroit om l'on peut retrouver les variables de contexte qui sont disponible à l'exécution du JOB que l'on oppose aux variables globales qui sont disponibles dans le Job\
+-   RESSOURCE : (Aucune idée de l'utilité ou non)\
+-   CODE : Permet de faire du code Java que l'on pourra réutiliser\
+-   MODEL SQL : (Aucune idée de l'utilité ou non)\
+-   METADONNE : L'endroit où l'on stocke les métadonnées des diverses sources de données possible :
+    -   BDD\
+    -   Fichier Délimité\
+    -   Fichier JSON\
+    -   Ect ....
+
+#### QUADRANT NORD EST
+
+![](img/quadrant_nord_est.png)
+
+L'endroit où nous allons créer les jobs qui prennent généralement des sources de données effectue des transformations en vue de les mettre dans une autre ou la même source de données.\
+Nous verrons cela plus en détail dans les parties suivantes.
+
+#### QUADRANT SUD OUEST
+
+![](img/quadrant_sud_ouest.png)
+
+-   APERCU DU CODE : (Aucune idée de l'utilité ou non)
+-   OUTLINE : Ne prend sens que dans le cas où un job est ouvert. On retrouve ici l'ensemble des composants utilisées dans le job ouvert et les variables globales que ces composants génèrent.\
+    Ces variables peuvent être définis avant l'exécution du composant ou après.
+
+#### QUADRANT SUD EST
+
+-   COMPOSANT : Ne prend sens que dans le cas où un job est ouvert et qu'on à cliqué sur un composant. Dans cette fenêtre, nous allons paramétrer le composant afin que celui fonctionne selon nos besoins
+-   CONTEXT : Permet de visualiser et de gérer l'ensemble des variables de contexte utilisés dans le job
+-   EXECUTER LE JOB : Ne prend sens que dans le cas où un job est ouvert, il permet d'exécuter le traitement et d'afficher ce qui arrive dans la console. Une exécution en mode DEBUG est possible qui permet d'afficher l'ensemble des variables utilisées par le programme et leurs valeurs à l'instant T, il est également dans ce mode de faire une pause dans le traitement.
+
+![](img/quadrant_sud_est.png)
+
+## 1.5 Création d'un job
+
+Nous allons dans cette partie créé notre premier job. Celui-ci servira d'exemple en terme de bonne pratique quand au nommage et à la description de celui-ci. Mais avant cela, nous allons créer un nouveau workspace qui sera utilisé dans la suite des exercices :
+
+-   **Etape 0** : Créer un dossier : C:/workspace_talend
+
+-   **Etape 0 bis** : Démarrer Talend
+
+-   **Etape 1** : Cliquer sur Gérer les connexions et choisir le dossier créer en étape 0
+
+-   **Etape 1 bis** : Attendre que Talend redémarre
+
+-   **Etape 2** : Créer un projet nommé : OPENDATA_ASSEMBLEE_NATIONALE
+
+-   **Etape 3** : Créer un job avec :
+
+    -   pour titre : DL_DATA_DEPUTE
+    -   pour objectif : Téléchargement d'un fichier de type csv contenant les informations des députés et dans la description
+    -   pour description le bloc suivant en remplaçant les {} par vos informations :
+
+    \##########\
+    DATE DE CREATION : {dd/MM/yyyy}\
+    DATE DE MODIFICATION :\
+    VERSION : 0.1\
+    AUTEUR : {nom_prenom}\
+    DESCRIPTION : CREATION DU JOB\
+    \##########
+
+```{=html}
+<video 
+   src="video/init_workspace_creation_job.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+# 2. Création de traitement
+
+## 2.1 Fichier plat -- Traitement des députés
+
+### TELECHARGEMENT DU FICHIER
+
+L'objectif ici est de télécharger le fichier source que nous allons utilisé par la suite. Il convient de bien organiser son projet, ainsi nous mettrons les fichiers de type SOURCE dans un dossier :
+
+-   C:/workspace_talend/source/
+
+Dossier que l'on va opposé à un dossier dns lequel nous allons mettre des fichiers généré par le logiciell appellé cible :
+
+-   C:/workspace_talend/cible/
+
+Pour cela, nous allons utlisé le composant **tFileFetch** qui peut être trouvé soit dans la pallette à droite, soit en tapant directement **tFileFetch** n'importe où dans le quadrant nord-est.
+
+Un [composant](https://www.axysweb.com/le-lexique-pour-comprendre-et-utiliser-le-studio-talend/) est un sous-ensemble d'un job qui effectue une opération définie. Par exemple : lire un fichier, filtrer des données ou encore extraire des données.
+
+Un composant est composé d'un extrait de code Java généré automatiquement. Le but des composants est de gagner du temps en évitant le codage manuel pour effectuer les opérations de traitement de données courantes.
+
+Talend propose une multitude de composants prêts à l'emploi regroupés un répertoire. Il est possible de développer des composants sur-mesure si Talend ne propose aucun composant répondant à votre besoin.
+
+URL : "https://www.data.gouv.fr/fr/datasets/r/092bd7bb-1543-405b-b53c-932ebb49bb8e"\
+METHODE : GET (Nous allons voir cette notion plus en loin dans le document) - Décocher POST\
+NOM_FICHIER : "depute.csv"\
+CIBLE : "C:/workspace_talend/source/depute/"
+
+```{=html}
+<video 
+  src="video/first_job_fetch_file.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+#### EXECUTION DU JOB
+
+Pour pouvoir exécuter un job, il convient de se mettre dans l'onglet "EXECUTER" dans le QUADRANT SUD EST.\
+Ensuite il faut cliquer EXECUTER et observé qu'aucune erreur de compilation n'est généré.\
+Les erreurs de compilation sont la conséquence d'un code mal écrit.
+
+Il convient ensuite de s'assurer du bon fonctionnement du job. Ici nous souhaitons simplement télécharger un fichier csv dans un dossier, il convient donc de s'assurer que ce fichier est bien présent dans le dossier spécifié.
+
+```{=html}
+<video 
+  src="video/launch_first_job.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+### LECTURE DU FICHIER
+
+Nous allons dans cette partie créé un second job qui va lire le fichier télécharger par le premier.
+
+-   pour titre : READ_DATA_DEPUTE
+-   pour objectif : Lecture d'un fichier de type csv contenant les informations des députés et dans la description
+-   pour description le bloc suivant en remplaçant les {} par vos informations :\
+    \##########\
+    DATE DE CREATION : {dd/MM/yyyy}\
+    DATE DE MODIFICATION :\
+    VERSION : 0.1\
+    AUTEUR : {nom_prenom}\
+    DESCRIPTION : CREATION DU JOB\
+    \##########
+
+La première chose à faire est de déterminer la structure du fichier. Pour cela nous allons l'ouvrir avec Notepad :
+
+```{=html}
+<video 
+  src="video/open_file_notepad.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+Nous constatons :
+
+-   une première ligne d'entête qui donne le nom des différents champs.
+-   les champs sont séparés par des ","
+-   Nom du fichier : depute.csv
+-   Dossier : C:/workspace_talend/source/depute/
+-   les champs sont les suivants :
+
+| Nom du champ                 | Type   | Nullable |
+|------------------------------|:-------|---------:|
+| id                           | STRING |      YES |
+| legislature                  | STRING |      YES |
+| civ                          | STRING |      YES |
+| nom                          | STRING |      YES |
+| prenom                       | STRING |      YES |
+| villeNaissance               | STRING |      YES |
+| naissance                    | STRING |      YES |
+| age                          | STRING |      YES |
+| groupe                       | STRING |      YES |
+| groupeAbrev                  | STRING |      YES |
+| departementNom               | STRING |      YES |
+| departementCode              | STRING |      YES |
+| datePriseFonction            | STRING |      YES |
+| mail                         | STRING |      YES |
+| twitter                      | STRING |      YES |
+| facebook                     | STRING |      YES |
+| website                      | STRING |      YES |
+| nombreMandats                | STRING |      YES |
+| experienceDepute             | STRING |      YES |
+| scoreParticipation           | STRING |      YES |
+| scoreParticipationSpecialite | STRING |      YES |
+| scoreLoyaute                 | STRING |      YES |
+| scoreMajorite                | STRING |      YES |
+| dateMaj                      | STRING |      YES |
+
+: Structure du fichier
+
+Nous avons dans un premier temps spécifié le type STRING pour l'ensemble des champs afin d'être sûr de bien pouvoir lire le fichier.\
+En effet, le type STRING est le plus complet dans le sens où touts les types peuvent être convertis en STRING
+
+Nous connaissons donc le format du fichier, il convient maintenant de spécifier le schéma à Talend afin qu'il sache comment lire le fichier.
+
+Deux possibilités : - Le faire à la main\
+- AVANTAGE : CONTROLE - DESAVANTAGE : LENT - Laisser TALEND le faire\
+- AVANTAGE : CONTROLE - DESAVANTAGE : LENT
+
+La structure du fichier peut être définis selon deux possibilité de façon unitaire pour le fichier en question ou en métadonné qui pourra être réutilisé par la suite.
+
+```{=html}
+<video 
+  src="video/set_schema_a_la_mano.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+### TRANSFORMATION
+
+Nous allons maintenant transformé les données d'entrée avant de les imprimer. Nous allons créer un nouveau champ que l'on va appelé : - intitule : qui va concaténer le titre (Monsieur ou Madame) le nom et le prénom du député en question.
+
+```{=html}
+<video 
+  src="video/transform_data_tmap.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+### JOINTURE
+
+Avant de voir une jointure, il convient de télécharger un deuxième fichier. Il convient de mettre à jour le job DL_DATA_DEPUTE en spécifiant une mineur 0.2 et ajoutant à la description le bloc suivant :\
+\##########\
+DATE DE CREATION : REPRENDRE LA DATE DE CREATION DU BLOC PR2CEDENT\
+DATE DE MODIFICATION : {dd/MM/yyyy}\
+VERSION : 0.2\
+AUTEUR : {nom_prenom}\
+DESCRIPTION : TELECHARGEMENT D'UN FICHIER SUPLLEMENTAIRE\
+\##########
+
+Ces divers bloc sont là pour tracer les diverses évolutions que peut rencontrer un flux. Maitenant il convient d'apporter la modification suivante : - Dupliquer le composant tFileFetch précedemment avec pour paramètrage : URL : "https://www.data.gouv.fr/fr/datasets/r/092bd7bb-1543-405b-b53c-932ebb49bb8e" METHODE : GET (Nous allons voir cette notion plus en loin dans le document) - Décocher POST NOM_FICHIER : "depute.csv" CIBLE : "C:/workspace_talend/source/depute/"
+
+```{=html}
+<video 
+  src="video/modification_job_dl_log_opt.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+(METTRE A JOUR JOB DL_DATA_DEPUTE avec nouveau fichier https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice)
+
+## 2.2 Fichier JSON -- Traitement des données de votes
+
+# FAIRE LE LIEN AVEC LE FICHIER JSON DES VOTES
+
+# FAIRE LE LIEN AVEC LE FICHIER GEOJSON
+
+## 2.3 Base de données -- Création d'une BDD et alimentation à partir des flux précédents
+
+# ECRITURE EN BDD
+
+## 2.4 Création d'un API\*
+
+# UTILISATION BDD POUR CRER UNE API QUI EN FONCTION DUNE ADRESSE DONNE LE DEPUTE
+
+# 3. Norme et bonne pratique
+
+## 3.1 Variable et groupe de contexte
+
+## 3.2 Log
+
+## 3.3 Règle de nommage et esthétique
+
+## 3.4 Création d'un API
+
+# 4. Déploiement et dévollepement informatique
+
+## 4.1 Construction du job
+
+## 4.2 Déploiement et Unix
+
+## 4.3 Developement informatique
+
+# ANNEXE
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can do math :\
+$Y_{hat}=\epsilon +\beta = \gamma$
+
+You can add options to executable code like this The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+You can add options to executable code like this Blah Blah [see @QGOLLENTZ, pp. 33-35; also @wickham2015, chap. 1] You can add options to executable code like this
+
+```{r}
+#| warning: false
+
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```

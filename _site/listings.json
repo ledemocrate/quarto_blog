@@ -2,8 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
+      "/posts/test/quarto_document_formation_talend.html",
+      "/posts/formation_data_talend/new_post.html"
     ]
   }
 ]
