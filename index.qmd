@@ -17,12 +17,16 @@ about:
 
 Bonjour à vous,
 
-Je suis titulaire d'un [Master Économétrie & Statistique](https://ecogestion.unistra.fr/formations/masters/analyse-et-politique-economique/statistique-et-econometrie/), obtenu en 2018 à l'Université de Strasbourg, fruit d'une passion pour la data science avec pour domaine d'application de prédilection : [OpenData de l'Assemblée Nationale](https://data.assemblee-nationale.fr/).       
+Née le 25 Juillet 1994 à Guebwiller.                
+Titulaire d’un [Master Économétrie & Statistique](https://ecogestion.unistra.fr/formations/masters/analyse-et-politique-economique/statistique-et-econometrie/), obtenu en 2018 à l’Université de Strasbourg.       
+Passionné par la science des données avec pour domaine d’application de prédilection :    
+[L'OpenData de l'Assemblée Nationale](https://data.assemblee-nationale.fr/).
+      
 Vous pouvez trouver une version exhaustive de mon [curriculum vitae](pdf/cv.pdf)
     
-Je travaille actuellement dans une entreprise [DAKA-TEAM](https://daka-team.com/) avec pour mission principal le développement d'entrepôts de données ce qui m'amène à faire un peu de [Java](https://www.oracle.com/fr/java/), un peu de [Python](https://www.python.org/), un peu de  [Debian](https://www.debian.org/index.fr.html), beaucoup de [Talend](https://www.talend.com/fr/) et beaucoup de [PostgreSQL](https://www.postgresql.org/).
+Je travaille actuellement dans une entreprise [DAKA-TEAM](https://daka-team.com/) avec pour mission principale le développement d'entrepôts de données ce qui m'amène à faire un peu de [Java](https://www.oracle.com/fr/java/), un peu de [Python](https://www.python.org/), un peu de  [Debian](https://www.debian.org/index.fr.html), beaucoup de [Talend](https://www.talend.com/fr/) et beaucoup de [PostgreSQL](https://www.postgresql.org/).
 
-Néanmoins du fait de ma formation initiale de statisticien, je préfère l'utilisation de [R](https://posit.co/products/open-source/rstudio/) et toute la suite proposée à côté :[`tidyverse`](https://www.tidyverse.org/),[`shiny`](https://shiny.posit.co/),[`quarto`](https://quarto.org/docs/authoring/markdown-basics.html),`....`
+Néanmoins du fait de ma formation initiale de statisticien, je préfère l'utilisation de [R](https://posit.co/products/open-source/rstudio/) et toute la suite proposée à côté :[`tidyverse`](https://www.tidyverse.org/), [`shiny`](https://shiny.posit.co/), [`quarto`](https://quarto.org/docs/authoring/markdown-basics.html),`....`
 
 Je suis également un chineur de [Rapsberry Pi](https://www.raspberrypi.com/software/).
 
@@ -30,14 +34,14 @@ J'ai à cœur la réalisation d'un mini-projet de bureau de vote en ligne ayant 
 Le code peut être consulté sur [GitHub](https://github.com/ledemocrate/bureaudevote_2022_2027)  
     
 Pour contrainte technique :       
-1. L'utilisation de [R](https://posit.co/products/open-source/rstudio/) et plus précisément des packages suivants ([`tidyverse & co`](https://www.tidyverse.org/),[`shiny`](https://shiny.posit.co/)    ,[`quarto`](https://quarto.org/docs/authoring/markdown-basics.html))         
+1. L'utilisation de [R](https://posit.co/products/open-source/rstudio/) et plus précisément des packages suivants ([`tidyverse & co`](https://www.tidyverse.org/), [`shiny`](https://shiny.posit.co/), [`quarto`](https://quarto.org/docs/authoring/markdown-basics.html))         
 2. L'utilisation d'une base de données [PostgreSQL](https://www.postgresql.org/)                  
 3. L'utilisation de [Rapsberry Pi](https://www.raspberrypi.com/software/) sous [Debian](https://www.debian.org/index.fr.html) fonctionnant en [réseau](https://mabbox.bytel.fr/login.html)        
 
 Avec ce blog, je souhaite présenter mes divers travaux à l'instar de mon mentor [RODRIGUES Bruno](https://www.brodrigues.co/about/me/) et de l'ensemble des [Rbloggers](https://www.r-bloggers.com/).       
 Je tiens également à remercier les contributeurs au projet [R4pi](https://r4pi.org/).
     
-Vous pouvez me joindre sur [Linkdin](https://www.linkedin.com/in/quentin-gollentz-697993172/) ou [GitHub](https://github.com/ledemocrate) mais également [Reddit](https://www.reddit.com/user/goldentzgrahams).         
+Vous pouvez me joindre sur [Linkdin](https://www.linkedin.com/in/quentin-gollentz-697993172/) ou [GitHub](https://github.com/ledemocrate) mais également [Redit](https://www.reddit.com/user/goldentzgrahams).         
 Vous pouvez également me joindre par [mail](mailto:ledemocratealsacien@gmail.com;quentin.gollentz@outlook.com) ou me défiez aux  [échecs](https://www.chess.com/member/goldentzgrahamz).        
 
 Merci à vous pour m'avoir lu.

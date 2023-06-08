@@ -22,5 +22,8 @@
   },
   "posts/test/quarto_document_formation_talend.qmd": {
     "quarto_document_formation_talend.html": "6ed08e1e"
+  },
+  "posts/formation_talend/quarto_document_formation_talend.qmd": {
+    "quarto_document_formation_talend.html": "d2bef26c"
   }
 }

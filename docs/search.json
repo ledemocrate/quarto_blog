@@ -11,130 +11,130 @@
     "href": "index.html",
     "title": "GOLLENTZ Quentin, Artisant de la Data depuis 1994",
     "section": "",
-    "text": "Bonjour à vous,\nJe suis titulaire d’un Master Économétrie & Statistique, obtenu en 2018 à l’Université de Strasbourg, fruit d’une passion pour la data science avec pour domaine d’application de prédilection : OpenData de l’Assemblée Nationale.\nVous pouvez trouver une version exhaustive de mon curriculum vitae\nJe travaille actuellement dans une entreprise DAKA-TEAM avec pour mission principal le développement d’entrepôts de données ce qui m’amène à faire un peu de Java, un peu de Python, un peu de Debian, beaucoup de Talend et beaucoup de PostgreSQL.\nNéanmoins du fait de ma formation initiale de statisticien, je préfère l’utilisation de R et toute la suite proposée à côté :tidyverse,shiny,quarto,....\nJe suis également un chineur de Rapsberry Pi.\nJ’ai à cœur la réalisation d’un mini-projet de bureau de vote en ligne ayant pour but de mesurer la différence de vote entre une assemblée élective et une assemblée participative et ainsi déterminer un indice démocratique.\nLe code peut être consulté sur GitHub\nPour contrainte technique :\n1. L’utilisation de R et plus précisément des packages suivants (tidyverse & co,shiny ,quarto)\n2. L’utilisation d’une base de données PostgreSQL\n3. L’utilisation de Rapsberry Pi sous Debian fonctionnant en réseau\nAvec ce blog, je souhaite présenter mes divers travaux à l’instar de mon mentor RODRIGUES Bruno et de l’ensemble des Rbloggers.\nJe tiens également à remercier les contributeurs au projet R4pi.\nVous pouvez me joindre sur Linkdin ou GitHub mais également Reddit.\nVous pouvez également me joindre par mail ou me défiez aux échecs.\nMerci à vous pour m’avoir lu."
+    "text": "Bonjour à vous,\nNée le 25 Juillet 1994 à Guebwiller.\nTitulaire d’un Master Économétrie & Statistique, obtenu en 2018 à l’Université de Strasbourg.\nPassionné par la science des données avec pour domaine d’application de prédilection :\nL’OpenData de l’Assemblée Nationale.\nVous pouvez trouver une version exhaustive de mon curriculum vitae\nJe travaille actuellement dans une entreprise DAKA-TEAM avec pour mission principale le développement d’entrepôts de données ce qui m’amène à faire un peu de Java, un peu de Python, un peu de Debian, beaucoup de Talend et beaucoup de PostgreSQL.\nNéanmoins du fait de ma formation initiale de statisticien, je préfère l’utilisation de R et toute la suite proposée à côté :tidyverse, shiny, quarto,....\nJe suis également un chineur de Rapsberry Pi.\nJ’ai à cœur la réalisation d’un mini-projet de bureau de vote en ligne ayant pour but de mesurer la différence de vote entre une assemblée élective et une assemblée participative et ainsi déterminer un indice démocratique.\nLe code peut être consulté sur GitHub\nPour contrainte technique :\n1. L’utilisation de R et plus précisément des packages suivants (tidyverse & co, shiny, quarto)\n2. L’utilisation d’une base de données PostgreSQL\n3. L’utilisation de Rapsberry Pi sous Debian fonctionnant en réseau\nAvec ce blog, je souhaite présenter mes divers travaux à l’instar de mon mentor RODRIGUES Bruno et de l’ensemble des Rbloggers.\nJe tiens également à remercier les contributeurs au projet R4pi.\nVous pouvez me joindre sur Linkdin ou GitHub mais également Redit.\nVous pouvez également me joindre par mail ou me défiez aux échecs.\nMerci à vous pour m’avoir lu."
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html",
-    "href": "posts/test/quarto_document_formation_talend.html",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "",
     "text": "Dans la suite du document, nous proposons des exercices qui sont liés les uns des autres.\nIl est donc nécessaire de suivre dans l’ordre le document car certains exercices sont conditionnés aux précédents.\nNous proposons le traitement de données issus de l’Open Data de l’Assemblée Nationale.\nPour la réalisation des exercices, il sera nécessaire d’avoir :\n\nTalend en version 7.3\nNotepad++\nDbeaver\nPostman\nPostgreSQL\nConnexion internet\nUne compréhension basique de l’anglais technique\nUne compréhension basique de la science des données"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#présentation",
-    "href": "posts/test/quarto_document_formation_talend.html#présentation",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#présentation",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#présentation",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "1.1 Présentation",
     "text": "1.1 Présentation\nL’ETL est un acronyme pour EXTRACT TRANSFORM AND LOAD.\nC’est un concept signifiant le chargement de données d’un point A vers un point B ou les données de A sont éventuellement transformé afin d’être chargés dans B.\nUn logiciel ETL (Extract, Transform, Load) permet d’extraire des données brutes depuis une base de données, pour ensuite les restructurer, et enfin les charger.\nLes premiers ETL ont fait leur apparition dans les années 1970, mais ont beaucoup évolué pour répondre aux nouveaux besoins liés à l’essor du Cloud, des SaaS (logiciels en tant que service) et du Big Data.\nDésormais, les ETL doivent permettre l’ingestion en temps réel, l’enrichissement de données, la prise en charge de milliards de transactions. Ils prennent aussi en charge les données structurées ou non structurées en provenance de sources sur site ou sur le Cloud.\nDe même, ces plateformes doivent désormais être scalables, flexibles, résistantes aux pannes, et sécurisées.\nTalend est donc un logiciel ETL de manière simplifier afin que le développeur ne s’occupe que de la partie règle de métier."
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#installation-de-loutil",
-    "href": "posts/test/quarto_document_formation_talend.html#installation-de-loutil",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#installation-de-loutil",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#installation-de-loutil",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "1.2 Installation de l’outil",
     "text": "1.2 Installation de l’outil\n\nTALEND\n\nEtape 1 : Se rendre le dossier Google Drive suivant :\n\ngoogle_drive\n\nEtape 2 : Télécharger l’archive ESB_731.7z\nEtape 3 : Extraire l’archive téléchargé précédemment à la racine du disque C:/\n\nÀ la fin de ces étapes, vous devriez obtenir le dossier suivant :\n\nÉgalement les sous-dossiers suivants :\n\n\n\nJAVA\nTalend peut être vu comme un générateur de code Java, ainsi il est donc nécessaire de disposer d’une version de machine java adapté à la version de Talend utilisé.\n\nEtape 1 : Se rendre le dossier Google Drive suivant :\n\ngoogle_drive\n\nEtape 2 : Télécharger l’archive jdk-20.zip\nEtape 3 : Extraire l’archive téléchargé précédemment à la racine du disque C:/\nEtape 4 : Lancer une invite de commande (Rappel : cmd dans une fenêtre)\nEtape 5 : Lancer les commandes suivantes :\n\nset PATH=C:\\jdk-20\\bin;%PATH%\njava -version\nwhere java\n\n\nÀ la fin de ces étapes, vous devriez obtenir le résultat suivant :\n\n\n\nNOTEPAD++\n\nEtape 1 : Se rendre le dossier Google Drive suivant :\n\ngoogle_drive\n\nEtape 2 : Télécharger l’archive Notepad++.7z\nEtape 3 : Extraire l’archive téléchargé précédemment à la racine du disque C:/\n\nÀ la fin de ces étapes, vous devriez obtenir le résultat suivant :\n\nÉgalement les sous-dossiers suivants :\n\n\n\nDBEAVER\n\nEtape 1 : Se rendre le dossier Google Drive suivant :\n\ngoogle_drive\n\nEtape 2 : Télécharger l’archive Dbeaver.7z\nEtape 3 : Extraire l’archive téléchargé précédemment à la racine du disque C:/\n\nÀ la fin de ces étapes, vous devriez obtenir le résultat suivant :\n\nÉgalement les sous-dossiers suivants :\n\n\n\nPOSTGRESQL\nExpliquer les procédures serait un peu compliqué et redondant par rapport à la documentation qu’on peut trouver sur le web.\nVous pouvez suivre la procédure ici :\npostgresql\nVous pouvez également regarder la vidéo ci-dessous :\n\n\nSource : @waytolearn"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#création-dun-workspace",
-    "href": "posts/test/quarto_document_formation_talend.html#création-dun-workspace",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-workspace",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-workspace",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "1.3 Création d’un WORKSPACE",
     "text": "1.3 Création d’un WORKSPACE\nLes projet Talend sont stockés dans un espace de travail (workspace).\nChaque projet Talend contient un ensemble de Jobs (traduit sous forme de “classe”), ces jobs Talend sont stockés dans un projet Talend.\nCi-dessous, vous verrez l’arborescence d’un projet Talend :\n\nworkspace\n\nprojet1\n\nbusinessProcess (les Business Models)\ncode (les Routines)\nconfiguration (les fichiers de configuration)\ncontext (les contextes)\ndocumentations (les documentations créés dans les jobs)\nimages (les images des tMap par exemple)\njoblets (les joblets pour les version TIS)\nmetadata (les metadata)\nprocess (les jobs)\nsqlPatterns (les patterns sql)\ntemp (les fichiers temporaires)\n\nprojet2\n\nbusinessProcess\ncode\n…\n\n\n\nAvant de créer son premier WORKSPACE, il convient de lancer Talend Studio.\nEn supposant que les étapes précédentes ont été respectées, il convient de :\n\n\nSe rendre dans ce chemin : C:\\ESB_731\\Studio\nFaire un double clic gauche sur l’exécutable TOS_ESB-win-x86_64.exe afin de démarrer Talend Studio.\n\nRemarque : Il est recommandé de créer un Raccourci vers exécutable dans son Bureau afin d’éviter une navigation inutile. (Rappel : CTRL+C sur exécutable puis CTRL+V sur le Bureau)\nÀ l’exécution vous devriez avoir la fenêtre suivante qui s’ouvre :\n Par défaut, le WORKSPACE sera situé dans le chemin suivant :\n\nC:\\ESB_731\\Studio\\workspace\n\nPour pouvoir changer d’endroit, il convient de :\n\nCliquer sur : Gérer les connexions\nDans la partie Espace de travail : Mettre le chemin souhaité"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#présentation-du-talend-studio",
-    "href": "posts/test/quarto_document_formation_talend.html#présentation-du-talend-studio",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#présentation-du-talend-studio",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#présentation-du-talend-studio",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "1.4 Présentation du Talend Studio",
     "text": "1.4 Présentation du Talend Studio\nRappel commande utile :\n\nCTRL + A : Tout sélectionner\nCTRL + C : Copier\nCTRL + V : Coller\nCTRL + Z : Revenir à l’état précédent une action\nCTRL + Y : Revenir à l’état succèdent une action\nCTRL + S : Sauvegarder\n\n\nBARRE PRINCIPALE\n\n\nFICHIER : Permet de changer de WORKSPACE et de modifier les propriétés du projet (Non utile)\nEDITER : Revenir en arrière, Copier, Coller, ect… (Non utile)\nFENÊTRE :\n\nModifier les éléments visuelles du Studio (Plutôt utile)\nDans Préférences l’ensemble des paramètres pour les jobs du projet (Trop vaste pour être traité dans exhaustivité) (Très utile)\n\n\n\n\nQUADRANT NORD OUEST\n\n\nBUSINESS MODELS : (Aucune idée de l’utilité ou non)\n\nJOBS : L’endroit où l’on peut retrouver les différents JOB, par JOB on entend un traitement de données. Dans d’autres langage de programmation on parle de script.\n\nROUTES : L’équivalent d’un Job mais le mode d’exécution n’est pas le même, un job sera lancé une fois tandis qu’une ROUTE est un service qui s’exécute en permanence\n\nSERVICES : On appelle cela communément une API permet de faire le lien avec d’autres application par exemple une BDD\n\nCONTEXTE : L’endroit om l’on peut retrouver les variables de contexte qui sont disponible à l’exécution du JOB que l’on oppose aux variables globales qui sont disponibles dans le Job\n\nRESSOURCE : (Aucune idée de l’utilité ou non)\n\nCODE : Permet de faire du code Java que l’on pourra réutiliser\n\nMODEL SQL : (Aucune idée de l’utilité ou non)\n\nMETADONNE : L’endroit où l’on stocke les métadonnées des diverses sources de données possible :\n\nBDD\n\nFichier Délimité\n\nFichier JSON\n\nEct ….\n\n\n\n\nQUADRANT NORD EST\n\nL’endroit où nous allons créer les jobs qui prennent généralement des sources de données effectue des transformations en vue de les mettre dans une autre ou la même source de données.\nNous verrons cela plus en détail dans les parties suivantes.\n\n\nQUADRANT SUD OUEST\n\n\nAPERCU DU CODE : (Aucune idée de l’utilité ou non)\nOUTLINE : Ne prend sens que dans le cas où un job est ouvert. On retrouve ici l’ensemble des composants utilisées dans le job ouvert et les variables globales que ces composants génèrent.\nCes variables peuvent être définis avant l’exécution du composant ou après.\n\n\n\nQUADRANT SUD EST\n\nCOMPOSANT : Ne prend sens que dans le cas où un job est ouvert et qu’on à cliqué sur un composant. Dans cette fenêtre, nous allons paramétrer le composant afin que celui fonctionne selon nos besoins\nCONTEXT : Permet de visualiser et de gérer l’ensemble des variables de contexte utilisés dans le job\nEXECUTER LE JOB : Ne prend sens que dans le cas où un job est ouvert, il permet d’exécuter le traitement et d’afficher ce qui arrive dans la console. Une exécution en mode DEBUG est possible qui permet d’afficher l’ensemble des variables utilisées par le programme et leurs valeurs à l’instant T, il est également dans ce mode de faire une pause dans le traitement."
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#création-dun-job",
-    "href": "posts/test/quarto_document_formation_talend.html#création-dun-job",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-job",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-job",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "1.5 Création d’un job",
     "text": "1.5 Création d’un job\nNous allons dans cette partie créé notre premier job. Celui-ci servira d’exemple en terme de bonne pratique quand au nommage et à la description de celui-ci. Mais avant cela, nous allons créer un nouveau workspace qui sera utilisé dans la suite des exercices :\n\nEtape 0 : Créer un dossier : C:/workspace_talend\nEtape 0 bis : Démarrer Talend\nEtape 1 : Cliquer sur Gérer les connexions et choisir le dossier créer en étape 0\nEtape 1 bis : Attendre que Talend redémarre\nEtape 2 : Créer un projet nommé : OPENDATA_ASSEMBLEE_NATIONALE\nEtape 3 : Créer un job avec :\n\npour titre : DL_DATA_DEPUTE\npour objectif : Téléchargement d’un fichier de type csv contenant les informations des députés et dans la description\npour description le bloc suivant en remplaçant les {} par vos informations :\n\n##########\nDATE DE CREATION : {dd/MM/yyyy}\nDATE DE MODIFICATION :\nVERSION : 0.1\nAUTEUR : {nom_prenom}\nDESCRIPTION : CREATION DU JOB\n##########"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#fichier-plat-traitement-des-députés",
-    "href": "posts/test/quarto_document_formation_talend.html#fichier-plat-traitement-des-députés",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#fichier-plat-traitement-des-députés",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#fichier-plat-traitement-des-députés",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "2.1 Fichier plat – Traitement des députés",
     "text": "2.1 Fichier plat – Traitement des députés\n\nTELECHARGEMENT DU FICHIER\nL’objectif ici est de télécharger le fichier source que nous allons utilisé par la suite. Il convient de bien organiser son projet, ainsi nous mettrons les fichiers de type SOURCE dans un dossier :\n\nC:/workspace_talend/source/\n\nDossier que l’on va opposé à un dossier dns lequel nous allons mettre des fichiers généré par le logiciell appellé cible :\n\nC:/workspace_talend/cible/\n\nPour cela, nous allons utlisé le composant tFileFetch qui peut être trouvé soit dans la pallette à droite, soit en tapant directement tFileFetch n’importe où dans le quadrant nord-est.\nUn composant est un sous-ensemble d’un job qui effectue une opération définie. Par exemple : lire un fichier, filtrer des données ou encore extraire des données.\nUn composant est composé d’un extrait de code Java généré automatiquement. Le but des composants est de gagner du temps en évitant le codage manuel pour effectuer les opérations de traitement de données courantes.\nTalend propose une multitude de composants prêts à l’emploi regroupés un répertoire. Il est possible de développer des composants sur-mesure si Talend ne propose aucun composant répondant à votre besoin.\nURL : “https://www.data.gouv.fr/fr/datasets/r/092bd7bb-1543-405b-b53c-932ebb49bb8e”\nMETHODE : GET (Nous allons voir cette notion plus en loin dans le document) - Décocher POST\nNOM_FICHIER : “depute.csv”\nCIBLE : “C:/workspace_talend/source/depute/”\n\n\n\nEXECUTION DU JOB\nPour pouvoir exécuter un job, il convient de se mettre dans l’onglet “EXECUTER” dans le QUADRANT SUD EST.\nEnsuite il faut cliquer EXECUTER et observé qu’aucune erreur de compilation n’est généré.\nLes erreurs de compilation sont la conséquence d’un code mal écrit.\nIl convient ensuite de s’assurer du bon fonctionnement du job. Ici nous souhaitons simplement télécharger un fichier csv dans un dossier, il convient donc de s’assurer que ce fichier est bien présent dans le dossier spécifié.\n\n\n\n\n\nLECTURE DU FICHIER\nNous allons dans cette partie créé un second job qui va lire le fichier télécharger par le premier.\n\npour titre : READ_DATA_DEPUTE\npour objectif : Lecture d’un fichier de type csv contenant les informations des députés et dans la description\npour description le bloc suivant en remplaçant les {} par vos informations :\n##########\nDATE DE CREATION : {dd/MM/yyyy}\nDATE DE MODIFICATION :\nVERSION : 0.1\nAUTEUR : {nom_prenom}\nDESCRIPTION : CREATION DU JOB\n##########\n\nLa première chose à faire est de déterminer la structure du fichier. Pour cela nous allons l’ouvrir avec Notepad :\n\n\nNous constatons :\n\nune première ligne d’entête qui donne le nom des différents champs.\nles champs sont séparés par des “,”\nNom du fichier : depute.csv\nDossier : C:/workspace_talend/source/depute/\nles champs sont les suivants :\n\n\nStructure du fichier\n\n\nNom du champ\nType\nNullable\n\n\n\n\nid\nSTRING\nYES\n\n\nlegislature\nSTRING\nYES\n\n\nciv\nSTRING\nYES\n\n\nnom\nSTRING\nYES\n\n\nprenom\nSTRING\nYES\n\n\nvilleNaissance\nSTRING\nYES\n\n\nnaissance\nSTRING\nYES\n\n\nage\nSTRING\nYES\n\n\ngroupe\nSTRING\nYES\n\n\ngroupeAbrev\nSTRING\nYES\n\n\ndepartementNom\nSTRING\nYES\n\n\ndepartementCode\nSTRING\nYES\n\n\ndatePriseFonction\nSTRING\nYES\n\n\nmail\nSTRING\nYES\n\n\ntwitter\nSTRING\nYES\n\n\nfacebook\nSTRING\nYES\n\n\nwebsite\nSTRING\nYES\n\n\nnombreMandats\nSTRING\nYES\n\n\nexperienceDepute\nSTRING\nYES\n\n\nscoreParticipation\nSTRING\nYES\n\n\nscoreParticipationSpecialite\nSTRING\nYES\n\n\nscoreLoyaute\nSTRING\nYES\n\n\nscoreMajorite\nSTRING\nYES\n\n\ndateMaj\nSTRING\nYES\n\n\n\nNous avons dans un premier temps spécifié le type STRING pour l’ensemble des champs afin d’être sûr de bien pouvoir lire le fichier.\nEn effet, le type STRING est le plus complet dans le sens où touts les types peuvent être convertis en STRING\nNous connaissons donc le format du fichier, il convient maintenant de spécifier le schéma à Talend afin qu’il sache comment lire le fichier.\nDeux possibilités : - Le faire à la main\n- AVANTAGE : CONTROLE - DESAVANTAGE : LENT - Laisser TALEND le faire\n- AVANTAGE : CONTROLE - DESAVANTAGE : LENT\nLa structure du fichier peut être définis selon deux possibilité de façon unitaire pour le fichier en question ou en métadonné qui pourra être réutilisé par la suite.\n\n\n\n\nTRANSFORMATION\nNous allons maintenant transformé les données d’entrée avant de les imprimer. Nous allons créer un nouveau champ que l’on va appelé : - intitule : qui va concaténer le titre (Monsieur ou Madame) le nom et le prénom du député en question.\n\n\n\n\nJOINTURE\nAvant de voir une jointure, il convient de télécharger un deuxième fichier. Il convient de mettre à jour le job DL_DATA_DEPUTE en spécifiant une mineur 0.2 et ajoutant à la description le bloc suivant :\n##########\nDATE DE CREATION : REPRENDRE LA DATE DE CREATION DU BLOC PR2CEDENT\nDATE DE MODIFICATION : {dd/MM/yyyy}\nVERSION : 0.2\nAUTEUR : {nom_prenom}\nDESCRIPTION : TELECHARGEMENT D’UN FICHIER SUPLLEMENTAIRE\n##########\nCes divers bloc sont là pour tracer les diverses évolutions que peut rencontrer un flux. Maitenant il convient d’apporter la modification suivante : - Dupliquer le composant tFileFetch précedemment avec pour paramètrage : URL : “https://www.data.gouv.fr/fr/datasets/r/092bd7bb-1543-405b-b53c-932ebb49bb8e” METHODE : GET (Nous allons voir cette notion plus en loin dans le document) - Décocher POST NOM_FICHIER : “depute.csv” CIBLE : “C:/workspace_talend/source/depute/”\n\n\n(METTRE A JOUR JOB DL_DATA_DEPUTE avec nouveau fichier https://data.assemblee-nationale.fr/acteurs/deputes-en-exercice)"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#fichier-json-traitement-des-données-de-votes",
-    "href": "posts/test/quarto_document_formation_talend.html#fichier-json-traitement-des-données-de-votes",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#fichier-json-traitement-des-données-de-votes",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#fichier-json-traitement-des-données-de-votes",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "2.2 Fichier JSON – Traitement des données de votes",
     "text": "2.2 Fichier JSON – Traitement des données de votes"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#base-de-données-création-dune-bdd-et-alimentation-à-partir-des-flux-précédents",
-    "href": "posts/test/quarto_document_formation_talend.html#base-de-données-création-dune-bdd-et-alimentation-à-partir-des-flux-précédents",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#base-de-données-création-dune-bdd-et-alimentation-à-partir-des-flux-précédents",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#base-de-données-création-dune-bdd-et-alimentation-à-partir-des-flux-précédents",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "2.3 Base de données – Création d’une BDD et alimentation à partir des flux précédents",
     "text": "2.3 Base de données – Création d’une BDD et alimentation à partir des flux précédents"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#création-dun-api",
-    "href": "posts/test/quarto_document_formation_talend.html#création-dun-api",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-api",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-api",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "2.4 Création d’un API*",
     "text": "2.4 Création d’un API*"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#variable-et-groupe-de-contexte",
-    "href": "posts/test/quarto_document_formation_talend.html#variable-et-groupe-de-contexte",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#variable-et-groupe-de-contexte",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#variable-et-groupe-de-contexte",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "3.1 Variable et groupe de contexte",
     "text": "3.1 Variable et groupe de contexte"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#log",
-    "href": "posts/test/quarto_document_formation_talend.html#log",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#log",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#log",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "3.2 Log",
     "text": "3.2 Log"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#règle-de-nommage-et-esthétique",
-    "href": "posts/test/quarto_document_formation_talend.html#règle-de-nommage-et-esthétique",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#règle-de-nommage-et-esthétique",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#règle-de-nommage-et-esthétique",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "3.3 Règle de nommage et esthétique",
     "text": "3.3 Règle de nommage et esthétique"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#création-dun-api-1",
-    "href": "posts/test/quarto_document_formation_talend.html#création-dun-api-1",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-api-1",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#création-dun-api-1",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "3.4 Création d’un API",
     "text": "3.4 Création d’un API"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#construction-du-job",
-    "href": "posts/test/quarto_document_formation_talend.html#construction-du-job",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#construction-du-job",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#construction-du-job",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "4.1 Construction du job",
     "text": "4.1 Construction du job"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#déploiement-et-unix",
-    "href": "posts/test/quarto_document_formation_talend.html#déploiement-et-unix",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#déploiement-et-unix",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#déploiement-et-unix",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "4.2 Déploiement et Unix",
     "text": "4.2 Déploiement et Unix"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#developement-informatique",
-    "href": "posts/test/quarto_document_formation_talend.html#developement-informatique",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#developement-informatique",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#developement-informatique",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "4.3 Developement informatique",
     "text": "4.3 Developement informatique"
   },
   {
-    "objectID": "posts/test/quarto_document_formation_talend.html#running-code",
-    "href": "posts/test/quarto_document_formation_talend.html#running-code",
+    "objectID": "posts/formation_talend/quarto_document_formation_talend.html#running-code",
+    "href": "posts/formation_talend/quarto_document_formation_talend.html#running-code",
     "title": "Formation DATA (TRAVAIL EN COURS)",
     "section": "Running Code",
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\nYou can do math :\nY_{hat}=\\epsilon +\\beta = \\gamma\nYou can add options to executable code like this The echo: false option disables the printing of code (only output is displayed).\n\n\n[1] 4\n\n\nYou can add options to executable code like this Blah Blah (see GOLLENTZ 2023, 33–35; also wickham2015?) You can add options to executable code like this\n\n\nCode\nlibrary(leaflet)\nleaflet() %&gt;%\n  addTiles() %&gt;%  # Add default OpenStreetMap map tiles\n  addMarkers(lng=174.768, lat=-36.852, popup=\"The birthplace of R\")"
