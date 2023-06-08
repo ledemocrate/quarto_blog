@@ -1,5 +1,5 @@
 ---
-title: "Formation DATA"
+title: "Formation DATA (TRAVAIL EN COURS)"
 subtitle: "Utilisation d'un ETL : Talend"
 categories: ['talend', 'data science']
 author:
