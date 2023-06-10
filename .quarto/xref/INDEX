@@ -25,5 +25,8 @@
   },
   "posts/formation_talend/quarto_document_formation_talend.qmd": {
     "quarto_document_formation_talend.html": "d2bef26c"
+  },
+  "posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.qmd": {
+    "quarto_data_unstructured_pgs.html": "795a4d0f"
   }
 }

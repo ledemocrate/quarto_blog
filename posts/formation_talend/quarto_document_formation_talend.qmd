@@ -503,7 +503,8 @@ You can add options to executable code like this The `echo: false` option disabl
 2 * 2
 ```
 
-You can add options to executable code like this Blah Blah [see @QGOLLENTZ, pp. 33-35; also @wickham2015, chap. 1] You can add options to executable code like this
+You can add options to executable code like this Blah Blah [see @QGOLLENTZ, pp. 33-35] 
+You can add options to executable code like this
 
 ```{r}
 #| warning: false
