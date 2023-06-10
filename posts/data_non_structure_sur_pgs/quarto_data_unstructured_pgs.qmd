@@ -29,18 +29,19 @@ format:
     width: 1280
     scrollable : true
     height: 720
-    toc-depth: 10
+    toc: false
+    toc-depth: 100
     css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css, assets/logo.css]
 execute:
   echo: true
 ---
 
-## Concept de Tidy Data [1]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/wadley_wickam_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
+## Concept de Tidy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/wadley_wickam_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
 
 ![](img/wadley_wickam_tidy_data.jpg)        
 [@wickam]
 
-## Tidy Data et Messy Data [2]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/standard_data.jpg" height="120px" style="vertical-align:middle;"/>
+## Tidy Data et Messy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/standard_data.jpg" height="120px" style="vertical-align:middle;"/>
 
 ![](img/standard_data.jpg) [@julia_allison]       
 
@@ -60,7 +61,7 @@ Liste d'exemple de *Messy Data* à partir de [MongoDB](https://www.mongodb.com/u
 </ul>
 :::
 
-## L'avantage du Tidy Data [3]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pourquoi_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
+## L'avantage du Tidy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pourquoi_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
 
 ![](img/pourquoi_tidy_data.jpg) [@julia_allison]
 
@@ -82,7 +83,7 @@ also_not_tidydata_format <- table2 %>% filter(year==2000)
 also_not_tidydata_format
 ```
 
-## Quand un *Messy Data* ne peut se transformer en *Tidy Data* [4]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/process.jpg" height="120px" style="vertical-align:middle;"/>
+## Quand un *Messy Data* ne peut se transformer en *Tidy Data* []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/process.jpg" height="120px" style="vertical-align:middle;"/>
 
 Prenons l'exemple des [circonscriptions françaises](https://www.data.gouv.fr/fr/datasets/contours-detailles-des-circonscriptions-des-legislatives/).
 
@@ -131,7 +132,7 @@ tribble(
 
 ::::
 
-## Le type geometry  [5]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/france_metropolitaine.png" height="120px" style="vertical-align:middle;"/>
+## Le type geometry  []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/france_metropolitaine.png" height="120px" style="vertical-align:middle;"/>
 
 Considérons le type de variable `geometry` dont la valeur est une liste de point.
 ```{r}
@@ -144,7 +145,7 @@ library(sp)
 
 france_metropolitaine = geojson_sf("data/france-circonscriptions-legislatives-2012.json") %>%
   select(num_circ,code_dpt,geometry)%>%
-  rename(circo = num_circ,departementCode =code_dpt ) %>%
+  rename(circo = num_circ,departementCode = code_dpt) %>%
   filter(departementCode!="ZD",
          departementCode!="ZN",
          departementCode!="ZS",
@@ -163,7 +164,7 @@ france_metropolitaine
 plot(france_metropolitaine)
 ```
 
-## Quid de PostgreSQL [6]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pgs.jpg" height="120px" style="vertical-align:middle;"/>
+## Quid de PostgreSQL []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pgs.jpg" height="120px" style="vertical-align:middle;"/>
 
 Ci-dessous un script permettant de reproduire la même chose en `SQL` :       
 
@@ -213,7 +214,7 @@ FROM (
 ) AS f;
 ```
 
-## Application : Rattachement adresse à une circonscription [7]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/assemble_nationale.png" height="120px" style="vertical-align:middle;"/>
+## Application : Rattachement adresse à une circonscription []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/assemble_nationale.png" height="120px" style="vertical-align:middle;"/>
 
 L'objectif étant à partir d'une adresse de déterminer si cette adresse appartient à la circonscription circonscription en `python` :       
 
@@ -258,7 +259,7 @@ cursor.execute(query_kernel)
 
 print("Voci le résultat ci-dessous : ")
 mobile_records = cursor.fetchall()
-mobile_records[292] #Mon adresse appartient bien à la belle circonscription du HAUT-RHIN
+mobile_records[292] # Mon adresse appartient bien à la belle circonscription du HAUT-RHIN
 mobile_records[132] # Mon adresse n'appartient pas à la moins belle circonscription du BAS-RHIN
 ```
-## Citations et discussion [8]{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/hansi.jpg" height="120px" style="vertical-align:middle;"/>
+## Citations et discussion []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/hansi.jpg" height="120px" style="vertical-align:middle;"/>
