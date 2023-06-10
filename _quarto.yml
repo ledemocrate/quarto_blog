@@ -21,6 +21,6 @@ website:
         href: https://www.playstation.com/fr-fr/playstation-network/
 format:
   html:
-    theme: darkly
+    theme: litera
     css: styles.css
 

@@ -1,0 +1,36 @@
+---
+title: "De la démocratie théorique à la démocratie empirique (travail en cours)"
+categories: ['democratie participitative', 'statistique','essai']
+author:
+    name: GOLLENTZ Quentin
+    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@daka-team.com
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Essai de définiton d'un indice de mesure démocratique"
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+    self_contained: no
+css: css/styles.css
+bibliography: references.bib
+---
+
+# 0. Sens commun
+
+
+# 1.  Etymologie et définition des termes
+
+## 1.1 Présentation
+
+

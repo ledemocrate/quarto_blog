@@ -136,12 +136,9 @@ tribble(
 
 Considérons le type de variable `geometry` dont la valeur est une liste de point.
 ```{r}
-library(geojsonR)
 library(geojsonsf)
 library(tidyverse)
-library(geojson)
 library(sf)
-library(sp)
 
 france_metropolitaine = geojson_sf("data/france-circonscriptions-legislatives-2012.json") %>%
   select(num_circ,code_dpt,geometry)%>%

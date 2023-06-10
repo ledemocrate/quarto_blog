@@ -1,6 +1,5 @@
 ---
-title: "Formation DATA (TRAVAIL EN COURS)"
-subtitle: "Utilisation d'un ETL : Talend"
+title: "Formation à l'outil talend (travail en cours)"
 categories: ['talend', 'data science']
 author:
     name: GOLLENTZ Quentin

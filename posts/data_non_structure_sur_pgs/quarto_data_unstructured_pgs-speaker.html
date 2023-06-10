@@ -584,30 +584,27 @@ Multiplier les <strong>lignes</strong> :</p>
 <h2>Le type geometry <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/france_metropolitaine.png" height="120px" style="vertical-align:middle;"></h2>
 <p>Considérons le type de variable <code>geometry</code> dont la valeur est une liste de point.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(geojsonR)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">library</span>(geojsonsf)</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">library</span>(geojson)</span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">library</span>(sf)</span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">library</span>(sp)</span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a>france_metropolitaine <span class="ot">=</span> <span class="fu">geojson_sf</span>(<span class="st">"data/france-circonscriptions-legislatives-2012.json"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">select</span>(num_circ,code_dpt,geometry)<span class="sc">%&gt;%</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>  <span class="fu">rename</span>(<span class="at">circo =</span> num_circ,<span class="at">departementCode =</span> code_dpt) <span class="sc">%&gt;%</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>  <span class="fu">filter</span>(departementCode<span class="sc">!=</span><span class="st">"ZD"</span>,</span>
-<span id="cb13-12"><a href="#cb13-12"></a>         departementCode<span class="sc">!=</span><span class="st">"ZN"</span>,</span>
-<span id="cb13-13"><a href="#cb13-13"></a>         departementCode<span class="sc">!=</span><span class="st">"ZS"</span>,</span>
-<span id="cb13-14"><a href="#cb13-14"></a>         departementCode<span class="sc">!=</span><span class="st">"ZX"</span>,</span>
-<span id="cb13-15"><a href="#cb13-15"></a>         departementCode<span class="sc">!=</span><span class="st">"ZP"</span>,</span>
-<span id="cb13-16"><a href="#cb13-16"></a>         departementCode<span class="sc">!=</span><span class="st">"ZW"</span>,</span>
-<span id="cb13-17"><a href="#cb13-17"></a>         departementCode<span class="sc">!=</span><span class="st">"2B"</span>,</span>
-<span id="cb13-18"><a href="#cb13-18"></a>         departementCode<span class="sc">!=</span><span class="st">"2A"</span>,</span>
-<span id="cb13-19"><a href="#cb13-19"></a>         departementCode<span class="sc">!=</span><span class="st">"ZA"</span>,</span>
-<span id="cb13-20"><a href="#cb13-20"></a>         departementCode<span class="sc">!=</span><span class="st">"ZM"</span>,</span>
-<span id="cb13-21"><a href="#cb13-21"></a>         departementCode<span class="sc">!=</span><span class="st">"ZC"</span>,</span>
-<span id="cb13-22"><a href="#cb13-22"></a>         departementCode<span class="sc">!=</span><span class="st">"ZB"</span>)</span>
-<span id="cb13-23"><a href="#cb13-23"></a></span>
-<span id="cb13-24"><a href="#cb13-24"></a>france_metropolitaine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(geojsonsf)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">library</span>(sf)</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a>france_metropolitaine <span class="ot">=</span> <span class="fu">geojson_sf</span>(<span class="st">"data/france-circonscriptions-legislatives-2012.json"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">select</span>(num_circ,code_dpt,geometry)<span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">rename</span>(<span class="at">circo =</span> num_circ,<span class="at">departementCode =</span> code_dpt) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">filter</span>(departementCode<span class="sc">!=</span><span class="st">"ZD"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>         departementCode<span class="sc">!=</span><span class="st">"ZN"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10"></a>         departementCode<span class="sc">!=</span><span class="st">"ZS"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11"></a>         departementCode<span class="sc">!=</span><span class="st">"ZX"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12"></a>         departementCode<span class="sc">!=</span><span class="st">"ZP"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13"></a>         departementCode<span class="sc">!=</span><span class="st">"ZW"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14"></a>         departementCode<span class="sc">!=</span><span class="st">"2B"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15"></a>         departementCode<span class="sc">!=</span><span class="st">"2A"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16"></a>         departementCode<span class="sc">!=</span><span class="st">"ZA"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17"></a>         departementCode<span class="sc">!=</span><span class="st">"ZM"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18"></a>         departementCode<span class="sc">!=</span><span class="st">"ZC"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19"></a>         departementCode<span class="sc">!=</span><span class="st">"ZB"</span>)</span>
+<span id="cb13-20"><a href="#cb13-20"></a></span>
+<span id="cb13-21"><a href="#cb13-21"></a>france_metropolitaine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 535 features and 2 fields
 Geometry type: GEOMETRY
