@@ -31,5 +31,11 @@
   },
   "posts/democratie_empirique/democratie_empirique.qmd": {
     "democratie_empirique.html": "86c3612a"
+  },
+  "posts/graphe_inter_vote/graphe_inter_vote.qmd": {
+    "graphe_inter_vote.html": "cf70e37e"
+  },
+  "posts/crypthographie_homomorphe/democratie_empirique.qmd": {
+    "democratie_empirique.html": "ca4d4469"
   }
 }

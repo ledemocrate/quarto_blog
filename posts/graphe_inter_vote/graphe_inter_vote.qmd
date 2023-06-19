@@ -1,0 +1,343 @@
+---
+title: "De la notion de graphe inter-vote à la notion de représentativité"
+categories: ['théorie des graphes', 'réseau','vote','assemblée nationale']
+author:
+    name: GOLLENTZ Quentin
+    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@daka-team.com
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Application à l'Assemblée Nationale"
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+    self_contained: no
+css: css/styles.css
+bibliography: references.bib
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Fonctionnement de l'Assemblée Nationale
+
+L'Assemblée nationale se situe au cœur de notre démocratie.        
+Elle est née en 1789 lorsque les députés du tiers-Etat ont juré de ne pas se séparer
+tant que ne serait pas établie une Constitution. Les députés sont élus
+pour représenter la Nation tout entière et le peuple français. Ils ont
+pour mission de voter les lois, de contrôler l'action du Gouvernement et
+d'évaluer les politiques publiques.       
+
+Les députés qui siègent à l’Assemblée nationale sont élus au scrutin majoritaire uninominal à deux tours dans le cadre de circonscriptions plus ou moins équivalentes à 100 000 habitants, pour cinq ans, sauf dissolution de l’Assemblée. La loi électorale de 1986 précise que les écarts de population entre circonscriptions ne doivent en aucun cas aboutir à ce qu’une circonscription dépasse de plus de 20 % la population moyenne des circonscriptions du département. Mais il existe des inégalités entre les circonscriptions rurales moins peuplées et les circonscriptions urbaines. À titre d’exemple, le député de la circonscription la plus peuplée du Val-d'Oise représente 188 000 électeurs quand celui de la circonscription la moins peuplée de Lozère n’en représente que 34 0003. Chaque candidat se présente avec un suppléant qui prend sa place en cas d’incompatibilité de fonction, quand le député devient ministre par exemple.
+    
+Un texte de loi peut avoir pour origine le Premier ministre (le texte
+est alors un « projet de loi ») ou un membre du Parlement (« proposition
+de loi »).         
+Certaines lois sont obligatoirement d'origine gouvernementale, comme les lois de finances. 
+Les projets de loi peuvent être soumis en premier à l'Assemblée nationale ou au Sénat, sauf dans le
+cas des lois de finances qui passent d'abord par l'Assemblée nationale,
+et des lois ayant pour principal objet l'organisation des collectivités
+territoriales ou les instances représentatives des Français établis hors
+de France qui sont soumis en premier lieu au Sénat.       
+
+En tant que chambre du Parlement, l'Assemblée nationale contrôle la
+politique du gouvernement. Elle a plus de pouvoir en ce domaine que le
+Sénat, à travers les procédures de vote de confiance, de motion de
+censure, et d'engagement de responsabilité du gouvernement sur un texte.         
+Concrètement cela signifie que la majorité de l'Assemblée doit être en accord avec le Gouvernement.
+
+# Définition mathématique
+
+Soit un ensemble de députés $D$ ayant à charge le vote d'un ensemble de
+lois $L$ s'appliquant à un ensemble de citoyens $C$.        
+    
+On suppose ici que du fait d'un problème logistique il soit impossible
+d'avoir une démocratie parfaite à savoir $D=C$ mais que $D$ soit élus de
+façon à représenter la façon dont $C$ aurait voté si il était
+techniquement possible de que chaque citoyens.        
+    
+Les lois peuvent provenir de $D$ mais plus généralement une partie que l'on appelle gouvernement et que l'on va noté $G$ avec $G \in D=\empty$.        
+    
+Soit $L=[l_1,l_2,...,l_p]$ les lois proposé par $G$ pour servir $C$.\
+Soit $D=[d_1,d_2,...,d_n]$ les représentants de $C$ vis à vis de $G$.\
+Soit $V_i=[v_{i,1},v_{i,2},...,v_{i,p}]$  le vecteur des votes d'un députés $i \in D$ vis à vis de l'ensemble $L$.\
+Soit $V_k=[v_{1,k},v_{2,k},...,v_{n,k}]$  le vecteur des votes vis à vis d'une loi $k \in L$ vis à vis de l'ensemble $D$.\
+
+Plus généralement, nous avons $V$ la matrice de vote de dimension $[n;p]$ où $V_i$ est un vecteur ligne de dimension $p$ de la matrice $V$ et respectivement $V_k$ un vecteur colonne de dimension $n$ la matrice $V$
+On a également $\forall_{i,k} v_{i,k}$ qui prend valeur dans l'espace de vote $Vote=[0;0.5;1]$ avec :
+    
+-   La valeur $0$ si le députés $i$ est **contre** l'instauration de la loi $k$
+-   La valeur $0.5$ si le députés $i$ **s’abstient de voté** vis à vis de l'instauration de la loi $k$
+-   La valeur $1$ si le députés $i$ est **pour** l'instauration de la loi $k$
+    
+A partir de là on peut commencer à définir des opérations sur les vecteurs $V_i$ et $V_k$.
+
+*Exemple* : $4$ députés et $3$ lois       
+
+```{r}
+#| warning: false
+library(tidyverse)
+
+M <- tribble(
+  ~ loi_1, ~ loi_2, ~ loi_3,
+  1,   0  , 0.5, 
+  0.5, 1  , 0.5, 
+  0,   0.5,   1, 
+  1,   0.5,   0)
+
+depute <- paste0("députés_", 1:4)
+M <- cbind(depute,M)
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  head()
+```
+
+## Moyenne des vecteurs
+
+### Résultat d'un vote
+
+On note $\bar{V_k}=\frac{\sum_{i=1}^{n}v_{i,k}}{n}$ le résultat d'un vote relatif à la loi $k$ par les députés $D$.
+Ce résultat peut prendre une valeur comprise entre $0$ et $1$.        
+    
+Dans un système démocratique ont peut admettre la règle :       
+    
+-   Si $\bar{V_k} > 0.5$ alors la loi $k$ est **adopté** par $D$
+-   Si $\bar{V_k} < 0.5$ alors la loi $k$ est **rejeté** par $D$
+-   Si $\bar{V_k} = 0.5$ la loi $k$  doit être **revoté** par $D$
+
+A partir de la règle précédente, on peut définir $\bar{V^A_k}$ tel que :  
+    
+-   Si $\bar{V_k} > 0.5$ alors $\bar{V^A_k}=1$
+-   Si $\bar{V_k} < 0.5$ alors $\bar{V^A_k}=0$
+-   Si $\bar{V_k} = 0.5$ $\bar{V^A_k}=0.5$
+
+On peut également définir la moyenne de $\bar{\bar{V_k}}=\frac{\sum_{k=1}^{p}\bar{V_k}}{p}$ et cela définit la proportion de loi votés par les députés $D$
+
+*Exemple* : $4$ députés et $3$ lois       
+
+```{r}
+#| warning: false
+print("Résultat d'un vote")
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  summarise_all(mean)
+
+print("Résultat alternatif d'un vote")
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  summarise_all(mean) %>% 
+  as_tibble() %>%
+  mutate_all(list(~
+    case_when(
+    . > 0.5 ~ 1,
+    . < 0.5 ~ 0,
+    . == 0.5 ~ 0.5)))
+
+print("Proportion de loi votés par les députés $D$")
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  summarise_all(mean) %>%
+  rowMeans()
+
+
+print("proportion alternative de loi votés par les députés $D$")
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  summarise_all(mean) %>% 
+  as_tibble() %>%
+  mutate_all(list(~
+    case_when(
+    . > 0.5 ~ 1,
+    . < 0.5 ~ 0,
+    . == 0.5 ~ 0.5))) %>%
+  rowMeans()
+```
+
+### Attitude face à la politique du gouvernement
+
+Noté que dans le cas où $G \in D=\empty$ on peut définir alors $\bar{V_i}=\frac{\sum_{k=1}^{p}v_{i,k}}{p}$ la position d'un député $i$ vis à vis de la politique du gouvernement $G$ à travers les lois proposées $L$.
+
+Dans un système démocratique ont peut admettre la règle :       
+        
+-   Si $\bar{V_i} > 0.5$ alors le député $i$ est **favorable** à $G$ à travers l'ensemble des lois $L$
+-   Si $\bar{V_i} < 0.5$ alors le député $i$ est **défavorable**  à $G$ à travers l'ensemble des lois $L$
+-   Si $\bar{V_i} = 0.5$ alors le député $i$ est **neutre** à $G$ à travers l'ensemble des lois $L$
+
+A partir de la règle précédente, on peut définir $\bar{V^A_i}$ tel que :  
+    
+-   Si $\bar{V_i} > 0.5$ alors $\bar{V^A_i}=1$
+-   Si $\bar{V_i} < 0.5$ alors $\bar{V^A_i}=0$
+-   Si $\bar{V_i} = 0.5$ $\bar{V^A_i}=0.5$
+
+On peut également définir la moyenne de $\bar{\bar{V_i}}=\frac{\sum_{i=1}^{n}\bar{V_i}}{n}$ et cela définit la proportion de députés $D$ favorables à l'action de $G$ vis à vis de vis des lois proposées $L$.
+    
+Si $G \in D\neq\empty$ l'analyse devient plus complexe car on peut légitimement pensée que voté **pour** une loi $k$ si $k$ provient de $i$ est le résultat le plus probable.       
+Il faut alors s'arranger pour ne considérer que les lois faites par $G\star$ où $G\star\in D=\empty$
+
+*Exemple* : $4$ députés et $3$ lois       
+
+```{r}
+#| warning: false
+print("Attitude face à la politique du gouvernement des députés")
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  rowMeans() %>%  
+  as_tibble()
+
+print("Attitude alternative face à la politique du gouvernement des députés")
+M %>% 
+  column_to_rownames(var = "depute")   %>% 
+  rowMeans() %>%  
+  as_tibble() %>%
+  mutate_all(list(~
+    case_when(
+    . > 0.5 ~ 1,
+    . < 0.5 ~ 0,
+    . == 0.5 ~ 0.5)))
+
+print("Attitude moyenne face à la politique du gouvernement des députés")
+M %>% 
+  column_to_rownames(var = "depute") %>% 
+  rowMeans()  %>%  
+  as_tibble() %>% 
+  summarise(mean = mean(value))
+
+print("Attitude moyenne alternative face à la politique du gouvernement des députés")
+M %>% 
+  column_to_rownames(var = "depute")   %>% 
+  rowMeans() %>%  
+  as_tibble() %>%
+  mutate_all(list(~
+    case_when(
+      . > 0.5 ~ 1,
+      . < 0.5 ~ 0,
+      . == 0.5 ~ 0.5))) %>% 
+  summarise(mean = mean(value))
+```
+
+## Différence inter-vecteurs
+
+### Différence inter-députés
+
+On note $DIV_{k}(i,i\star)=1-|{v_{i,k}-v_{i\star,k}}|$ la différence de position entre le députés $i$ et le députés $i\star$ relatif à une loi $k$.        
+Cette différence prend :        
+
+-   la valeur $1$ si le députés $i$ et le députés $i\star$ ont la **même position** vis à vis de loi $k$
+-   la valeur $0$ si le députés $i$ et le députés $i\star$ ont une **position différente** vis à vis de la loi $k$
+
+On peut alors définir $\bar{DIV}_{i,i\star}=\frac{\sum_{k=1}^{p}IV_{k}(V_{i},V_{i\star})}{p}$ la différence de position entre le députés $i$ et le députés $i\star$ relatif à l'ensemble de lois $L$. 
+
+-   Si $\bar{DIV}_{i,i\star} > 0.5$ alors le député $i$ et le député $i\star$ ont globalement la **même position** sur l'ensemble des lois $L$
+-   Si $\bar{DIV}_{i,i\star} < 0.5$ alors le député $i$ et le député $i\star$ ont globalement une **position différente** sur l'ensemble des lois $L$
+-   Si $\bar{DIV}_{i,i\star} = 0.5$ alors le député $i$ et le député ont autant de **même position** que  de **position différente** sur l'ensemble des lois $L$
+
+A partir de la règle précédente, on peut définir $\bar{DIV^A}_{i,i\star}$ tel que : 
+    
+-   Si $\bar{DIV}_{i,i\star} > 0.5$ alors $\bar{DIV^A}_{i,i\star}=1$ 
+-   Si $\bar{DIV}_{i,i\star} < 0.5$ alors $\bar{DIV^A}_{i,i\star}=0$
+-   Si $\bar{DIV}_{i,i\star} = 0.5$ alors $\bar{DIV^A}_{i,i\star}=0.5$
+
+
+### Différence inter-lois
+
+On note $DIV_{i}(k,k\star)=1-|{v_{i,k}-v_{i,k\star}}|$ la différence de position du députés $i$ entre la loi $k$ et la loi $k\star$.        
+Cette différence prend :        
+
+-   la valeur $1$ si le députés $i$ a la **même position** vis à vis de loi $k$ et de la loi $k\star$
+-   la valeur $0$ si le députés $i$ a une **position différente** vis à vis de loi $k$ et de la loi $k\star$
+
+On peut alors définir $\bar{DIV}_{k,k\star}=\frac{\sum_{i=1}^{n}IV_{i}(k,k\star)}{n}$ la différence de position entre la loi $k$ et $k\star$ pour de l'ensemble des députés $D$. 
+
+-   Si $\bar{DIV}_{k,k\star} > 0.5$ alors globalement les députés $D$ ont votés de la **même façon** entre la loi $k$ et la loi $k\star$
+-   Si $\bar{DIV}_{k,k\star} < 0.5$ alors globalement les députés $D$ ont votés de la **façon différente** entre la loi $k$ et la loi $k\star$  $L$
+-   Si $\bar{DIV}_{k,k\star} = 0.5$ alors les député $D$ ont autant de fois votés de la **même façon** que de **façon différente**
+
+A partir de la règle précédente, on peut définir $\bar{DIV^A}_{i,i\star}$ tel que : 
+    
+-   Si $\bar{DIV}_{k,k\star} > 0.5$ alors $\bar{DIV^A}_{k,k\star}=1$ 
+-   Si $\bar{DIV}_{k,k\star} < 0.5$ alors $\bar{DIV^A}_{k,k\star}=0$
+-   Si $\bar{DIV}_{k,k\star} = 0.5$ alors $\bar{DIV^A}_{k,k\star}=0.5$
+
+## Graphes associés       
+
+Le graphe est défini comme une collection d'éléments qui sont mis en relation entre eux. Leur représentation géométrique se fait à travers des modèles constitués par des points (appelés encore sommets ou nœuds) reliés par des lignes de courbes (appelée aussi arêtes, liens ou flèches). Les arêtes peuvent être non symétriques et sont alors considérées comme des flèches ou des arcs. Quand on choisit de les orienter et/ou leur attribuer un poids, les graphes sont dits orientés ou pondérés.
+
+On note $G=(V,E)$ avec $V$ les noeuds et $VE$ les relations entre les noeuds.       
+Ce graphe peut être définis par une matrice d'ajacence que l'on note $M$, matrice symétrique $[n;n]$.
+
+### Graphe inter-députés
+
+Avec les définitions précédentes, on peut poser $V$ tel que $V=D$ c'est à dire les députes et $E$ comme l'ensemble des $\bar{DIV}_{i,i\star}$ possible en faisant remarquer que $\bar{DIV}_{i,i\star}=\bar{DIV}_{i\star,i}$ l'on peut définir avec $n$ députés le nombre de relations distinctes $n(n − 1)/2$. 
+
+On peut également utiliser l'ensemble des $\bar{DIV^A}_{i,i\star}$ pour définir les relations entre les noeuds à savoir l'ensemble des députés $D$.        
+
+### Graphe inter-députés
+
+Avec les définitions précédentes, on peut poser $V$ tel que $V=L$ c'est à dire les lois et $E$ comme l'ensemble des $\bar{DIV}_{k,k\star}$ possible en faisant remarquer que $\bar{DIV}_{k,k\star}=\bar{DIV}_{k\star,k}$ l'on peut définir avec $p$ lois le nombre de relations distinctes $p(p − 1)/2$.
+
+# Définition d'une assemblée participitative
+
+## Tirage au sort en politique
+
+En politique, le tirage au sort permet de désigner des représentants exécutifs, législatifs et judiciaires, aujourd'hui principalement des jurés et magistrats, au moyen du hasard et parmi un ensemble de candidats universel ou restreint. Dans le cas de la désignation d'une assemblée (échantillon large), le tirage au sort a la particularité d'assurer une représentativité plus importante que le vote.       
+Il est de ce fait couramment promu, en complément des référendums, par les partisans de la démocratie directe. 
+
+## Députés alternatifs
+
+On peut alors définir un ensemble de députés alternatifs $C$ c'est à dire des gens choisis de façon aléatoire afin de votés sur le même ensemble $L$ que l'espace de votes des députés $D$.
+
+On peut définir les mêmes relations qu'auparavant entre $D$ et $L$ avec cette fois-ci $C$ à la place de $D$ ; mais l'on peut étant donné que l'espace $L$ est commun à $D$ et à $C$ créer des relations supplémentaires.
+
+## Différence en utilisant l'assemblée élective vis à vis de l'assemblée participitative
+
+### Différence résultat de vote
+
+On note $\bar{V_k^E}$ le résultat d'un vote relatif à la loi $k$ par les députés $D$ soit l'**assemblée élective** et $\bar{V_k^P}$ le résultat d'un vote relatif à la même loi $k$ par les députés $C$ soit l'**assemblée participitative**.
+A partir de ces deux résultat ont peut calculer pour chaque lois $k$ la différence $DIV_{k}(\bar{V_k^E},\bar{V_k^P})=1-|\bar{V_k^E}-\bar{V_k^P}|$
+
+On peut alors définir $\bar{DIV_{k}(\bar{V_k^E},\bar{V_k^P})}=\frac{\sum_{k=1}^{p}DIV_{k}(\bar{V_k^E},\bar{V_k^P})}{p}$ la différence de position entre l'**assemblée élective** et l'**assemblée participitative** vis à vis de l'ensemble des lois $L$. 
+
+-   Si $\bar{DIV_{k}(\bar{V_k^E},\bar{V_k^P})} > 0.5$ alors globalement l'**assemblée élective** et l'**assemblée participative** ont les **mêmes positions** vis à vis de l'ensemble des lois $L$
+-   Si $\bar{DIV_{k}(\bar{V_k^E},\bar{V_k^P})} < 0.5$ alors globalement l'**assemblée élective** et l'**assemblée participative** ont des **positions différentes** vis à vis de l'ensemble des lois $L$
+-   Si $\bar{DIV_{k}(\bar{V_k^E},\bar{V_k^P})} = 0.5$ alors globalement il est difficile de dire si l'**assemblée élective** et l'**assemblée participative** sont différentes ou similaire.
+
+On peut faire remarquer qu'il est préférable dans ce cas de considérer la version alternative de $\bar{V_k}$ c'est à dire $\bar{V_k^A}$.
+En effet prenons le cas fictif où   $\forall x \in L$ nous avons  $\bar{V_x^E}=0.51$ et $\bar{V_x^P}=0.49$, nous obtenons donc $DIV_{k}(\bar{V_x^E},\bar{V_x^P})=0.8$ et également $\bar{DIV_{k}(\bar{V_k^E},\bar{V_k^P})}=0.8$ alors même qu'aucune loi n'est accepté par l'**assemblée participative** et que toute le sont par l'**assemblée élective**.
+
+En prenant la version alternative, nous arrivons à des résultats plus cohérants, mais nous perdons la notions d'écart, ainsi si $\bar{V_x^E}=0.99$ et $\bar{V_x^P}=0.51$ nous arrivons au même résultat que si $\bar{V_x^E}=0.51$ et $\bar{V_x^P}=0.51$
+Notion de marge.
+
+### Différence d'attitude face à la politique du gouvernement
+
+On ne peut ici faire le même travail qu'auparavant car la dimension de l'espace des $\bar{V_i^E}$ qui a la même dimension que l'espace des députés $D$ n'est pas obligatoirement égale à la dimension de l'espace des $\bar{V_i^P}$ qui a la même dimension que l'espace des députés $C$.
+Autrement dit $dim(D) \neq dim(C)$ et à fortiori $dim(D) < dim(C)$
+
+Il faut donc trouver un moyen de réduire la $dim(C)$ afin à défaut de pouvoir augmenté $dim(D)$.
+
+Une solution radicale est de considérer est de considérer la différence entre $\bar{\bar{V_k^E}}$ et $\bar{\bar{V_k^P}}$  la différence entre la moyenne des attitudes des députés $D$ de l'**assemblée élective** et la moyenne des attitudes des députés $C$ de l'**assemblée participative**.
+
+Une autre solution plus subtile consiste à créer un sous-ensemble $C^i$ de députés de $C$ de **l'assemblée participative** est rattachant ce sous ensemble à un députés $i \in D$ de **l'assemblée élective** .        
+En considérant autant de sous-ensemble que l'on peut avoir de députés $D$ de **l'assemblée participative** soit $C=C^1,..C^n$ et que $\forall j \in C$ soit au moins rattaché à un $C^i$ et seulement $C^i$.
+
+Nous pouvons considérer $\bar{V_i^P}=\frac{\sum_{j=1}^{dim(C^i)}\bar{V_j}}{dim(C^i)}$, nous obtenons alors deux objets définis dans le même espace à savoir l'espace des députés $D$ de **l'assemblée élective**.
+
+On note $\bar{V_i^E}$ la position d'un députés $i \in D$ de l'**assemblée élective** vis à vis de l'ensemble des lois $L$ et $\bar{V_i^P}$ la position des députés $j in C^i$ de l'**assemblée participatitative** rattachés à un député $i$ de l'**assemblée élective**.
+A partir de ces deux résultat ont peut calculer pour chaque députés $i$ la différence $DIV_{i}(\bar{V_i^E},\bar{V_i^P})=1-|\bar{V_i^E}-\bar{V_i^P}|$. 
+
+Remarque : Pour chaque $DIV_{i}(\bar{V_i^E},\bar{V_i^P})$ ont peut considérer comme le degré de répresentativité du députés $i$ vis à vis des représentés $j in C^i$ 
+    
+On peut alors définir $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})}=\frac{\sum_{i=1}^{n}DIV_{i}(\bar{V_i^E},\bar{V_i^P})}{n}$ la différence de d'attitude face à la politique du gouvernement entre l'**assemblée élective** et l'**assemblée participitative** vis à vis de l'ensemble des lois $L$. 
+
+-   Si $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})} > 0.5$ alors globalement l'**assemblée élective** et l'**assemblée participative** ont la **même attitudes** vis à vis du gouvernement $G$
+-   Si $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})}  < 0.5$ alors globalement l'**assemblée élective** et l'**assemblée participative** ont des **attitudes différentes** vis à vis du gouvernement $G$
+-   Si $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})}  = 0.5$ alors globalement il est difficile de dire si l'**assemblée élective** et l'**assemblée participative** ont des **attitudes différentes** ou la .

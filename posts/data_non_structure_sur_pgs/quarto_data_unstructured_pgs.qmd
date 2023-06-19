@@ -75,7 +75,6 @@ tidydata_format <- table1 %>%
   filter(year==2000)
 tidydata_format
 
-#| code-line-numbers: "13"
 not_tidydata_format <- table4b %>% select(-`1999`) 
 not_tidydata_format
 
@@ -89,7 +88,6 @@ Prenons l'exemple des [circonscriptions françaises](https://www.data.gouv.fr/fr
 
 Si une circonscription se limitait à un point, on pourrait considérer la structure suivante :
 ```{r}
-#| code-line-numbers: "13"
 tribble(
   ~ ID, ~ code_dpt, ~ nom_dpt, ~ nom_reg, ~ num_circ, ~ lattitude, ~ longitude,
    "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.454946,44.953424,
@@ -105,7 +103,6 @@ Malheureusement c'est plus compliqué que cela.
 Première solution :        
 Multiplier les **colonnes** :       
 ```{r}
-#| code-line-numbers: "13"
 tribble(
   ~ ID, ~ code_dpt, ~ nom_dpt, ~ nom_reg, ~ num_circ, ~ lattitude_point1, ~ lattitude_point1,~ lattitude_point2, ~ lattitude_point2,~ lattitude_point3, ~ lattitude_point3,
    "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.454946,44.953424,-0.454946,45.953424,-0.454946,46.953424,

@@ -120,6 +120,4 @@ En définissant $Q_{k,i}$ comme :
 Nous obtenons un modèle similaire à celui de The Economist.       
     
 La contrainte est que l'espace $K$ est ici bien supérieur à 60 et que l'information est bien plus complexe.   
-       
-
 
