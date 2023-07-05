@@ -35,7 +35,7 @@ editor:
 Cette carte montre les gouvernements se réclamant (ou non) de la démocratie en juin 2019.       
 Seules les pays rouge ne ser= réclament pas être une démocratie
 
-En entend souvent que tel ou tel pays serait une **démocratie** et que
+On entend souvent que tel ou tel pays serait une **démocratie** et que
 tel ou tel autre serait une **dictature**.
 
 Cette affirmation pose problème dans le sens où on établis ici une
@@ -43,7 +43,7 @@ frontière stricte entre deux catégories que pourrait avoir un pays, à
 savoir démocratique ou non.
 
 Après une telle affirmation, la question de la pertinence de restreindre
-l'espace catégories à deux états se pose.\
+l'espace des régimes à deux états se pose.\
 Et cette question de la pertinence de restriction à deux catégories se
 pose d'autant plus, qu'il convient de disposer d'un critère de
 discrimination permettant de justifier de l'attribution d'un pays à tel
@@ -85,7 +85,7 @@ Quelques éléments peuvent favoriser cette **représentation** :
 #  Indice de démocratie selon The Economist
 
 ![](img/democracy_index_the.png)       
-Carte de l'indice de démocratie publiée par Economist Intelligence Unit en 2022 : plus le pays est en vert, plus il est considéré comme démocratique.
+Carte de l'indice de démocratie publié par Economist Intelligence Unit en 2022 : plus le pays est en vert, plus il est considéré comme démocratique.
 
 C'est avec cette vision que [@theco] définit son indice de démocratie à
 savoir : "The Democracy Index is based on five categories: electoral
@@ -99,8 +99,8 @@ Pour un pays $j$, une question $k$, $Q_{k,i}$ la réponse du citoyen $i$ à la q
     
 Si cette $ID_{j}>0.8$ alors `full democracy`      
 Si cette $ID_{j}<0.8$ & $IJ_{j}>0.6$  alors `flawed democracy`        
-Si cette $ID_{j}>0.8$ alors `hybrid regime`        
-Si cette $ID_{j}>0.8$ alors `authoritarian regime`
+Si cette $ID_{j}<0.6$ & $IJ_{j}>0.4$ alors `hybrid regime`        
+Si cette $ID_{j}<0.4$ alors `authoritarian regime`
 
 # Indice de démocratie alternatif
 
