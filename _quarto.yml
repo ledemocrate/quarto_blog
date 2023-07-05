@@ -3,7 +3,6 @@ project:
   output-dir: docs
 
 website:
-  image: hansi.jpg
   title: "Société Alsacienne d'Artisanat de la Data"
   description: "Blog sur les travaux réalisés dans le cadre de la data"
   navbar:
