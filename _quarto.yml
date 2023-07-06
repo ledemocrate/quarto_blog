@@ -6,6 +6,7 @@ website:
   title: "Société Alsacienne d'Artisanat de la Data"
   description: "Blog sur les travaux réalisés dans le cadre de la data"
   navbar:
+    logo: "hansi.jpg"
     right:
       - text: Journal
         href: blog.qmd 
