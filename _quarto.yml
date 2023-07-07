@@ -3,9 +3,6 @@ project:
   output-dir: docs
 
 website:
-  comments: 
-    giscus:
-      repo: ledemocrate/blog_comment
   favicon: "hansi.jpg"
   title: "Société Alsacienne d'Artisanat de la Data"
   description: "Blog sur les travaux réalisés dans le cadre de la data"
@@ -22,6 +19,11 @@ website:
         href: https://www.linkedin.com/in/quentin-gollentz-697993172/
       - icon: playstation
         href: https://www.playstation.com/fr-fr/playstation-network/
+        
+comments: 
+  giscus:
+    repo: ledemocrate/blog_comment
+    category: article
 format:
   html:
     theme: litera

@@ -6,16 +6,14 @@ freeze: true
 # Enable banner style title blocks
 title-block-banner: false
 
-# Author name of all blog posts
-author: 'GOLLENTZ Quentin'
-
-# Table of content settings
 toc: true
 toc-depth: 3
 
 page-layout: article
 
-comments: 
+comments:
   giscus:
-    repo: ledemocrate/blog_comment
-    category: posts
+    repo: quarto-dev/quarto-web
+    category: Blog
+
+
