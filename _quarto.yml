@@ -20,10 +20,6 @@ website:
       - icon: playstation
         href: https://www.playstation.com/fr-fr/playstation-network/
         
-comments: 
-  giscus:
-    repo: ledemocrate/blog_comment
-    category: article
 format:
   html:
     theme: litera
