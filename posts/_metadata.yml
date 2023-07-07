@@ -16,5 +16,6 @@ toc-depth: 3
 page-layout: article
 
 comments: 
-  utterances: 
-    repo:  ledemocrate/blog_comment
+  giscus:
+    repo: ledemocrate/blog_comment
+    category: posts

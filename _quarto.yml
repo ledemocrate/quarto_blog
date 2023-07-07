@@ -3,19 +3,17 @@ project:
   output-dir: docs
 
 website:
+  comments: 
+    giscus:
+      repo: ledemocrate/blog_comment
   favicon: "hansi.jpg"
   title: "Société Alsacienne d'Artisanat de la Data"
   description: "Blog sur les travaux réalisés dans le cadre de la data"
-  comments: 
-    utterances:
-      repo: ledemocrate/blog_comment
   navbar:
     logo: "hansi.jpg"
     right:
       - text: Journal
         href: blog.qmd 
-      - icon: github
-      - href : /posts/
       - icon: github
         href: https://github.com/ledemocrate
       - icon: reddit
@@ -28,4 +26,5 @@ format:
   html:
     theme: litera
     css: styles.css
+
 

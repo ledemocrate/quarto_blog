@@ -2,7 +2,7 @@
 title: "De la démocratie théorique à la démocratie empirique"
 categories: ['democratie participitative', 'statistique','essai']
 author:
-    name: GOLLENTZ Quentin
+    name: 'GOLLENTZ Quentin'
     url: https://www.linkedin.com/in/quentin-gollentz-697993172/
     email: quentin.gollentz@daka-team.com
 date: last-modified
