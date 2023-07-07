@@ -11,9 +11,13 @@ toc-depth: 3
 
 page-layout: article
 
-comments:
+comments: 
   giscus:
-    repo: quarto-dev/quarto-web
-    category: Blog
+    repo: ledemocrate/blog_comment
+    category: article
+    
+include-in-header: ../_includes/giscus.html
+include-after-body: ../_includes/div-giscus.html
+
 
 
