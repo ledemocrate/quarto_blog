@@ -33,7 +33,7 @@ editor:
 
 ![](img/democracy_claims.png)       
 Cette carte montre les gouvernements se réclamant (ou non) de la démocratie en juin 2019.       
-Seules les pays rouge ne ser= réclament pas être une démocratie
+Seules les pays rouge ne se réclament pas être une démocratie
 
 On entend souvent que tel ou tel pays serait une **démocratie** et que
 tel ou tel autre serait une **dictature**.
@@ -95,21 +95,29 @@ scores on a range of indicators within these categories, each country is
 then classified as one of four types of regime: "full democracy",
 "flawed democracy", "hybrid regime" or "authoritarian regime".
 
-Pour un pays $j$, une question $k$, $Q_{k,i}$ la réponse du citoyen $i$ à la question $k$ pouvant prendre valeur dans la la liste `[0;0.5;1]`  alors on a un indice de démocratie que l'on note $ID_{j}$ définis par l'expression suivante : $ID_{j}=\frac{\sum_{i=1}^{N}\sum_{k=1}^{60}Q_{i,k}}{60}$.       
+Soit :     
+
+-   un pays $j$
+-   une question $k$
+-   $Q_{k,i}$ la réponse du citoyen $i$ à la question $k$ pouvant prendre valeur dans la la liste `[0;0.5;1]`  
+
+Alors on a un indice de démocratie que l'on note $ID_{j}$ définis par l'expression suivante :
+
+-   $ID_{j}=\frac{\sum_{i=1}^{N}\sum_{k=1}^{60}Q_{i,k}}{60}$.       
     
 Si cette $ID_{j}>0.8$ alors `full democracy`      
-Si cette $ID_{j}<0.8$ & $IJ_{j}>0.6$  alors `flawed democracy`        
-Si cette $ID_{j}<0.6$ & $IJ_{j}>0.4$ alors `hybrid regime`        
+Si cette $ID_{j}<0.8$ & $ID_{j}>0.6$  alors `flawed democracy`        
+Si cette $ID_{j}<0.6$ & $ID_{j}>0.4$ alors `hybrid regime`        
 Si cette $ID_{j}<0.4$ alors `authoritarian regime`
 
 # Indice de démocratie alternatif
 
 Dans cette définition alternative, nous allons uniquement faire une définition alternative de $k$.
 
-Soit un pays $j$ définis par des citoyens $i$ avec $N$ l'ensemble des citoyens.
+Soit un pays $j$ définis par des citoyens $i$ avec $N$ l'ensemble des citoyens.       
 Les citoyens sont soumis à des lois $k$ avec $K$ l'ensemble des lois.
     
-La seule différence ici par rapport au modèle de The Economist est d'avoir remplacé $k$ une question par $k$ une loi.        
+La seule différence ici par rapport au modèle de The Economist est d'avoir remplacé $k$ une question par $k$ la question relative à l'acceptation d'une loi $k$.        
 
 En définissant $Q_{k,i}$ comme :        
 
@@ -120,5 +128,7 @@ En définissant $Q_{k,i}$ comme :
 Nous obtenons un modèle similaire à celui de The Economist.       
     
 La contrainte est que l'espace $K$ est ici bien supérieur à 60 et que l'information est bien plus complexe.   
+
+Néanmoins nous obtenons une mesure plus précise quand à l'objet étudié.
 
 
