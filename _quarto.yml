@@ -1,5 +1,7 @@
 project:
   type: website
+  resources: 
+    - "*.mp3"
   output-dir: docs
 
 website:

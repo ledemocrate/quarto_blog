@@ -14,6 +14,22 @@ about:
         href: https://www.playstation.com/fr-fr/playstation-network/
 
 ---
+```{r}
+#| echo: false
+html_tag_audio <- function(file, type = c("wav")) {
+  type <- match.arg(type)
+  htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = file,
+      type = glue::glue("audio/{type}", type = type)
+    )
+  )
+}
+
+html_tag_audio("../Sound/GTA_IV_TBoGT_Pause_menu_music_1_HOUR.mp3", type = "wav")
+```
+
 
 Bonjour à vous,
 
