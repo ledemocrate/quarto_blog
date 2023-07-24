@@ -36,6 +36,43 @@ execute:
   echo: true
 ---
 
+## Format de données []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/solid_liquid_gas_header.png" height="120px" style="vertical-align:middle;"/>
+
+Allégorie du gaz.       
+La donnée peut être représenté selon différentes formes :       
+
+-   l'**usage** qui est faite de la donnée conditionne sa **forme**.    
+-   la **forme** de la donnée conditionne son **usage**
+
+    
+Distinction Information/Donnée :         
+
+-   L’**information** est la mise en contexte d’une donnée.
+-   La **donnée** est le support ou vecteur de l'information.
+
+Ci-dessous 2 format pour 1 information :        
+
+-   JSON
+
+```JSON
+{
+				"civ": "M.",
+				"prenom": "David",
+				"nom": "Habib",
+				"alpha": "HabibD",
+				"trigramme": "DHA"
+}
+
+```
+-   CSV
+
+```csv
+civ;prenom;nom;alpha;trigramme
+M.;David;Habib;HabibD;DHA
+```
+
+
+
 ## Concept de Tidy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/wadley_wickam_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
 
 ![](img/wadley_wickam_tidy_data.jpg)        
@@ -96,6 +133,7 @@ tribble(
 
 Malheureusement c'est plus compliqué que cela.        
 ![](img/messy.png)
+[@open_data]
 
 :::: {.columns}
 
@@ -129,9 +167,11 @@ tribble(
 
 ::::
 
+=> Nous somme contraint de considérer le type JSON
+
 ## Le type geometry  []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/france_metropolitaine.png" height="120px" style="vertical-align:middle;"/>
 
-Considérons le type de variable `geometry` dont la valeur est une liste de point.
+Considérons le type de variable `geometry` dans `R` dont la valeur est une liste de point.
 ```{r}
 library(geojsonsf)
 library(tidyverse)
@@ -208,11 +248,20 @@ FROM (
 ) AS f;
 ```
 
+On obtient un jeu de données qui est TIDY.
+
+
+![](img/dbeaver.png)
+
+
+
 ## Application : Rattachement adresse à une circonscription []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/assemble_nationale.png" height="120px" style="vertical-align:middle;"/>
 
-L'objectif étant à partir d'une adresse de déterminer si cette adresse appartient à la circonscription circonscription en `python` :       
+L'objectif étant à partir d'une adresse de déterminer la circonscription à laquelle appartient l'adresse en `python` :       
 
 ```{python}
+
+
 import geopandas as gpd
 import os
 import psycopg2
@@ -256,4 +305,13 @@ mobile_records = cursor.fetchall()
 mobile_records[292] # Mon adresse appartient bien à la belle circonscription du HAUT-RHIN
 mobile_records[132] # Mon adresse n'appartient pas à la moins belle circonscription du BAS-RHIN
 ```
+Utilité dans l'application de prédiction de prix (Cf : BBL de Ramzi)
+
+
+## Application : Un ETL pour un flux ELT []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/giphar-453951.jpeg" height="120px" style="vertical-align:middle;"/>
+
+![](img/import_json_via_talend.png)
+![](img/parsage_json.png)
+
+
 ## Citations et discussion []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/hansi.jpg" height="120px" style="vertical-align:middle;"/>

@@ -1,6 +1,6 @@
 ---
 title: "Formation DATA"
-subtitle: "Utilisation d'un ETL : Talend"
+subtitle: "Utilisation d'un ETL : Talend Open Studio"
 author:
     name: GOLLENTZ Quentin
     url: https://www.linkedin.com/in/quentin-gollentz-697993172/
@@ -29,13 +29,26 @@ format:
     html-math-method: katex
 css: css/styles.css
 bibliography: references.bib
+engine: knitr
 ---
+```{css echo=FALSE}
+.column {
+text-align: center;
+}
+```
+```{css, echo = FALSE}
+.justify {
+  text-align: justify !important
+}
+```
 
 # 0. Introduction et prérequis
 
+::: {.justify}
+
 Dans la suite du document, nous proposons des exercices qui sont liés les uns des autres.\
 Il est donc nécessaire de suivre dans l'ordre le document car certains exercices sont conditionnés aux précédents.\
-Nous proposons le traitement de données issus de l'Open Data de l'Assemblée Nationale, en vue de développer une API permettant d'obtenir les informations relatifs à un député.
+Nous proposons le traitement de données issu de l'[Open Data de l'Assemblée Nationale](https://data.assemblee-nationale.fr/), en vue de développer une API permettant d'obtenir les informations relatives à un député.
 
 Pour la réalisation des exercices, il sera nécessaire d'avoir :
 
@@ -49,9 +62,13 @@ Pour la réalisation des exercices, il sera nécessaire d'avoir :
 -   Une compréhension basique de la science des données
 -   Une compréhension basique de l'informatique décisionnelle
 
-# 1. Prise en main
+:::
 
-## 1.1 Présentation
+# 1. Présentation
+
+## 1.1 Présentation du principe ETL
+
+::: {.justify}
 
 **L'ETL est un acronyme pour EXTRACT TRANSFORM AND LOAD.**
 
@@ -61,103 +78,28 @@ Les premiers ETL ont fait leur apparition dans les années 1970, mais ont beauco
 Désormais, les ETL doivent permettre l'ingestion en temps réel, l'enrichissement de données, la prise en charge de milliards de transactions. Ils prennent aussi en charge les données structurées ou non structurées en provenance de sources sur site ou sur le Cloud.\
 De même, ces plateformes doivent désormais être scalables, flexibles, résistantes aux pannes, et sécurisées.
 
+La différence entre l’ETL et l’ELT réside dans le fait que les données sont transformées en informations décisionnelles et dans la quantité de données conservée dans les entrepôts.
+
+-   L’ETL (Extract/Transform/Load) est une approche d’intégration qui recueille des informations auprès de sources distantes, les transforme en formats et styles définis, puis les charge dans des bases de données, sources de données ou entrepôts.
+
+![](img/ETL.png)
+
+
+
+-   L’ELT (Extract/Load/Tansform) extrait également des données à partir d’une ou plusieurs sources distantes, mais les charge ensuite dans l’entrepôt de données cible sans changement de format. Dans un processus ELT, la transformation des données s’effectue au sein de la base de données cible. L’ELT nécessite moins de sources distantes, uniquement leurs données brutes et non préparées.
+
+![](img/ELT.png)
+
+
+Les deux approches sont viables, mais les décideurs informatiques, lorsqu’ils créent une architecture de données, doivent prendre en compte les capacités internes et l’impact croissant des technologies Cloud.
+
 **Talend est donc un logiciel ETL de manière simplifier afin que le développeur ne s'occupe que de la partie règle de métier.**
 
-## 1.2 Installation de l'outil
+:::
 
-#### TALEND
+## 1.2 Présentation d'un WORKSPACE
 
--   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
-    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
--   **Etape 1** : Télécharger l'archive ***ESB_731.7z***
--   **Etape 2** : Extraire l'archive téléchargé précédemment à la racine du disque *C:/*
-
-À la fin de ces étapes, vous devriez obtenir le dossier suivant :
-
-![](img/resultat_installation_talend.png)
-
-Également les sous-dossiers suivants :
-
-![](img/resultat_installation_talend_subfolder.png)
-
-#### JAVA
-
-Talend peut être vu comme un générateur de code Java, ainsi il est donc nécessaire de disposer d'une version de machine java adapté à la version de Talend utilisé.
-
--   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
-    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
--   **Etape 1** : Télécharger l'archive ***jdk-20.zip***
--   **Etape 2** : Extraire l'archive téléchargé précédemment à la racine du disque *C:/*
--   **Etape 3** : Lancer une invite de commande (Rappel : cmd dans une fenêtre)
--   **Etape 4** : Lancer les commandes suivantes :
-    -   `set PATH=C:\jdk-20\bin;%PATH%`       
-        `java -version`       
-        `where java`        
-
-À la fin de ces étapes, vous devriez obtenir le résultat suivant :
-
-![](img/resultat_installation_java.png)
-
-#### NOTEPAD++
-
--   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
-    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
--   **Etape 1** : Télécharger l'archive ***Notepad++.7z***
--   **Etape 2** : Extraire l'archive téléchargé précédemment à la racine du disque *C:/*
-
-À la fin de ces étapes, vous devriez obtenir le résultat suivant :
-
-![](img/resultat_installation_notepad.png)
-
-Également les sous-dossiers suivants :
-
-![](img/resultat_installation_notepad_subfolder.png)
-
-#### DBEAVER
-
--   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
-    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
--   **Etape 1** : Télécharger l'archive ***Dbeaver.7z***
--   **Etape 2** : Extraire l'archive téléchargé précédemment à la racine du disque *C:/*
-
-À la fin de ces étapes, vous devriez obtenir le résultat suivant :
-
-![](img/resultat_installation_dbeaver.png)
-
-Également les sous-dossiers suivants :
-
-![](img/resultat_installation_dbeaver_subfolder.png)
-    
-#### POSTGRESQL
-
-Expliquer les procédures serait un peu compliqué et redondant par rapport à la documentation qu'on peut trouver sur le web.       
-Vous pouvez suivre la procédure ici :  
-[`postgresql`](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql)                
-    
-Vous pouvez également regarder la vidéo ci-dessous :        
-
-```{=html}
-<video 
-  src="video/postgresql_opt.mp4" 
-  width="1000" 
-  height="500">
-</video>
-```
-
-[Source : @waytolearn](https://www.youtube.com/watch?v=H_TFWZo-I5w)
-
-#### POSTMAN
-
--   **Etape 0** : Se rendre sur le site suivant :
-    -   [`postman`](https://www.postman.com/downloads/)
--   **Etape 1** : Télécharger l'archive ***Postman-win64-Setup.exe***
--   **Etape 2** : Double cliquez sur l'exécutable et laissez vous guider par l'assistant d’installation
-
-À la fin de ces étapes, vous devriez obtenir le résultat suivant :
-
-![](img/postman.png)
-
-## 1.3 Présentation d'un WORKSPACE
+::: {.justify}
 
 [Les projet Talend sont stockés dans un espace de travail (workspace)](https://business-intelligence.developpez.com/faq/talend/?page=I).
 
@@ -189,7 +131,13 @@ En supposant que les étapes précédentes ont été respectées, il convient de
 -   Se rendre dans ce chemin : *C:/ESB_731/Studio*        
 -   Faire un double clic gauche sur l'exécutable ***TOS_ESB-win-x86_64.exe*** afin de démarrer Talend Studio.
 
-Remarque : Il est recommandé de créer un Raccourci vers exécutable dans son Bureau afin d'éviter une navigation inutile. (Rappel : CTRL+C sur exécutable puis CTRL+V sur le Bureau)
+:::{.callout-tip}
+
+## Recommandation
+
+Il est recommandé de créer un raccourci vers l'exécutable dans son Bureau afin d'éviter une navigation inutile.       
+Rappel : CTRL+C sur l'exécutable puis CTRL+V sur le Bureau
+:::
 
 À l'exécution vous devriez avoir la fenêtre suivante qui s'ouvre :
 
@@ -204,102 +152,185 @@ Pour pouvoir changer d'endroit, il convient de :
 
 ![](img/set_workspace_path.png)
 
-## 1.4 Présentation du Talend Studio
+:::
+
+## 1.3 Présentation de TALEND OPEN STUDIO
+
+::: {.justify}
 
 Rappel commande utile :
 
 -   CTRL + A : Tout sélectionner
 -   CTRL + C : Copier
 -   CTRL + V : Coller
--   CTRL + Z : Revenir à l'état précédent une action
--   CTRL + Y : Revenir à l'état succèdent une action
+-   CTRL + Z : Revenir à l'état précédant une action
+-   CTRL + Y : Revenir à l'état succédant une action
 -   CTRL + S : Sauvegarder
 
+:::
 
-#### BARRE PRINCIPALE
+### BARRE PRINCIPALE
+
+::: {.justify}
 
 ![](img/barre_principale.png)
 
--   FICHIER : Permet de changer de WORKSPACE et de modifier les propriétés du projet (Non utile)
--   EDITER : Revenir en arrière, Copier, Coller, ect… (Non utile)
+-   FICHIER : Permets de changer de WORKSPACE et de modifier les propriétés du projet 
+-   EDITER : Revenir en arrière, Copier, Coller, ect… 
 -   FENÊTRE : 
-    -   Modifier les éléments visuelles du Studio (Plutôt utile)
-    -   Dans Préférences l’ensemble des paramètres pour les jobs du projet (Trop vaste pour être traité dans exhaustivité) (Très utile)
+    -   Modifier les éléments visuels du Studio 
+    -   Modifier l’ensemble des paramètres pour les jobs du projet dans l'onglet [Préférences](https://help.talend.com/r/fr-FR/7.3/open-studio-user-guide/java-interpreter-path-talend) 
 
+:::
 
-#### QUADRANT NORD OUEST
+### QUADRANT NORD OUEST {#quad-no}
+
+::: {.justify}
 
 ![](img/quadrant_nord_ouest.png) 
     
 -   BUSINESS MODELS : (Aucune idée de l’utilité ou non)       
--   JOBS : L’endroit où l’on peut retrouver les différents JOB, par JOB on entend un traitement de données. Dans d’autres langage de programmation on parle de script.        
--   ROUTES : L’équivalent d’un Job mais le mode d’exécution n’est pas le même, un job sera lancé une fois tandis qu’une ROUTE est un service qui s’exécute en permanence        
--   SERVICES : On appelle cela communément une API permet de faire le lien avec d’autres application par exemple une BDD       
--   CONTEXTE : L’endroit om l’on peut retrouver les variables de contexte qui sont disponible à l’exécution du JOB que l’on oppose aux variables globales qui sont disponibles dans le Job        
+-   JOBS : L’endroit où l’on peut retrouver les différents JOB, par JOB on entend un traitement de données.       
+-   ROUTES : La principale différence entre les ROUTES et les JOB est que lorsque vous démarrez une route, elle écoute ou STREAM indéfiniment les entrées (fichier, message, etc.), et chaque fois qu'elles sont disponibles, elles sont traitées et envoyées à destination, jusqu'à ce que la route soit arrêtée.         
+D'autre part, un JOB est un processus par lots ou BATCH qui est lancé à la demande pour gérer certaines entrées (fichiers, base de données, etc.) et se termine lorsque toutes les entrées sont traitées.   
+
+:::{.callout-tip}
+
+## Utile
+
+Un point important à noter est que vous pouvez appeler des Jobs Talend à partir d'une Route Talend si vous le souhaitez.
+:::
+
+-   SERVICES : Un webservice est une fonction qui a pour rôle de mettre un disposition un service via internet. Le webservice est une interface entre deux applications, et leur permet tout comme l’API, de communiquer entre elles.         
+Le webservice permet à des applications de communiquer entre elles même si elles fonctionnent avec des langages différents. Les webservices les plus connus sont de types SOAP, REST et HTTP.         
+Fonctionnement d’un webservice
+    -   **Étape 1** : Un utilisateur sur un ordinateur ou un mobile fait une demande. On l’appelle le client. Sa demande représente une requête qui est envoyée dans un langage spécfique : XML, HTTP ou encore JSON.
+    -   **Étape 2** : La requête issue du client est envoyée sur un serveur distant via un protocole de type SOAP, REST ou HTTP.
+    -   **Étape 3** : Le serveur va émettre une réponse qui aura le même format que celui du protocole de la demande.       
+-   CONTEXTE : L’endroit où l’on peut retrouver les variables de contexte qui sont disponibles à l’exécution du JOB que l’on oppose aux variables globales qui sont disponibles dans le JOB.       
+Ces variables peuvent être regroupées dans une catégorie qu'on appelle GROUPE et peuvent prendre leurs valeurs en fonction d'un ENVIRONNEMENT.        
+
 -   RESSOURCE : (Aucune idée de l’utilité ou non)                
--   CODE : Permet de faire du code Java que l’on pourra réutiliser         
+-   CODE : Permets de faire du code Java que l’on pourra réutiliser, on appelle ce code ROUTINES.  
+
+:::{.callout-note}
+## Note
+
+Par défaut un certain de nombre de ROUTINES sont disponibles :   
+
+-   Mathematical : Permet de faire des opérations mathématiques sur des entiers ou des numeriques
+-   TalendDate : Permet de faire des opérations sur des dates
+-   StringHandling : Permet de faire des opérations sur des chaines de charactères
+:::
+
 -   MODEL SQL : (Aucune idée de l’utilité ou non)       
--   METADONNE : L’endroit où l’on stocke les métadonnées des diverses sources de données possible :       
+-   METADONNE : L’endroit où l’on stocke les **metadata** des diverses sources ou cibles de données possibles.      
+On peut faire remarquer que ces **metadata** peuvent être paramètrées par des variables de contextes :       
     -   BDD       
     -   Fichier Délimité        
     -   Fichier JSON        
-    -   Ect ….        
-        
+    -    …       
 
-#### QUADRANT NORD EST
+:::        
+
+### QUADRANT NORD EST {#quad-ne}
+
+::: {.justify}
 
 ![](img/quadrant_nord_est.png)        
     
 L'endroit où nous allons créer les jobs qui prennent généralement des sources de données effectue des transformations en vue de les mettre dans une autre ou la même source de données.\
-Nous verrons cela plus en détail dans les parties suivantes.
 
-#### QUADRANT SUD OUEST
+Cette partie ne prend sens uniquement lorsqu'un JOB est ouvert.   
+    
+On importe des composants :       
+
+- Via la palette à droite
+- En cliquant n'importe où dans la fenêtre puis en écrivant le nom du composant que l'on souhaite importer.       
+Par exemple : **tFileInputDelimited**
+    
+Dans l'onglet Code, on peut voir le code du job.        
+Celui-ci n'est là qu'à titre informatif et ne peut être modifié, il permet néanmoins de détecter d'éventuel erreur de compilation. 
+
+:::{.callout-warning}
+
+## Attention
+
+Seule l’onglet Designer permet de développer.  
+Ne permet de détecter les erreurs qui peuvent se produire dans l'éxécution du job
+:::
+
+![](img/quadrant_nord_est_bis.png)        
+:::
+
+
+### QUADRANT SUD OUEST {#quad-so}
+
+::: {.justify}
 
 ![](img/quadrant_sud_ouest.png)
 
 -   APERCU DU CODE : (Aucune idée de l’utilité ou non)
--   OUTLINE : Ne prend sens que dans le cas où un job est ouvert. On retrouve ici l’ensemble des composants utilisées dans le job ouvert et les variables globales que ces composants génèrent.        
-Ces variables peuvent être définis avant l’exécution du composant ou après.
+-   OUTLINE : Ne prend sens que dans le cas où un JOB est ouvert.        
+On retrouve ici l'ensemble des composants utilisés dans le JOB ouvert et les variables globales que ces composants génèrent.        
+Ces variables peuvent être disponible avant ou pendant l’exécution du composant.
+
+:::{.callout-tip}
+
+## Utile
+
+Les variables globales définis par les composants, peuvent être appelés une fois qu'elle ont été définis dans d'autres composants.       
+:::
+
+:::
+
+### QUADRANT SUD EST {#quad-se}
+
+::: {.justify}
+
+-   COMPOSANT : Ne prend sens que dans le cas où un JOB est ouvert et qu’on a cliqué sur un composant.         
+Dans cette fenêtre, nous allons paramétrer le composant afin que celui fonctionne selon nos besoins
+![](img/quadrant_sud_est_2.png)
 
 
-#### QUADRANT SUD EST
-
--   COMPOSANT : Ne prend sens que dans le cas où un job est ouvert et qu’on à cliqué sur un composant. Dans cette fenêtre, nous allons paramétrer le composant afin que celui fonctionne selon nos besoins
--   CONTEXT : Permet de visualiser et de gérer l’ensemble des variables de contexte utilisés dans le job
--   EXECUTER LE JOB : Ne prend sens que dans le cas où un job est ouvert, il permet d’exécuter le traitement et d’afficher ce qui arrive dans la console. Une exécution en mode DEBUG est possible qui permet d’afficher l’ensemble des variables utilisées par le programme et leurs valeurs à l’instant T, il est également dans ce mode de faire une pause dans le traitement.
+-   CONTEXT : Permet de visualiser et de gérer l’ensemble des variables de contexte utilisés dans le JOB
+![](img/quadrant_sud_est_3.png)
 
 
-![](img/quadrant_sud_est.png)
+-   EXECUTER LE JOB : Ne prend sens que dans le cas où un JOB est ouvert, il permet d’exécuter le traitement et d’afficher ce qui arrive dans la console.       
+Une exécution en mode DEBUG est possible; une telle exécution permet d’afficher l’ensemble des variables utilisées par le programme et leurs valeurs à l’instant T.        
+Il est également dans ce mode DEBUG de faire une pause dans le traitement.
+Deux types d'erreur peuvent se produire :       
+    -   Les erreurs de **compilation** sont la conséquence d'un code mal écrit et se manifeste lors de la construction du job.       
+    -    Les erreurs dans l'**éxécution**  sont la conséquence d'un code mal écrit ou mal définis et se manifeste lors de l'éxécution du job. 
 
-## 1.5	Création d’un projet
 
-Nous allons dans cette partie créé notre premier et unique projet.
-Mais avant cela, nous allons créer un nouveau workspace qui sera utilisé dans la suite des exercices : 
+![](img/quadrant_sud_est_1.png)
 
--   **Etape 0** : Créer un dossier : *C:/workspace_talend*
--   **Etape 1** : Démarrer Talend
--   **Etape 2** : Cliquer sur Gérer les connexions et choisir le dossier créer en étape 0
--   **Etape 3** : Attendre que Talend redémarre
--   **Etape 4** : Créer un projet nommé : **OPENDATA_ASSEMBLEE_NATIONALE**
+:::
 
-```{=html}
-<video 
-   src="video/init_workspace_opt.mp4" 
-  width="1000" 
-  height="500">
-</video>
-```
+## 1.4 Présentation d'un JOB
 
-# 2. Création de traitement
+::: {.justify}
 
-Un job peut être vu comme un ensemble de composant lié les uns aux autres et qui se lit de gauche à droite puis du haut vers le bas.
+Un job peut être vu comme un ensemble de composants liés les uns aux autres et se lit de gauche à droite puis du haut vers le bas ; à la manière de la lecture française.
 
 Les liens entre composants peuvent être de différentes natures :        
 
 -   **Row** : Les lignes sont transférés de la sortie d'un composant à l'entrée d'un autres composant
     -   *Main* : L'ensemble des lignes sont transférés
-    -   *Iterate* chaque ligne passe dans le composant de façon itérative
--   **If** : Le composant s'éxécute en fonction d'une condition testé à la fin de l'éxécution d'un autres composants
+    -   *Iterate* : Chaque ligne passe dans le composant de façon itérative
+-   **Trigger** : Le composant s'éxécute en fonction d'une condition testé à la fin de l'éxécution d'un autres composants
+    -   *On Component OK/ERROR* : Le composant s'éxecute en fonction de si le composant précédent à réussi ou pas
+    -   *On Subjob OK/ERROR* : Le composant s'éxecute en fonction de si le sous-job précédent càd une suite de composant lié en mode **Row** à réussi ou pas
+    -   *If* : Le composant s'éxécute en fonction d'une condition qui retourne TRUE ou FALSE.
+
+:::{.callout-note}
+
+## Convention
+
+On parle de sous-job lorsqu'une suite de composant est lié par des liens de type **Row**
+:::
 
 Par convention, on lit les composants de gauche à droite lorsque le lien est de type **Row** et de haut en bas lorsque le lien est de type **If**
 
@@ -309,14 +340,27 @@ Un composant est composé d’un extrait de code Java généré automatiquement.
 
 Talend propose une multitude de composants prêts à emploi regroupés un répertoire. Il est possible de développer des composants sur-mesure si Talend ne propose aucun composant répondant à votre besoin.
 
-Ces composants nécessite un paramétrage, le paramétrage peut être définis selon deux façons :        
+Ces composants nécessitent un paramétrage, le paramétrage peut être définis selon deux façons :        
 
 - **En dure** dans le sens où les valeurs associé aux paramètres du composant est définis par une valeur fixe écrit par le développeur
 - **Avec variable** dans le sens où les valeurs associé aux paramètres du composant est définis par une valeur porté par une variable :
     - *contexte* : Disponible à l’exécution du job
     - *globale* : Définis dans le job
 
-Les variables de contexte sont souvent utilisée pour porter les paramétrages de composant qu'on va appeler **metadata** et peuvent être définis à la main ou définis de façon automatique par Talend.
+Les variables de contexte sont souvent utilisée pour porter les paramétrages de composant.
+Ces variables de contexte peuvent être regroupés dans un **GROUPE** et les valeurs portés par ces variables peuvent être définis en fonction d'**ENVIRONNEMENT**.       
+Généralement, on définis au moins trois environnement.         
+Prenons l'exemple d'un job visant à alimenter une BDD, on définis un groupe de contexte visant à porter les paramètres pour s'y connecter, on définit trois environnements :               
+
+-   **DEV** :  BDD sur son poste permettant de faire son développement
+-   **QUAL** : BDD sur un serveur dédié visant à simuler un traitement opérationnelle
+-   **PROD** : BDD opérationnel
+
+Certain composant peuvent être paramétrer via le concept de **metadata**, ce qui permet la réutilisation du composant avec le paramétrage associé.        
+On oppose ce concept de **metada** au fait de paramétrer le composant dans le job lui-même.
+
+Certains paramétrages peut être fait de façon partiellement automatique ou à la main.
+C'est le cas notamment des composants de lecture de fichier, par exemple **tFileInputDelimited**
 
 - **À la main** : 
   - AVANTAGE : CONTROLE 
@@ -325,50 +369,236 @@ Les variables de contexte sont souvent utilisée pour porter les paramétrages d
   - AVANTAGE : VITESSE 
   - DESAVANTAGE : CONTROLE
   
-:::{.callout-note}
+:::{.callout-tip}
+
+## Recommandation
+
 Il est recommandé de laisser Talend définir les **metadata** et de corriger le résultat si celui-ci ne convient pas
 :::
-  
-## 2.1	Fichier plat – Traitement des députés
+
+:::
+
+# 2. Installation des outils
+
+## 2.1 TALEND
+
+::: {.justify}
+
+-   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 1** : Télécharger l'archive ***ESB_731.7z***
+-   **Etape 2** : Extraire l'archive téléchargée précédemment à la racine du disque *C:/*
+
+À la fin de ces étapes, vous devriez obtenir le dossier suivant :
+
+![](img/resultat_installation_talend.png)
+
+Également les sous-dossiers suivants :
+
+![](img/resultat_installation_talend_subfolder.png)
+
+:::
+
+## 2.2 JAVA
+
+::: {.justify}
+
+Talend peut être vu comme un générateur de code Java, ainsi il est donc nécessaire de disposer d'une version de machine java adapté à la version de Talend utilisé.
+
+-   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 1** : Télécharger l'archive ***jdk-20.zip***
+-   **Etape 2** : Extraire l'archive téléchargée précédemment à la racine du disque *C:/*
+-   **Etape 3** : Lancer une invite de commande (Rappel : cmd dans une fenêtre)
+-   **Etape 4** : Lancer les commandes suivantes :
+    -   `set PATH=C:\jdk-20\bin;%PATH%`       
+        `java -version`       
+        `where java`        
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_java.png)
+Une autre solution est de spécifier le JAVA a utilisé par TALEND.       
+
+-   **Etape 0** : Se rendre dans le dossier d'installation suivant suivant *C:/ESB_731* :
+-   **Etape 1** : Ouvrir le fichier `TOS_ESB-win-x86_64.ini` 
+-   **Etape 2** : A début du fichier ajouter les deux lignes suivnantes : 
+    -   `-vm`       
+        `C:\Program Files\Java\jdk-20\bin`       
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_java_2.png)
+
+:::
+
+## 2.3 NOTEPAD++
+
+::: {.justify}
+
+-   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 1** : Télécharger l'archive ***Notepad++.7z***
+-   **Etape 2** : Extraire l'archive téléchargée précédemment à la racine du disque *C:/*
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_notepad.png)
+
+Également les sous-dossiers suivants :
+
+![](img/resultat_installation_notepad_subfolder.png)
+
+On peut également télécharger des add-ons à Notepad :       
+
+-   JSON Viewer : Pour mieux visualiser des fichiers JSON
+-   XML Tools : Pour mieux visualiser des fichiers XML
+
+Pour pouvoir installer un add-on, il convient de :        
+
+-   **Etape 0** : Ouvrir Notepad
+-   **Etape 1** : Cliquer *Modules d'extension*<*Gestionnaires des modules d'extension*
+-   **Etape 2** : Rechercher JSON VIEWER puis cocher (Faire de même avec XML TOOLS)
+-   **Etape 3** : Cliquer sur *Installer*
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/notepad_addon.png)
+
+:::
+
+## 2.4 DBEAVER
+
+::: {.justify}
+
+-   **Etape 0** : Se rendre dans le dossier Google Drive suivant :
+    -   [`google_drive`](https://drive.google.com/drive/folders/1B_jTobHpSz_h2LFBbwAunaaA0G_X3jQc)
+-   **Etape 1** : Télécharger l'archive ***Dbeaver.7z***
+-   **Etape 2** : Extraire l'archive téléchargée précédemment à la racine du disque *C:/*
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/resultat_installation_dbeaver.png)
+
+Également les sous-dossiers suivants :
+
+![](img/resultat_installation_dbeaver_subfolder.png)
+:::
+    
+## 2.5 POSTGRESQL
+
+::: {.justify}
+
+Expliquer les procédures serait un peu compliqué et redondant par rapport à la documentation qu'on peut trouver sur le web.       
+Vous pouvez suivre la procédure ici :  
+[`postgresql`](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql)                
+
+:::
+
+## 2.6 POSTMAN
+
+::: {.justify}
+
+-   **Etape 0** : Se rendre sur le site suivant :
+    -   [`postman`](https://www.postman.com/downloads/)
+-   **Etape 1** : Télécharger l'archive ***Postman-win64-Setup.exe***
+-   **Etape 2** : Double-cliquer sur l'exécutable et laissez vous guider par l'assistant d’installation
+
+À la fin de ces étapes, vous devriez obtenir le résultat suivant :
+
+![](img/postman.png)
+
+:::
+
+# 3. Création de traitement
+
+## 3.1	WORKSPACE - Création d’un projet 
+
+::: {.justify}
+
+::: {.callout-note}
+
+## Objectif 
+
+Nous allons dans cette partie créée notre premier et unique projet.        
+
+:::
+
+-   **Etape 0** : Créer un dossier : *C:/workspace_talend*
+-   **Etape 1** : Démarrer Talend
+-   **Etape 2** : Cliquer sur "Gérer les connexions" et choisir le dossier *C:/workspace_talend* créé en étape 0
+-   **Etape 3** : Attendre que Talend redémarre
+-   **Etape 4** : Créer un projet nommé : **OPENDATA_ASSEMBLEE_NATIONALE**
+
+::: {.callout-caution collapse="true"}
+
+## Solution
+```{=html}
+<video 
+   src="video/init_workspace_opt.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+::: 
+
+:::
+
+## 3.2 CSV – Traitement des données des députés
 
 ### TELECHARGEMENT DU FICHIER
 
 #### CREATION DU JOB
 
-L'objectif ici est de télécharger le fichier source que nous allons utilisé par la suite.       
-Nous allons créer un job avec :       
+::: {.justify}
 
--   pour titre : DL_DATA_DEPUTE 
--   pour objectif : Téléchargement d’un fichier de type csv contenant les informations des députés
--   pour description le bloc suivant en remplaçant les {} par vos informations :        
-    -     ##########                
-          DATE DE CREATION : {dd/MM/yyyy}       
-          DATE DE MODIFICATION :         
-          VERSION : 0.1       
-          AUTEUR : {nom_prenom}       
-          DESCRIPTION  : CREATION DU JOB       
+::: {.callout-note}
+
+## Objectif 
+
+L'objectif ici est de télécharger le fichier source que nous allons utilisé par la suite.     
+
+:::
+
+::: {.callout-tip}
+
+## Composant
+
+-   **tFileFetch** : Ce composant récupère un fichier via un protocole donné (HTTP, HTTPS, FTP ou SMB).
+
+:::
+
+-   **Etape 0** : Créer un job avec :       
+      -   pour titre : DL_DATA_DEPUTE 
+      -   pour objectif : Téléchargement d’un fichier de type csv contenant les informations des députés
+      -   pour description le bloc suivant en remplaçant les {} par vos informations :        
+          -     ##########                
+                DATE DE CREATION : {dd/MM/yyyy}       
+                DATE DE MODIFICATION :         
+                VERSION : 0.1       
+                AUTEUR : {nom_prenom}       
+                DESCRIPTION  : CREATION DU JOB       
+                ##########
+
+-   **Etape 1** : Créer un dossier dans lequel nous allons mettre des fichiers brut non généré par le job qu'il prend en entrée :    
+    -   *C:/workspace_talend/source/*
+
+-   **Etape 2** : Créer un dossier dans lequel nous allons mettre des fichiers généré par le job qu'il génère en sortie :        
+    -   *C:/workspace_talend/cible/*
+
+-   **Etape 3** : Pour effectuer le téléchargement, nous allons utilisé le composant **tFileFetch** qui peut être trouvé soit dans la palette à droite, soit en tapant directement **tFileFetch** n'importe où dans le [QUADRANT NORD EST](#quad-ne).        
+Soit le paramétrage suivant :
+    -     ##########
+          URL : https://www.data.gouv.fr/fr/datasets/r/092bd7bb-1543-405b-b53c-932ebb49bb8e       
+          METHODE : GET        
+          NOM_FICHIER : depute.csv        
+          CIBLE : C:/workspace_talend/source/depute/
+          ARRET EN CAS D'ERREUR
           ##########
 
-Dossier dans lequel nous allons mettre des fichiers brut non généré par le job qu'il prend en entrée :    
+::: {.callout-caution collapse="true"}
 
--   *C:/workspace_talend/source/*
-
-Dossier dans lequel nous allons mettre des fichiers généré par le job qu'il génère en sortie :        
-
--   *C:/workspace_talend/cible/*
-
-Pour effectuer le téléchargement, nous allons utilisé le composant **tFileFetch** qui peut être trouvé soit dans la palette à droite, soit en tapant directement **tFileFetch** n'importe où dans le quadrant nord-est.
-
-
-Soit le paramétrage suivant :
-
--     ##########
-      URL : https://www.data.gouv.fr/fr/datasets/r/092bd7bb-1543-405b-b53c-932ebb49bb8e       
-      METHODE : GET        
-      NOM_FICHIER : depute.csv        
-      CIBLE : C:/workspace_talend/source/depute/
-      ARRET EN CAS D'ERREUR
-      ##########
+## Solution 
 
 ```{=html}
 <video 
@@ -377,18 +607,30 @@ Soit le paramétrage suivant :
   height="500">
 </video>
 ```
+:::
+
+:::
 
 #### EXECUTION DU JOB
 
-Pour pouvoir exécuter un job, il convient de se mettre dans l'onglet "EXECUTER" dans le QUADRANT SUD EST.       
-Ensuite il faut cliquer EXECUTER et observé qu'aucune erreur de compilation n'est généré.       
-        
-Les erreurs de compilation sont la conséquence d'un code mal écrit et se manifeste lors de la construction du job.       
-Les erreurs d'éxécution  sont la conséquence d'un code mal écrit ou mal définis et se manifeste lors de l'éxécution du job.       
+::: {.justify}
 
-Il convient ensuite de s'assurer du bon fonctionnement du job.        
+::: {.callout-note}
+
+## Objectif 
+
+L'objectif ici est de vérifier la bonne éxécution du job.       
 Ici nous souhaitons simplement télécharger un fichier csv dans un dossier, il convient donc de s'assurer que ce fichier est bien présent dans le dossier spécifié.
 
+:::
+
+-   **Etape 1** : Pour pouvoir exécuter un job, il convient de se mettre dans l'onglet "EXECUTER" dans le [QUADRANT SUD EST](#quad-se). 
+-   **Etape 2** : Cliquer EXECUTER et observer qu'aucune erreur de compilation n'est générée.   
+-   **Etape 3** : Vérifier la présence du fichier *C:/workspace_talend/source/depute/****depute.csv***.   
+      
+::: {.callout-caution collapse="true"}
+
+## Solution
 ```{=html}
 <video 
   src="video/launch_first_job_opt.mp4" 
@@ -396,48 +638,55 @@ Ici nous souhaitons simplement télécharger un fichier csv dans un dossier, il 
   height="500">
 </video>
 ```
+:::
+
+:::
 
 ### LECTURE DU FICHIER
 
 #### CREATION DU JOB
 
-Nous allons dans cette partie créer un second job qui va lire le fichier télécharger par le premier.        
-Nous allons créer un job avec :       
+::: {.justify}
 
--   pour titre : READ_DATA_DEPUTE 
--   pour objectif : Lecture d'un fichier de type csv contenant les informations des députés et dans la description
--   pour description le bloc suivant en remplaçant les {} par vos informations :        
-    -     ##########                
-          DATE DE CREATION : {dd/MM/yyyy}       
-          DATE DE MODIFICATION :         
-          VERSION : 0.1       
-          AUTEUR : {nom_prenom}       
-          DESCRIPTION  : CREATION DU JOB       
-          ##########    
+::: {.callout-note}
+
+## Objectif 
+Nous allons dans cette partie créer un second job qui va lire le fichier télécharger par le premier. 
+:::
+
+::: {.callout-tip}
+
+## Liste des composants
+
+-   **tFileInputDelimited** : Ce composant lit un fichier délimité ligne par ligne, afin de le diviser en champs et d'envoyer ces champs au composant suivant, comme défini par le schéma.
+
+:::
+
+-   **Etape 0** : Créer un job avec :        
+    -   pour titre : READ_DATA_DEPUTE 
+    -   pour objectif : Lecture d'un fichier de type csv contenant les informations des députés et dans la description
+    -   pour description le bloc suivant en remplaçant les {} par vos informations :        
+        -     ##########                
+              DATE DE CREATION : {dd/MM/yyyy}       
+              DATE DE MODIFICATION :         
+              VERSION : 0.1       
+              AUTEUR : {nom_prenom}       
+              DESCRIPTION  : CREATION DU JOB       
+              ##########    
       
       
-La première chose à faire est de déterminer la structure du fichier.        
-Pour cela nous allons l'ouvrir avec Notepad : 
-
-```{=html}
-<video 
-  src="video/open_file_notepad_opt.mp4" 
-  width="1000" 
-  height="500">
-</video>
-```
-
-Nous constatons le paramétrage :       
-
--     ##########
-      ENTETE : Ligne 1       
-      SEPARATION : Virgule      
-      NOM_FICHIER : depute.csv       
-      CIBLE : C:/workspace_talend/source/depute/
-      ##########
-
-AVec le schéma suivant : 
-
+-   **Etape 1** : Déterminer la structure du fichier avec Notepad.
+-   **Etape 2** : Lire le fichier *C:/workspace_talend/source/depute/****depute.csv***         
+Avec un composant **tFileInputDelimited**  que nous allons spécifier de la façon suivante:                
+     -  Le paramètrage        
+        -     ##########                
+              ENTETE : Ligne 1               
+              SEPARATION : Virgule             
+              NOM_FICHIER : depute.csv              
+              CIBLE : C:/workspace_talend/source/depute/        
+              ##########               
+     -  Le schéma 
+      
 | Nom du champ | Type | Nullable | 
 |---------|:-----|------:|
 | id      | STRING   |    YES |
@@ -465,13 +714,34 @@ AVec le schéma suivant :
 | scoreMajorite       | STRING    |     YES |
 | dateMaj       | STRING    |     YES |
 
-: Structure du fichier
+: Structure du fichier député
+
+
+::: {.callout-tip}
+
+## Type des données
 
 Nous avons dans un premier temps spécifié le type `STRING` pour l'ensemble des champs afin d'être sûr de bien pouvoir lire le fichier.        
 En effet, le type `STRING` est le plus complet dans le sens où touts les types peuvent être convertis en `STRING`        
 Voir @tbl-type.
 
-Il convient maintenant de paramétrer le composant **tFileInputDelimited** afin qu'il sache comment lire le fichier.       
+:::
+
+
+::: {.callout-caution collapse="true"}
+## Solution
+
+**Etape 1**
+
+```{=html}
+<video 
+  src="video/open_file_notepad_opt.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
+
+**Etape 2**
 
 Nous effectuons ici un paramétrage à la main.        
 
@@ -483,6 +753,8 @@ Nous effectuons ici un paramétrage à la main.
 </video>
 ```
 
+**Etape 2 : Alternative**
+
 Nous effectuons ici un paramétrage via l'utilisation d'une metadonnées définit par Talend.   
 ```{=html}
 <video 
@@ -491,16 +763,37 @@ Nous effectuons ici un paramétrage via l'utilisation d'une metadonnées défini
   height="500">
 </video>
 ```
+:::
 
+:::
 
 #### EXECUTION DU JOB
 
-Avant de lancer le job, il faut rajouter un composant **tLogRow** afin d'afficher les lignes lus dans la console d’exécution.
-Pour cela, il convient :        
+::: {.justify}
 
-- Ajouter un composant **tLogRow** du côté droit du composant **tFileInputDelimited**
-- Cliquer droit sur le composant **tFileInputDelimited** puis choisir un lien Row puis Main et le lier au composant **tLogRow**
-- Exécuter le job pour observer les lignes lus par le composant **tFileInputDelimited** à travers le composant **tLogRow**
+::: {.callout-note}
+
+## Objectif 
+
+L'objectif ici est de vérifier la bonne éxécution du job.       
+Ici nous souhaitons simplement lire  un fichier csv, il convient donc de s'assurer d'imprimer dans la console leslignes lus.
+
+:::
+
+::: {.callout-tip}
+
+## Liste des composants
+
+-   **tLogRow** : Ce composant affiche les données ou les résultats dans la console de la vue Run afin de monitorer les données traitées.
+
+:::
+
+-   **Etape 0** :  Ajouter un composant **tLogRow** du côté droit du composant **tFileInputDelimited**
+-   **Etape 1** :  Cliquer droit sur le composant **tFileInputDelimited** puis choisir un lien Row puis Main et le lier au composant **tLogRow**
+-   **Etape 2** :  Exécuter le job pour observer les lignes lus par le composant **tFileInputDelimited** à travers le composant **tLogRow**
+
+::: {.callout-caution collapse="true"}
+## Solution
 
 ```{=html}
 <video 
@@ -510,26 +803,110 @@ Pour cela, il convient :
 </video>
 ```
 
-### TRANSFORMATION DE LA DONNEES
+:::
 
-#### Etape 0 : Création d'un champ intitule
+:::
 
-Nous allons maintenant transformé les données d'entrée avant de les imprimer dans .
-Nous allons créer un nouveau champ que l'on va appelé :    
+### ACTION SUR LA DONNEES
 
--    `intitule` : qui va concaténer le titre (Monsieur ou Madame) le nom et le prénom du député en question :                     
-  - Soit `row1` la sorie du composant **tFileInputDelimited**       
-    Nous avons alors `intitule = row1.cv + " " + row1.nom + " " + row1.prenom` 
+::: {.justify}
 
-Pour cela, nous allons utiliser un composant **tMap** qui prend une ou plusieurs sources en entrée, permet de faire des actions sur ces données afin de définir une ou plusieurs cibles de données.  
+Nous allons utiliser un composant **tMap** qui prend une ou plusieurs sources en entrée, permet de faire des actions sur ces données afin de définir une ou plusieurs cibles de données.  
 
 Ces actions peuvent être listées :        
 
 - Transformation
 - Jointure
 - Filtre
-- Selection
+- Sélection
 
+:::
+
+#### TRANSFORMATION ET SELECTION
+
+::: {.justify}
+
+::: {.callout-note}
+
+## Objectif 
+
+L'objectif ici est de créer un nouveau champ qui donnerait l'intitule du depute.        
+Exemple : M. GOLLENTZ QUENTIN       
+Nous souhaitons également sélectionner quelque champs que l'on va mettre en majuscule, renommer et trimer(=Supprimer les espaces avant et après le dernier charactère)  
+
+Plus précisément on veut créer un fichier en effectuant le mapping suivant : 
+
+| Nom du source | Nom du champ cible | Fonction | 
+|---------|:-----|------:|
+| depute_code     | row1.id   |    / |
+| nom_depute   | row1.nom  |   TRIM & MAJ |  
+| prenom_depute     | row1.prenom    |     TRIM & MAJ  |
+| intitule_depute       | row1.civ + " " + row1.nom + " " + row1.prenom        |     TRIM & MAJ  |
+| groupe_politique       | row1.groupeAbrev     |     TRIM & MAJ  |
+:::
+
+::: {.callout-tip}
+
+## Liste des composants et fonctions
+
+-   **tFileInputDelimited** : Ce composant lit un fichier délimité ligne par ligne, afin de le diviser en champs et d'envoyer ces champs au composant suivant, comme défini par le schéma.      
+-   **tMap** : Ce composant transforme et route des données à partir d'une ou plusieurs source(s) de données vers une ou plusieurs destination(s).        
+-   **tFileOutputDelimited** : Ce composant écrit en sortie les données d'entrée dans un fichier délimité en respectant le schéma défini.
+
+-   *MAJ* : StringHandling.UPCASE()
+-   *TRIM* : StringHandling.TRIM()
+
+
+:::
+
+-   **Etape 0** : Créer un job avec :       
+      -   pour titre : TRANSFORM_DATA_DEPUTE 
+      -   pour objectif : Transformation du fichier deputes.csv
+      -   pour description le bloc suivant en remplaçant les {} par vos informations :        
+          -     ##########                
+                DATE DE CREATION : {dd/MM/yyyy}       
+                DATE DE MODIFICATION :         
+                VERSION : 0.1       
+                AUTEUR : {nom_prenom}       
+                DESCRIPTION  : CREATION DU JOB       
+                ##########
+-   **Etape 2** : Lire le fichier *C:/workspace_talend/source/depute/****depute.csv*** de la même manière que dans le job READ_DATA_DEPUTE
+
+::: {.callout-tip}
+## Interet de la metada
+
+On voit ici l'avantage de spécifié des metada.        
+Si vous avez spécifié la metadata FICHIER_DEPUTE alors vous pouvez directement l'importer sans avoir à refaire le le paramétrage.              
+Si non vous pouvez toujours copier le **tFileInputDelimited** du job READ_DATA_DEPUTE et le coller dans le nouveau job TRANSFORM_DATA_DEPUTE
+:::
+
+-   **Etape 3** :  Ajouter un composant **tMap** du côté droit du composant **tFileInputDelimited**
+-   **Etape 4** :  Cliquer droit sur le composant **tFileInputDelimited** puis choisir un lien Row puis Main et le lier au composant **tMap**
+-   **Etape 5** :  Dans le **tMap** créer une sortie `depute_transform` avec le mapping suivant :    
+
+| Nom du source |Type source |  Nom du champ cible | Type cible | Fonction |        
+|---------|:-----|:-----|------:|        
+| depute_code     |STRING| row1.id   |STRING|    / |        
+| nom_depute   |STRING| row1.nom  |STRING|   TRIM & MAJ |  
+| prenom_depute     |STRING| row1.prenom    |STRING|     TRIM & MAJ  |
+| intitule_depute       |STRING| row1.civ + " " + row1.nom + " " + row1.prenom        |STRING|     TRIM & MAJ  |
+| groupe_politique       |STRING| row1.groupeAbrev     |STRING|     TRIM & MAJ  |
+
+-   **Etape 6** :  Ajouter un composant **tFileOutputDelimited** du côté droit du composant **tMap** 
+-   **Etape 7** :  Cliquer droit sur le composant **tMap** puis choisir un lien Row puis `depute_transform` et le lier au composant **tFileOutputDelimited**
+-   **Etape 8** :  Paramètrer le composant **tFileOutputDelimited** de la façon suivante :        
+    -       ##########
+            ENTETE : depute_code;nom_depute;prenom_depute;intitule_depute;groupe_politique      
+            SEPARATION : Point-Virgule      
+            NOM_FICHIER : depute_collaborateur.csv        
+            CIBLE : C:/workspace_talend/cible/depute/
+            NE PAS RETOURNER D'ERREUR SI LE FICHIER EXISTSE
+            ENCODAGE : UTF-8
+            CREER LE REPERTOIRE SI IL N'EXISTE PAS
+            ########## 
+
+::: {.callout-caution collapse="true"}
+## Solution
 ```{=html}
 <video 
   src="video/transform_data_tmap_opt.mp4" 
@@ -537,35 +914,45 @@ Ces actions peuvent être listées :
   height="500">
 </video>
 ```
+:::
 
+:::
 
-#### Etape 1 : Modification DL_DATA_DEPUTE
+#### JOINTURE
 
-Avant de voir une jointure, il convient de télécharger un deuxième fichier.
-Il convient de mettre à jour le job DL_DATA_DEPUTE en spécifiant une mineur 0.2 et ajoutant à la description le bloc suivant :           
+::: {.justify}
 
--     ##########                
-      DATE DE CREATION : REPRENDRE LA DATE DE CREATION DU BLOC PRECEDENT      
-      DATE DE MODIFICATION : {dd/MM/yyyy}        
-      VERSION : 0.2       
-      AUTEUR : {nom_prenom}       
-      DESCRIPTION  : TELECHARGEMENT D'UN FICHIER SUPLLEMENTAIRE     
-      ########## 
+::: {.callout-note}
 
+## Objectif 
+
+Nous souhaitons avoir un fichier des collaborateurs des députés.        
+Pour cela nous allons réaliser une jointure entre le fichier des deputes et un fichier des collaborateurs.
+
+:::
+
+-   **Etape 0** : Mettre à jour le job DL_DATA_DEPUTE en spécifiant une mineur 0.2 et ajoutant à la description le bloc suivant :       
+      -     ##########                        
+            DATE DE CREATION : {date_creation_1}             
+            DATE DE MODIFICATION : {dd/MM/yyyy}               
+            VERSION : 0.2              
+            AUTEUR : {nom_prenom}              
+            DESCRIPTION  : TELECHARGEMENT D'UN FICHIER SUPLLEMENTAIRE            
+            ##########        
+            DATE DE CREATION : {date_creation_1}              
+            DATE DE MODIFICATION :                
+            VERSION : 0.1           
+            AUTEUR : {nom_prenom}               
+            DESCRIPTION  : CREATION DU JOB            
+            ##########
+    
+::: {.callout-tip}
+## Utilité des descriptions
 
 Ces divers bloc sont là pour tracer les diverses évolutions que peut rencontrer un flux.    
+:::
 
-```{=html}
-<video 
-  src="video/modification_job_dl_log_opt.mp4" 
-  width="1000" 
-  height="500">
-</video>
-```
-
-Maintenant il convient d'apporter la modification suivante :      
-
-- Dupliquer le composant **tFileFetch** précédemment avec pour paramétrage :        
+- **Etape 2** : Dupliquer le composant **tFileFetch** avec pour paramétrage :        
     -     ##########                
           URL : https://data.assemblee-nationale.fr/static/openData/repository/16/amo/collaborateurs_csv_opendata/liste_collaborateurs_excel.csv
           METHODE : GET 
@@ -573,12 +960,23 @@ Maintenant il convient d'apporter la modification suivante :
           CIBLE : C:/workspace_talend/source/depute/
           ##########
 
-- Lier l'éxécution du composant nouvellement créé avec l'ancien, en cliquant droit sur le premier composant, puis choisir *On Component Ok* pour cliquer gauche sur le nouveau compissant
-
-- Renommer les composants :
+- **Etape 3** : Lier l'éxécution du composant nouvellement créé avec l'ancien, en cliquant droit sur le premier composant, puis choisir *On Component Ok* pour cliquer gauche sur le nouveau compissant
+- **Etape 4** : Renommer les composants :
   
     - **tFileFetch_1** en DL_DEPUTE
     - **tFileFetch_2** en DL_COLLAB
+- **Etape 5** : Executer le job et s'assurer de la bonne présence du fichier **collaborateur.csv** dans le dossier **C:/workspace_talend/source/depute/**
+
+
+::: {.callout-caution collapse="true"}
+## Solution
+```{=html}
+<video 
+  src="video/modification_job_dl_log_opt.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
 
 ```{=html}
 <video 
@@ -588,11 +986,16 @@ Maintenant il convient d'apporter la modification suivante :
 </video>
 ```
 
-On peut maintenant exécuter le job et s'assurer de la bonne présence du fichier **collaborateur.csv** dans le dossier **C:/workspace_talend/source/depute/**
 
 ![](img/realisation_dl_collab.png)
 
+:::
+
+:::
+
 #### Etape 2 : Modification READ_DATA_DEPUTE
+
+::: {.justify}
 
 Il convient de mettre à jour le job READ_DATA_DEPUTE en spécifiant une mineur 0.2 et ajoutant à la description le bloc suivant :           
 
@@ -717,7 +1120,11 @@ Il faudrait mettre un processus de nettoyage de la données, cependant par écon
 </video>
 ```
 
+:::
+
 #### Etape 3 : Création d'un fichier par groupe politique
+
+::: {.justify}
 
 Dans cette partie, nous allons utiliser le concept de variables globales ainsi que le principe d'itération.       
 
@@ -749,10 +1156,13 @@ Nous réaliserons la jointure mais également l'application d'un filtre en sorti
   height="500">
 </video>
 ```
+:::
 
-## 2.2	Fichier JSON – Traitement des données de votes
+## 3.3	JSON – Traitement des données de votes
 
 ### TELECHARGEMENT DU FICHIER
+
+::: {.justify}
 
 L’objectif ici est de télécharger le fichier source que nous allons utilisé par la suite.       
 Nous allons créer un job avec :       
@@ -802,8 +1212,11 @@ A la fin vous devriez avoir une liste de fichier JSON dans le dossier :
 </video>
 ```
 
+:::
 
 ### LECTURE DU FICHIER
+
+::: {.justify}
 
 Nous allons dans cette partie créer un second job qui va lire le fichier télécharger par le premier.        
 Nous allons créer un job avec :       
@@ -861,7 +1274,11 @@ Nous allons ensuite réunir les deux jeux de données dans un composant **tUnite
 </video>
 ```
 
+:::
+
 ### CREATION D'UN FICHIER GLOBAL DE VOTE
+
+::: {.justify}
 
 Le problème avec le flux précédent est que nous avons uniquement fait un traitement pour un fichier de la liste.        
 Ainsi il va falloir pour chaque fichier de la liste faire cette action.
@@ -874,7 +1291,11 @@ Ainsi il va falloir pour chaque fichier de la liste faire cette action.
 - Mettre à jour le schéma des composant **tUnite** et **tFileOutputDelimited** afin de considérer le nouveau champ `loi_code`
 - Mettre à jour le composant **tFileOutputDelimited** afin d'écrire les données à la suite du fichier existant
 
-## 2.2	Base de données – Alimentation
+:::
+
+## 3.4	POSTGRESQL – Alimentation de la base de données
+
+::: {.justify}
 
 Nous allons dans la suite créer un job ALIM_BDD_OPENDATA_ASSEMBLEE_NATIONALE en nous inspirant des jobs :       
 
@@ -887,15 +1308,21 @@ Nous souhaitons obtenir le MPD suivant :
 erDiagram
     COLLAB ||--|{ DEPUTE : rattachement 
     COLLAB {
+        integer collab_code PK "sequence incremental pour chaque depute_code"
         string depute_code PK "id du fichier collaborateur" 
-        string nom_collab PK "nom_collab du fichier collaborateur avec MAJUSCULE & TRIM" 
-        string prenom_collab PK "prenom_collab du fichier collaborateur avec MAJUSCULE & TRIM" 
+        string nom_collab  "nom_collab du fichier collaborateur avec MAJUSCULE & TRIM" 
+        string prenom_collab  "prenom_collab du fichier collaborateur avec MAJUSCULE & TRIM"
+        string intitule_collab "nom_collab + prenom_collab du fichier collaborateur avec MAJUSCULE & TRIM"
     }
     DEPUTE }o--|{ VOTE : vote
     DEPUTE {
        string depute_code PK "id du fichier deputes"
-       string nom_depute  "nom du fichier collaborateur avec MAJUSCULE & TRIM"
-       string prenom_collab  "prenom du fichier collaborateur avec MAJUSCULE & TRIM"
+       string nom_depute  "nom du fichier depute avec MAJUSCULE & TRIM"
+       string prenom_depute  "prenom du depute collaborateur avec MAJUSCULE & TRIM"
+       string intitule_depute  "prenom du fichier depute avec MAJUSCULE & TRIM"
+       string groupe_politique  "prenom du fichier depute avec MAJUSCULE & TRIM"
+
+
     }
     VOTE {
       string depute_code PK "champ depute_code des fichiers de *.json"
@@ -903,8 +1330,11 @@ erDiagram
       integer vote_code "champ construit dans le job READ_DATA_VOTE"
   }
 ```
+:::
 
 ### CREATION DE LA BDD
+
+::: {.justify}
 
 Avant de créer les tables, il convient de créer une base de données ainsi qu'un schéma dans lesquels nous allons construire nos différentes tables.       
 Pour cela, il convient d'ouvrir PgAdmin, puis de construire une database avec pour nom `OPENDATA_ASSEMBLEE_NATIONALE` et un schema avec pour nom `dwh` :
@@ -931,23 +1361,28 @@ CREATE SCHEMA IF NOT EXISTS dwh
     AUTHORIZATION postgres;
 ```
 
-Maitenant que nous avons une BDD ainsi qu'un schém, nous pouvons créer les différentes tables :   
+Maitenant que nous avons une BDD ainsi qu'un schéma, nous pouvons créer les différentes tables :   
 
 - Table DEPUTE :        
 ```SQL
 CREATE TABLE dwh."DEPUTE" (
 	depute_code varchar(20) NOT NULL,
-	loi_code varchar(250) NOT NULL,
-	prenom_depute varchar(250) NULL
+	nom_depute varchar(250) NULL,
+	prenom_depute varchar(250) NULL,
+	intitule_depute varchar(250) NULL,
+	groupe_politique varchar(250) NULL
+
 );
 ``` 
 
 - Table COLLAB :        
 ```SQL
 CREATE TABLE dwh."COLLAB" (
-	depute_code varchar(20) NOT NULL,
-	nom_collab varchar(250) NOT NULL,
-	prenom_collab varchar(250) NOT NULL
+  collab_code integer NOT NULL,
+  depute_code varchar(20) NOT NULL,
+  nom_collab varchar(250) NULL,
+  prenom_collab varchar(250) NULL,
+  intitule_collab varchar(250) NULL
 );
 ```
 
@@ -959,7 +1394,12 @@ CREATE TABLE dwh."VOTE" (
 	vote_code  integer NOT NULL
 );
 ```
+
+:::
+
 ### ALIMENTATION DE LA BDD
+
+::: {.justify}
 
 Nous allons créer un job avec :       
 
@@ -974,7 +1414,7 @@ Nous allons créer un job avec :
           DESCRIPTION  : CREATION DU JOB       
           ##########
           
-Nous réaliserons les étapes suivantes pour l'alimentation de la table VOTE:       
+#### Nous réaliserons les étapes suivantes pour l'alimentation de la table VOTE:       
 
 - Paramétrer la connexion à la BDD avec un composant **tPostrgreSQLConnection** avec pour paramétrage :        
   -     ##########
@@ -1001,20 +1441,120 @@ Avec le schéma suivant :
 | loi_code   | STRING  |   NO |  YES |
 | vote_code     | INTEGER    |     NO |NO |
 
+:::
 
+####  Nous réaliserons les étapes suivantes pour l'alimentation de la table DEPUTE et de la table COLLAB:     
+
+::: {.justify}
+
+-   Copier et coller le sous-job du job READ_DATA_DEPUTE lié à la jointure et à l'alimentation des fichiers **deputes.csv**
+-   Lier le sous-job d'alimentation de la table VOTE à ce nouveau job
+-   Changer le **tMap** afin de réaliser le  mapping suivant :           
+
+| Nom du source | Nom du champ cible | Fonction | 
+|---------|:-----|------:|
+| depute_code     | row1.id   |    / |
+| nom_depute   | row1.nom  |   TRIM & MAJ |  
+| prenom_depute     | row1.prenom    |     TRIM & MAJ  |
+| intitule_depute       | row1.civ + " " + row1.nom + " " + row1.prenom        |     TRIM & MAJ  |
+| groupe_politique       | row1.groupeAbrev     |     TRIM & MAJ  |
+
+: Mapping DEPUTE
+
+- Ajouter un composant **tUniqRow** en sortie DEPUTE du **tMap** avec pour identifiant unique l'attribut `depute_code`        
+- Mettre en sortie un composant **tPostrgreSQLOutput** pour la sortie DEPUTE avec pour paramètrage :        
+  -     ##########
+        UTILISER LA CONNEXION
+        TABLE : DEPUTE
+        ACTION SUR LA TABLE : SUPPRIMER SI ELLE EXISTE ET LA CREER
+        ACTION SUR LES DONNES : INSERT
+        ##########
+
+Avec le schéma suivant : 
+
+| Nom du champ | Type | Nullable | KEY
+|---------|:-----|:-----|------:|
+| depute_code     | STRING   |    NO |
+| nom_depute   | STRING  |   YES |  
+| prenom_depute     | STRING    |     YES  |
+| intitule_depute       | STRING        |    YES  |
+| groupe_politique       | STRING    |    YES  |
+
+-   Changer le **tMap** afin de réaliser le  mapping suivant :           
+
+
+| Nom du source | Nom du champ cible | Fonction | 
+|---------|:-----|------:|
+| collab_code     | row1.id   |     Numeric.sequence() |
+| depute_code     | row1.id   |    / |
+| nom_collab   | row2.nom_collab  |   TRIM & MAJ |  
+| prenom_collab     | row2.prenom_collab    |     TRIM & MAJ  |
+| intitule_collab      | row2.nom_collab + " " + row2.prenom_collab        |     TRIM & MAJ  |
+
+
+: Mapping COLLAB
+
+- Mettre en sortie un composant **tPostrgreSQLOutput** pour la sortie COLLAB avec pour paramètrage :        
+  -     ##########
+        UTILISER LA CONNEXION
+        TABLE : COLLAB
+        ACTION SUR LA TABLE : SUPPRIMER SI ELLE EXISTE ET LA CREER
+        ACTION SUR LES DONNES : INSERT
+        ##########
+
+Avec le schéma suivant : 
+
+| Nom du champ | Type | Nullable | KEY
+|---------|:-----|:-----|------:|
+| collab_code     | STRING   |    NO |
+| depute_code     | STRING   |    NO |
+| nom_collab   | STRING  |   YES |  
+| prenom_collab       | STRING    |     YES  |
+| intitule_collab         | STRING        |    YES  |
+
+:::
 
 ### RECETTE DE LA BDD
 
-## 2.3	API Rest – Récupération des informations liés à un députés
+::: {.justify}
+
+Dans cette partie, nous allons nous assurer que le job fonctionne bien.       
+Pour cela nous allons utiliser DBeaver.        
+
+:::{.callout-note}
+Nous aurions pus nous contenter de PgAdmin cependant cette outils ne permet d'interagir qu'avec des base de données de type PostgreSQL, là où DBeaver permet d'interagir avec un grand nombre d'autre type.
+:::
+
+- Ouvrir Dbeaver
+- Créer un dossier OPENDATA_ASSEMBLEE
+- Créer une connexion PostgreSQL à la BDD OPENDATA_ASSEMBLEE_NATIONALE
+- Double-cliquer sur les tables afin de visualiser les données
+
+![](img/dbeaver_table.png)
+:::
+
+## 3.5	REST – Récupération des informations liés à un députés
+
+::: {.justify}
+
+[Source : @INSATUNISIA](https://insatunisia.github.io/TP-eServices/tp1/)
+
+:::
 
 ### CREATION D'UNE REQUETE
 
+::: {.justify}
+:::
+
 ### CREATION D'UNE API
+
+::: {.justify}
 
 Nous allons maintenant créer le service REST. Pour cela, créer un nouveau job, qu'on appellera *GETINFO_OPENDATA_ASSEMBLEE_NATIONALE*, puis glisser les composants suivants:
 
+* **tPostgreSQLConnection** : Pour définir la connexion à la BDD OPENDATA_ASSEMBLEE_NATIONALE
 * **tRestRequest** : Pour définir la requête REST que le client doit appeler
-* **tPostgreSQLInput** : Table de la base de données. Dans la nouvelle connexion à la base de données que vous avez créé, sous *Schémas des tables*, glisser la table *user* vers le Job, puis choisir tMySQLInput dans la fenêtre de choix qui apparaît.
+* **tPostgreSQLInput** : Table de la base de données
 
 :::{.callout-note}
 Je choisis ***tPostgreSQLInput*** car, dans mon cas, c'est une base de données PostgreSQL, et je veux juste lire son contenu, je vais donc y accéder en entrée (d'où le ***Input***).
@@ -1027,35 +1567,40 @@ Je choisis ***tPostgreSQLInput*** car, dans mon cas, c'est une base de données 
 
 Le job aura l'allure suivante:
 
-![Service REST](img/tp1/rest-service.png)
+![Service REST](img/rest-service.png)
 
-Nous désirons configurer le service de manière à ce que, quand un consommateur appelle l'URI:
-`http://localhost:8088/depute?depute_code=`, le service retourne une réponse contenant les collaborateur (nom et prénom) de la base de données dont les ids figurent entre 1 et 3.
+Nous désirons configurer le service de manière à ce que, quand un consommateur appelle l'URI `http://localhost:8088/depute?depute_code=param` avec pour `param`, un identifiant de `depute`, le service retourne une réponse contenant les informations du député dont une liste des collaborateur.
 
 #### Configuration de tRestRequest
 tRestRequest devra être configuré comme suit:
 
-* La valeur de *Endpoint URL* devra être: `"http://localhost:8088/users"`
-* Si vous avez connecté le tRestRequest avec le tFlowToIterate avec un lien appelé *getUsers*, vous devriez le retrouver dans la case *REST API Mapping*. Sinon, créez-le.
+* La valeur de *Endpoint URL* devra être: `"http://localhost:8088/depute"`
+* Si vous avez connecté le tRestRequest avec le tFlowToIterate avec un lien appelé *getDepute*, vous devriez le retrouver dans la case *REST API Mapping*. Sinon, créez-le.
 * Garder les informations par défaut de ce mapping (méthode GET, URI /, Produit XML ou JSON).
-* En cliquant sur *getUsers*, un bouton avec trois petits points apparaît. Cliquez dessus.
-* Ajouter les deux colonnes *from* et *to* représentant les deux paramètres de la requête. Prenez soin à ce que:
+* En cliquant sur *getDepute*, un bouton avec trois petits points apparaît. Cliquez dessus.
+* Ajouter les deux colonnes *depute_code* représentant le  paramètre de la requête. Prenez soin à ce que:
 
-    * Leur type soit *int*
-    * Leurs valeurs par défaut soient respectivement 1 et 3.
-
-
-    !!! tip "Remarque"
-        Ces valeurs seront utilisées dans le cas où le consommateur n'introduit pas de paramètres.
-
+    * Son type soit *string*
+    * La valeur par défaut soit de PA722142 .
     * Leur commentaire ait la valeur: *query*
 
 
-    !!! tip "Remarque"
-        Cela indique que ces champs sont des paramètres de requête, pas définies dans le Path.
+:::{.callout-note}
+La valeur par défaut est utilisée dans le cas où le consommateur n'introduit pas de paramètres.
+:::
 
-#### Configuration de user
-Puisque le composant *user* a été créé à partir de la connexion à votre base MySQL, il contient déjà les informations de connexion nécessaires.
+
+:::{.callout-note}
+Le commentaire query indique que ce champ est un paramètre de requête, pas définie dans le Path.
+:::
+
+:::
+
+#### Configuration de depute
+
+::: {.justify}
+
+Puisque le composant *depute* a été créé à partir de la connexion à votre base PostgreSQL, il contient déjà les informations de connexion nécessaires.
 
 Il suffira dans notre cas de:
 
@@ -1063,119 +1608,192 @@ Il suffira dans notre cas de:
 * Changer la requête pour qu'elle soit comme suit:
 
 ```sql
-"SELECT * FROM `user` where id>="+globalMap.get("getUsers.from")+
-                      " and id<="+globalMap.get("getUsers.to")
+SELECT 
+
+  D.depute_code,
+  D.nom_depute,
+  D.prenom_depute,
+  D.intitule_depute ,
+  D.groupe_politique,
+  C.collab_code,
+  C.nom_collab,
+  C.prenom_collab,
+  C.intitule_collab,
+  V.loi_code,
+  V.vote_code
+  
+FROM "DEPUTE" D
+
+INNER JOIN "COLLAB" C
+ON D.depute_code = C.depute_code
+
+WHERE D.depute_code IN ("+ globalMap.get("getDepute.depute_code") + ")
 ```
 
-!!! tip "Remarque"
-    globalMap est une variable globale permettant de stocker les informations de la requête, comme par exemple ses paramètres.
+:::{.callout-note}
+ globalMap est une variable globale permettant de stocker les informations de la requête, comme par exemple ses paramètres.
+:::
+
+:::
 
 #### Configuration de tXMLMap
+
+::: {.justify}
+
 Cliquer deux fois sur la *tXMLMap* pour la configurer.
 
 * Dans la colonne de droite, ajouter (si ce n'est déjà fait) une colonne intitulée *body* dont le type est *Document*.
-* Cette colonne contient un élément *root*. Renommer cet élément pour *users*.
-* Ajouter un sous-élément à *users* appelé *user*.
+* Cette colonne contient un élément *root*. Renommer cet élément pour *députés*.
+* Ajouter un sous-élément à *deputes* appelé *depute*
+* Glisser-déplacer le depute_code de la colonne en entrée vers le *depute*. Créez-le comme attribut du noeud cible.
+* De même pour le *prenom_depute*,*prenom_depute*,*groupe_politique*,*intitule_depute*, qui seront, eux, des sous-éléments du noeud *depute*.
+* Ajouter un sous-élément à *collaborateurs* appelé *collaborateur*.
 * Définir cet élément comme *loop Element*.
-* Glisser-déplacer l'id de la colonne en entrée vers le *user*. Créez-le comme attribut du noeud cible.
-* De même pour le *firstname* et *lastname*, qui seront, eux, des sous-éléments du noeud *user*.
-* Dans la colonne de droite, cliquer sur la petite clef à molette (![](img/tp1/clef-molette.png)). Mettre la valeur de "All in one" à *true*. Cela permettra à toutes les données XML d'être écrites dans un seul flux.
+* Glisser-déplacer le collab_code de la colonne en entrée vers le *collaborateur*. Créez-le comme attribut du noeud cible.
+* De même pour le *prenom_collab*,*prenom_collab*,*intitule_collab*, qui seront, eux, des sous-éléments du noeud *collaborateur*.
+* Dans la colonne de droite, cliquer sur la petite clef à molette (![](img/clef-molette.png)). Mettre la valeur de "All in one" à *true*. Cela permettra à toutes les données XML d'être écrites dans un seul flux.
 
 La configuration finale sera donc comme suit:
 
-![tXMLMap du Service REST](img/tp1/rest-txmlmap.png)
+![tXMLMap du Service REST](img/rest-txmlmap.png)
 
-!!! tip "Indication"
-    La configuration précédente va générer une réponse de la forme suivante:
-
-    ```XML
-    <users>
-      <user id=1>
-        <firstname> flen </firstname>
-        <lastname> fouleni </lastname>
-      </user>
-      <user id=2>
-        <firstname> flena </firstname>
-        <lastname> foulenia </lastname>
-      </user>
-    <users>
-    ```
+:::{.callout-note}
+La configuration précédente va générer une réponse de la forme suivante:
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<deputes>
+    <depute depute_code="PA795596">
+        <nom_depute>VANNIER</nom_depute>
+        <prenom_depute>PAUL</prenom_depute>
+        <intitule_depute>M. VANNIER PAUL</intitule_depute>
+        <groupe_politique>LFI-NUPES</groupe_politique>
+        <collaborateurs>
+            <collaborateur collab_code="1">
+                <nom_collab>MARZOUGUI</nom_collab>
+                <prenom_collab>ANIS</prenom_collab>
+                <intitule_collab>MARZOUGUI ANIS</intitule_collab>
+            </collaborateur>
+            <collaborateur collab_code="2">
+                <nom_collab>FOUCAULT</nom_collab>
+                <prenom_collab>CLÉMENCE</prenom_collab>
+                <intitule_collab>FOUCAULT CLÉMENCE</intitule_collab>
+            </collaborateur>
+            <collaborateur collab_code="3">
+                <nom_collab>AWAD ABDOU</nom_collab>
+                <prenom_collab>MOHAMED</prenom_collab>
+                <intitule_collab>AWAD ABDOU MOHAMED</intitule_collab>
+            </collaborateur>
+        </collaborateurs>
+    </depute>
+</deputes>
+```
+:::
 
 Les autres composants devront rester tels qu'ils sont par défaut. Il suffira maintenant de lancer le service, en cliquant sur *Exécuter*.
 
-### Tester le Service
-#### Dans un navigateur
+:::
+
+### CONSOMMATEUR DU WEBSERVICE
+
+::: {.justify}
+
 Pour tester le service, il suffit d'ouvrir un navigateur, et de taper la requête de votre choix.
 
-Par exemple, la requête suivante : `http://localhost:8088/users?from=2&to=4` donnera:
+Par exemple, la requête suivante : `http://localhost:8088/depute?depute_code=PA795596` donnera:
 
 ```XML
-  <users>
-      <user id="2">
-          <firstname>Souad</firstname>
-          <lastname>Mezghenni</lastname>
-      </user>
-      <user id="3">
-          <firstname>Mourad</firstname>
-          <lastname>Lahwel</lastname>
-      </user>
-      <user id="4">
-          <firstname>Monia</firstname>
-          <lastname>Landolsi</lastname>
-      </user>
-  </users>
+<?xml version="1.0" encoding="UTF-8"?>
+<deputes>
+    <depute depute_code="PA795596">
+        <nom_depute>VANNIER</nom_depute>
+        <prenom_depute>PAUL</prenom_depute>
+        <intitule_depute>M. VANNIER PAUL</intitule_depute>
+        <groupe_politique>LFI-NUPES</groupe_politique>
+        <collaborateurs>
+            <collaborateur collab_code="1">
+                <nom_collab>MARZOUGUI</nom_collab>
+                <prenom_collab>ANIS</prenom_collab>
+                <intitule_collab>MARZOUGUI ANIS</intitule_collab>
+            </collaborateur>
+            <collaborateur collab_code="2">
+                <nom_collab>FOUCAULT</nom_collab>
+                <prenom_collab>CLÉMENCE</prenom_collab>
+                <intitule_collab>FOUCAULT CLÉMENCE</intitule_collab>
+            </collaborateur>
+            <collaborateur collab_code="3">
+                <nom_collab>AWAD ABDOU</nom_collab>
+                <prenom_collab>MOHAMED</prenom_collab>
+                <intitule_collab>AWAD ABDOU MOHAMED</intitule_collab>
+            </collaborateur>
+        </collaborateurs>
+    </depute>
+</deputes>
 ```
-Si aucun paramètre n'est indiqué: `http://localhost:8088/users` cela donnera:
+Si aucun paramètre n'est indiqué: `http://localhost:8088/depute` cela donnera:
 
 ```XML
-  <users>
-      <user id="1">
-          <firstname>Ahmed</firstname>
-          <lastname>Ramzi</lastname>
-      </user>
-      <user id="2">
-          <firstname>Souad</firstname>
-          <lastname>Mezghenni</lastname>
-      </user>
-      <user id="3">
-          <firstname>Mourad</firstname>
-          <lastname>Lahwel</lastname>
-      </user>
-  </users>
+<depute depute_code="PA722142">
+	<nom_depute>RUFFIN</nom_depute>
+	<prenom_depute>FRANÇOIS</prenom_depute>
+	<intitule_depute>M. RUFFIN FRANÇOIS</intitule_depute>
+	<groupe_politique>LFI-NUPES</groupe_politique>
+	<collaborateurs>
+		<collaborateur collab_code="1">
+			<nom_collab>LAPORTE</nom_collab>
+			<prenom_collab>SYLVAIN</prenom_collab>
+			<intitule_collab>LAPORTE SYLVAIN</intitule_collab>
+		</collaborateur>
+		<collaborateur collab_code="2">
+			<nom_collab>BOURRIÉ</nom_collab>
+			<prenom_collab>DIMITRI</prenom_collab>
+			<intitule_collab>BOURRIÉ DIMITRI</intitule_collab>
+		</collaborateur>
+		<collaborateur collab_code="3">
+			<nom_collab>GALÈS</nom_collab>
+			<prenom_collab>ALEXIS</prenom_collab>
+			<intitule_collab>GALÈS ALEXIS</intitule_collab>
+		</collaborateur>
+		<collaborateur collab_code="4">
+			<nom_collab>PLAZA</nom_collab>
+			<prenom_collab>LOU</prenom_collab>
+			<intitule_collab>PLAZA LOU</intitule_collab>
+		</collaborateur>
+	</collaborateurs>
+</depute>
+</deputes>
 ```
-#### Avec SOAPUI
-### Tester le service SOAP
-Il est possible de tester votre service REST avec *SOAPUI*.
+Il est possible de tester votre service REST avec POSTMAN qui vous permettra de créer des collections d'appels API :        
 
-* Lancer SOAPUI
-* Cliquer sur l'icône REST en haut de la fenêtre principale
-* Entrer l'URI que vous désirez tester: `http://localhost:8088/users?from=2&to=4`
-* La fenêtre suivante devrait apparaître:
+-   Lancer POSTMAN
+-   Créer un WORKSPACE avec :       
+    -   pour titre : OPENDATA_ASSEMBLEE_NATIONALE
+    -   pour description : Collection d'API lié à l'Open Data de l'Assemblée Nationale en mode Private
+-   Créer une collection COLLECTION_1
+-   Créer un appel GET_DEPUTE 
+-   Entrer l'URI que vous désirez tester: http://localhost:8088/depute?depute_code=PA795596
+-   Cliquer sur SEND. Le résultat devra ressembler au suivant:
 
-![SOAPUI REST request](img/tp1/soapui-rest-req.png)
-
-
-* Cliquer sur la flèche verte. Le résultat devra ressembler au suivant:
-
-![SOAPUI REST request-response](img/tp1/soapui-rest-req-resp.png)
-
-## Consommateur du WebService REST
+![](img/postman_use.png)
 
 Pour créer un consommateur pour le web service REST avec Talend, il suffit de créer le Job suivant:
 
-![Consommateur REST](img/tp1/rest-consumer.png)
+![](img/rest-consumer.png)
+
 
 Configurer le *tRestClient* comme suit:
 
-![Configuration du consommateur REST](img/tp1/rest-cons-config.png)
+![Configuration du consommateur REST](img/rest-cons-config.png)
 
 Exécuter. Le résultat devrait ressembler à ceci:
 
-![Résultat du consommateur REST](img/tp1/rest-cons-result.png)
+![Résultat du consommateur REST](img/rest-cons-result.png)
 
-### TEST AVEC POSTMAN
+:::
 
-# 3. Norme et bonne pratique
+# 4. Norme et bonne pratique
+
+::: {.justify}
+
 Moins vous utilisez de composants mieux c'est.
 Plus vous utilisez de job mieux c'est
 Plus vous variabilisée mieux c'est.
@@ -1183,9 +1801,15 @@ Moins vous utlise de varibale mieux c'est
 Plus vous loggé mieux c'est
 Mieux vous nommez et organiser le job mieux c'est.
 
-## 3.1	Variable et groupe de contexte
+:::
+
+## 4.1	Variable et groupe de contexte
+
+::: {.justify}
 
 Notion de réutilisation et de différentiation selon l'environnement permet des livraisons dans un autres environnement sans avoir à modifier toute les valeurs en dures
+
+:::
 
 ### VARIABLE DE DIR
 
@@ -1193,9 +1817,13 @@ Notion de réutilisation et de différentiation selon l'environnement permet des
 
 ### VARIABLE GLOBAL
 
-## 3.2	Log
+## 4.2	Log
+
+::: {.justify}
 
 Permet de savoir ce qu'il se passe, d'identifier les probleme afin d'avoir une meilleur maitenance et suivie?
+
+:::
 
 ### LOG DE DEBUT ET FIN DE TRAITEMENT
 
@@ -1204,21 +1832,28 @@ Permet de savoir ce qu'il se passe, d'identifier les probleme afin d'avoir une m
 ### LOG D'INFORMATION
 
 
-## 3.3	Règle de nommage et esthétique
+## 4.3	Règle de nommage et esthétique
+
+::: {.justify}
 
 Permet la compréhension par un autre dévellopeur
 
+:::
 ### NOMMAGE DES COMPOSANTS
 
 ### NOMMAGE DES LIENS
 
 ### NOMMAGE DES SOUS_JOBS
 
-# 4.	Déploiement et dévollepement informatique
+# 5.	Déploiement et dévollepement informatique
+
+::: {.justify}
 
 Généralement pas sur windows mais sur serveur UNIX et pas sur son post mais sur un seveur distant
 
-## 4.1	Construction du job
+:::
+
+## 5.1	Construction du job
 
 ### CONSTRUCTION AVEC GROUPE DE CONTEXTE DE QUAL
 
@@ -1226,7 +1861,7 @@ Généralement pas sur windows mais sur serveur UNIX et pas sur son post mais su
 
 ### FILEZILLA 
 
-## 4.2	Déploiement et Unix
+## 5.2	Déploiement et Unix
 
 ### LANCEMENT SCRIPT
 
@@ -1234,9 +1869,161 @@ Généralement pas sur windows mais sur serveur UNIX et pas sur son post mais su
 
 ### MAILTO
 
-## 4.3	Developement collaboratif avec Git 
+## 5.3	Developement collaboratif avec Git
 
-### REPRENDRE LE DOCUMENT DE QUENTIN DROUSIE
+::: {.justify}
+
+[Source : @QDROUSIE]()
+
+Il est bien connu que la version Open Source de Talend, Talend Open Studio est mono-poste, c’est-à-dire qu’elle ne permet pas le travail collaboratif intégré à l’outil. Pour cela, il faut se diriger vers les solutions entreprises.        
+Pourtant, avec un minimum d’esprit de développeur, il est possible de mettre manuellement les sources Talend sur Git.               
+En effet, les jobs,métadonnées, contextes crées dans Talend sont stockés sous forme de fichiers dans un répertoire spécifique, appelé workspace (cette terminologie parlera bien sûr aux développeurs habitués à Eclipse).         
+Tout fichier pouvant être versionné sur Git, rien n’empêche donc une mise sous contrôle Git de notre travail Talend.
+
+:::
+
+### INSTALLATION GIT
+
+::: {.justify}
+
+Installez le client GIT adapté à votre système d’exploitation, avec les options par défaut (cliquez sur Next à chaque fois).       
+Lien [git](https://git-scm.com/download/win)
+
+:::
+
+### INITIALISATION PROJET
+
+#### Création d’un projet en local et publication sur le GIT
+
+Suivez les étapes dans l’ordre :
+
+-   Démarrez Talend Open Studio en tant qu’administrateur
+-   Créez un projet dans votre workspace (celui par défaut se trouve dans le dossier du Studio)
+-   Créez un job, un contexte, une métadonnée ou tout autre élément, puis enregistrez et quittez le projet
+-   Dans BitBucket, créez un projet puis un dépôt (repository) à l’intérieur avec un fichier README.md par défaut, et enfin récupérez le lien
+HTTPS (ou SSH si vous avez paramétré une clé SSH) du dépôt
+-   Ouvrez le client GIT et placez-vous au niveau du workspace
+-   Configurez le GIT avec vos identifiants Bitbucket (dans le cas de l’utilisation d’un lien HTTPS)
+```git
+git config --global user.name "q_drousie"
+git config --global user.email quentin.drousie@daka-tec.com
+```
+-   Initialisez le repo GIT avec la commande
+```git
+git init
+```
+-   Créez un fichier ***.gitignore*** à la racine du workspace en exécutant la commande
+```git
+vim .gitignore
+```
+-   Ajoutez le contenu suivant à personnaliser selon le nom de votre projet
+```git
+**/jobInfo.properties
+.JETEmitters/
+.Java/
+.metadata/
+PROJET/code/routines/system/*.*
+PROJET/temp/
+PROJET/sqlPatterns/
+PROJET/talend.project
+Dans mon exemple, le contenu est
+**/jobInfo.properties
+.JETEmitters/
+.Java/
+.metadata/
+COMMON/code/routines/system/*.*
+COMMON/temp/
+COMMON/sqlPatterns/
+COMMON/talend.project
+```
+-   Ajoutez le lien (HTTPS ou SSH, voir plus haut) au dépôt
+```git
+git remote add origin https://q_drousie@bitbucket.org/dakatec
+```
+Mettez à jour vos sources avec la commande
+```git
+git pull origin master
+```
+Ajoutez vos modifications en cache avec la commande
+```git
+git add .
+```
+-   Committez vos modifications avec un commentaire avec la commande    
+```git
+git commit -m "Votre commentaire"
+```
+-   Publiez les modifications sur le GIT avec la commande
+```git
+git push origin master
+```
+-   Sur BitBucket, dans le projet talend et le dépôt talend se trouve désormais un dossier COMMON (nom technique du projet Talend)  
+
+#### Récupération en local d’un projet versionné sur le GIT
+
+Suivez les étapes dans l’ordre :        
+
+-   Créez un workspace sur votre poste, à l’emplacement de votre choix        
+```git
+C:\Users\quent\Documents\DAKA-Tec\Outils\Talend\workspace
+```
+
+-   Ouvrez le client GIT et placez-vous au niveau du répertoire nouvellement créé 
+```git
+cd "C:\Users\quent\Documents\DAKA-Tec\Outils\Talend\workspace"
+```
+-   Configurez le GIT avec vos identifiants Bitbucket (dans le cas de l’utilisation d’un lien HTTPS)   
+```git
+git config --global user.name "q_drousie"
+git config --global user.email quentin.drousie@daka-tec.com
+```
+Sur BitBucket, récupérez le lien HTTPS (ou SSH si vous avez paramétré une clé SSH) du dépôt
+-   Dans mon exemple, le lien HTTPS du dépôt est   
+```git
+https://q_drousie@bitbucket.org/dakatec/talend.git
+```
+-   Clonez le dépôt dans le dossier workspace
+```git
+git clone https://q_drousie@bitbucket.org/dakatec/talend.git
+```
+-   Vérifiez que le dépôt a bien été rapatrié  
+```git
+C:\Users\quent\Documents\DAKATec\Outils\Talend\workspace\talend
+```
+-   Démarrez Talend Open Studio en tant qu’administrateur       
+-   Changez le workspace au démarrage pour pointer vers le workspace que vous avez créé et alimenté dans les étapes précédentes (avec le \talend au bout) et redémarrez Talend Open Studio               
+-   Créez un nouveau projet portant exactement le même nom que celui publié sur le GIT (dossier se trouvant à la racine du dépôt)                
+
+### CYCLE DE VIE PROJET
+
+#### Récupération en local de la dernière version d’un projet GIT
+
+Si vous avez déjà récupéré le projet en local et que vous souhaitez de nouveau développer dessus, il faut impérativement que vous mettiez à jour vos sources au préalable.
+    
+Ouvrez le client GIT et exécutez les commandes
+
+```git
+git config --global user.name "q_drousie"
+git config --global user.email quentin.drousie@daka-tec.com
+cd "Votre workspace"
+git remote add origin url_distante_de_votre_projet
+git pull origin master
+```
+
+#### Publication sur le GIT de la dernière version d’un projet en local
+
+Une fois la dernière version du projet GIT récupéré en local et les développements effectués, poussez votre travail en retour sur le GIT.       
+
+Ouvrez le client GIT et exécutez les commandes        
+
+```git
+git config --global user.name "q_drousie"
+git config --global user.email quentin.drousie@daka-tec.com
+cd "Votre workspace"
+git add .
+git commit -m "Résumé de votre travail"
+git remote add origin url_distante_de_votre_projet
+git push origin master
+```
 
 # ANNEXE
 
@@ -1261,3 +2048,6 @@ Généralement pas sur windows mais sur serveur UNIX et pas sur son post mais su
 |BigDecimal|	Integer|	As with Float, BigDecimal can have decimal places, so will need to be rounded prior to casting toInteger.|
 
 : Tableau de conversion de type {#tbl-type}
+
+
+
