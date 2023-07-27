@@ -27,7 +27,7 @@ html_tag_audio <- function(file, type = c("wav")) {
   )
 }
 
-html_tag_audio("../Sound/GTA_IV_TBoGT_Pause_menu_music_1_HOUR.mp3", type = "wav")
+html_tag_audio("./Sound/GTA_IV_TBoGT_Pause_menu_music_1_HOUR.mp3", type = "wav")
 ```
 
 
