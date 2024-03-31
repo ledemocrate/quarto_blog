@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en"><head>
 <link href="../../hansi.jpg" rel="icon" type="image/jpeg">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -9,7 +9,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.353">
+  <meta name="generator" content="quarto-1.4.266">
 
   <meta name="author" content="GOLLENTZ Quentin">
   <title>Société Alsacienne d’Artisanat de la Data - De la données non structurées en base de données structurées</title>
@@ -245,7 +245,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -487,7 +488,7 @@
     </div>
 </div>
 
-  <p class="date">24-07-2023</p>
+  <p class="date">31-03-2024</p>
 </section>
 <section id="format-de-données" class="slide level2">
 <h2>Format de données <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/solid_liquid_gas_header.png" height="120px" style="vertical-align:middle;"></h2>
@@ -886,7 +887,6 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1187,10 +1187,9 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1200,8 +1199,17 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1259,6 +1267,8 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
     </script>
     <script src="https://giscus.app/client.js" data-repo="ledemocrate/blog_comment" data-repo-id="R_kgDOJ4CCXA" data-category="article" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
     </script>
+    <input type="hidden" id="giscus-base-theme" value="light">
+    <input type="hidden" id="giscus-alt-theme" value="dark">
     
 
 </div></body></html>

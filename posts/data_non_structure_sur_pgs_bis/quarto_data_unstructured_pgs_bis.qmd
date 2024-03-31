@@ -1,0 +1,271 @@
+---
+title: "De la données non structurées en base de données structurées"
+subtitle: "Application aux données géographiques"
+categories: ['data science', 'R','python','geojson','postgresql','tidydata']
+author:
+    name: GOLLENTZ Quentin
+    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@daka-team.com
+    affiliations:
+        name: DAKA-TEAM
+        url: https://www.linkedin.com/company/daka%E2%80%A2tec/
+        city: La Madelaine
+        state: France
+        postal-code: 5900
+date: last-modified
+date-format: "DD-MM-YYYY"
+title-block-banner: "#ECF4FA"
+bibliography: references.bib
+format: 
+  revealjs:
+    #incremental: true
+    #logo: img/daka-team-white-final.png
+    #footer: "`emitanaka.org/slides/toronto2022`"
+    slide-number: true
+    multiplex: true
+    theme: [simple, assets/monash.scss]
+    show-slide-number: all
+    controls: true
+    width: 1280
+    scrollable : true
+    height: 720
+    toc: false
+    toc-depth: 100
+    css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css, assets/logo.css]
+execute:
+  echo: true
+---
+
+## Format de données []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/solid_liquid_gas_header.png" height="120px" style="vertical-align:middle;"/>
+
+Allégorie du gaz.       
+La donnée peut être représenté selon différentes formes :       
+
+-   l'**usage** qui est faite de la donnée conditionne sa **forme**.    
+-   la **forme** de la donnée conditionne son **usage**
+
+    
+Distinction Information/Donnée :         
+
+-   L’**information** est la mise en contexte d’une donnée.
+-   La **donnée** est le support ou vecteur de l'information.
+
+Ci-dessous 2 format pour 1 information :        
+
+-   JSON
+
+```JSON
+{
+				"civ": "M.",
+				"prenom": "David",
+				"nom": "Habib",
+				"alpha": "HabibD",
+				"trigramme": "DHA"
+}
+
+```
+-   CSV
+
+```csv
+civ;prenom;nom;alpha;trigramme
+M.;David;Habib;HabibD;DHA
+```
+
+
+
+## Concept de Tidy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/wadley_wickam_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
+
+![](img/wadley_wickam_tidy_data.jpg)        
+[@wickam]
+
+## Tidy Data et Messy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/standard_data.jpg" height="120px" style="vertical-align:middle;"/>
+
+![](img/standard_data.jpg) [@julia_allison]       
+
+::: info-box
+$80$ à $90$% des données sont non structurées.        
+Liste d'exemple de *Messy Data* à partir de [MongoDB](https://www.mongodb.com/unstructured-data)    
+
+<ul>
+
+<li><i class="fa-solid fa-bullseye"></i>`json` dont `geojson`</li>
+<li><i class="fa-solid fa-bullseye"></i>`xml`</li>
+<li><i class="fa-solid fa-bullseye"></i>`image`</li>
+<li><i class="fa-solid fa-bullseye"></i>`texte`</li>
+<li><i class="fa-solid fa-bullseye"></i>`...`</li>
+
+
+</ul>
+:::
+
+## L'avantage du Tidy Data []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pourquoi_tidy_data.jpg" height="120px" style="vertical-align:middle;"/>
+
+![](img/pourquoi_tidy_data.jpg) [@julia_allison]
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+
+tidydata_format <- table1 %>%
+  select(country,year,population) %>%
+  filter(year==2000)
+tidydata_format
+
+not_tidydata_format <- table4b %>% select(-`1999`) 
+not_tidydata_format
+
+also_not_tidydata_format <- table2 %>% filter(year==2000) 
+also_not_tidydata_format
+```
+
+## Quand un *Messy Data* ne peut se transformer en *Tidy Data* []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/process.jpg" height="120px" style="vertical-align:middle;"/>
+
+Prenons l'exemple des [circonscriptions françaises](https://www.data.gouv.fr/fr/datasets/contours-detailles-des-circonscriptions-des-legislatives/).
+
+Si une circonscription se limitait à un point, on pourrait considérer la structure suivante :
+```{r}
+tribble(
+  ~ ID, ~ code_dpt, ~ nom_dpt, ~ nom_reg, ~ num_circ, ~ lattitude, ~ longitude,
+   "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.454946,44.953424,
+   "33004","68", "HAUT-RHIN", "ALSACE-CHAMPAGNE-ARDENNE-LORRAINE","44",	6.981539,48.009421)
+```
+
+Malheureusement c'est plus compliqué que cela.        
+![](img/messy.png)
+[@open_data]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Première solution :        
+Multiplier les **colonnes** :       
+```{r}
+tribble(
+  ~ ID, ~ code_dpt, ~ nom_dpt, ~ nom_reg, ~ num_circ, ~ lattitude_point1, ~ lattitude_point1,~ lattitude_point2, ~ lattitude_point2,~ lattitude_point3, ~ lattitude_point3,
+   "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.454946,44.953424,-0.454946,45.953424,-0.454946,46.953424,
+   "33004","68", "HAUT-RHIN", "ALSACE-CHAMPAGNE-ARDENNE-LORRAINE","44",	6.981539,48.009421,	6.981539,49.009421,	6.981539,50.009421)
+```
+:::
+
+::: {.column width="50%"}
+Deuxième solution :        
+Multiplier les **lignes** :      
+```{r}
+#| code-line-numbers: "13"
+tribble(
+  ~ ID, ~ code_dpt, ~ nom_dpt, ~ nom_reg, ~ num_circ, ~ lattitude, ~ lattitude,
+   "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.474946,44.953424,
+   "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.254946,45.953424,
+   "33004","33", "GIRONDE", "AQUITAINE-LIMOUSIN-POITOU-CHARENTES","75",-0.44946,46.953424,
+   "33004","68", "HAUT-RHIN", "ALSACE-CHAMPAGNE-ARDENNE-LORRAINE","44",	6.981539,49.009421,
+   "33004","68", "HAUT-RHIN", "ALSACE-CHAMPAGNE-ARDENNE-LORRAINE","44",	6.981539,50.009421,
+   "33004","68", "HAUT-RHIN", "ALSACE-CHAMPAGNE-ARDENNE-LORRAINE","44",	6.981539,51.009421,
+  )
+```
+:::
+
+::::
+
+=> Nous somme contraint de considérer le type JSON
+
+## Le type geometry  []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/france_metropolitaine.png" height="120px" style="vertical-align:middle;"/>
+
+Considérons le type de variable `geometry` dans `R` dont la valeur est une liste de point.
+```{r}
+library(geojsonsf)
+library(tidyverse)
+library(sf)
+
+france_metropolitaine = geojson_sf("data/france-circonscriptions-legislatives-2012.json") %>%
+  select(num_circ,code_dpt,geometry)%>%
+  rename(circo = num_circ,departementCode = code_dpt) %>%
+  filter(departementCode!="ZD",
+         departementCode!="ZN",
+         departementCode!="ZS",
+         departementCode!="ZX",
+         departementCode!="ZP",
+         departementCode!="ZW",
+         departementCode!="2B",
+         departementCode!="2A",
+         departementCode!="ZA",
+         departementCode!="ZM",
+         departementCode!="ZC",
+         departementCode!="ZB")
+
+france_metropolitaine
+
+plot(france_metropolitaine)
+```
+
+## Quid de PostgreSQL []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pgs.jpg" height="120px" style="vertical-align:middle;"/>
+
+Ci-dessous un script permettant de reproduire la même chose en `SQL` :       
+
+```{SQL}
+CREATE EXTENSION postgis;
+
+CREATE TABLE assemblee_elective.circonscription(
+  circo VARCHAR,
+  departementCode VARCHAR,
+  geometry geometry);
+ 
+ WITH DATA AS (SELECT '{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"ID": "33004",
+				"code_dpt": "33",
+				"nom_dpt": "GIRONDE",
+				"nom_reg": "AQUITAINE-LIMOUSIN-POITOU-CHARENTES",
+				"num_circ": "4",
+				"code_reg": "75"
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[
+						[
+							-0.454946,
+							44.953424
+						],
+						[...
+}'::json AS fc)
+
+INSERT INTO assemblee_elective.circonscription(geometry,departementcode,circo)
+
+SELECT
+
+  ST_AsText(ST_GeomFromGeoJSON(feat->>'geometry')) AS geometry,
+  CAST(REPLACE(CAST(feat->'properties'->'code_dpt' AS varchar),'"','') AS varchar) AS departementCode,
+  CAST(REPLACE(CAST(feat->'properties'->'num_circ' AS varchar),'"','') AS varchar) AS circo
+  
+FROM (
+  SELECT json_array_elements(fc->'features') AS feat
+  FROM data 
+) AS f;
+```
+
+On obtient un jeu de données qui est TIDY.
+
+
+![](img/dbeaver.png)
+
+
+
+## Application : Rattachement adresse à une circonscription []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/assemble_nationale.png" height="120px" style="vertical-align:middle;"/>
+
+L'objectif étant à partir d'une adresse de déterminer la circonscription à laquelle appartient l'adresse en `python` :       
+
+Utilité dans l'application de prédiction de prix (Cf : BBL de Ramzi)
+
+
+## Application : Un ETL pour un flux ELT []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/giphar-453951.jpeg" height="120px" style="vertical-align:middle;"/>
+
+![](img/import_json_via_talend.png)
+![](img/parsage_json.png)
+
+
+## Citations et discussion []{.circle} <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/hansi.jpg" height="120px" style="vertical-align:middle;"/>

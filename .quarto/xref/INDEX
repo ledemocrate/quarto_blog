@@ -40,5 +40,8 @@
   },
   "posts/du_contrat_social/du_contrat_social.qmd": {
     "du_contrat_social.html": "f97abe98"
+  },
+  "posts/data_non_structure_sur_pgs_bis/quarto_data_unstructured_pgs_bis.qmd": {
+    "quarto_data_unstructured_pgs_bis.html": "1060cdfd"
   }
 }
