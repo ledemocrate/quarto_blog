@@ -49,7 +49,7 @@ Je suis également un chineur de [Rapsberry Pi](https://www.raspberrypi.com/soft
 J'ai à cœur la réalisation d'un mini-projet de bureau de vote en ligne ayant pour but de mesurer la différence de vote entre une assemblée élective et une assemblée participative et ainsi déterminer un indice démocratique.       
 Le code peut être consulté sur [GitHub](https://github.com/ledemocrate/bureaudevote_2022_2027)  
     
-Pour contrainte technique :       
+Pour contrainte technique :        
 1. L'utilisation de [R](https://posit.co/products/open-source/rstudio/) et plus précisément des packages suivants ([`tidyverse & co`](https://www.tidyverse.org/), [`shiny`](https://shiny.posit.co/), [`quarto`](https://quarto.org/docs/authoring/markdown-basics.html))         
 2. L'utilisation d'une base de données [PostgreSQL](https://www.postgresql.org/)                  
 3. L'utilisation de [Rapsberry Pi](https://www.raspberrypi.com/software/) sous [Debian](https://www.debian.org/index.fr.html) fonctionnant en [réseau](https://mabbox.bytel.fr/login.html)        
