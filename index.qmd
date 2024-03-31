@@ -45,15 +45,15 @@ Vous pouvez trouver une version exhaustive de mon [curriculum vitae](pdf/cv.pdf)
     
 Je travaille actuellement dans une entreprise [DAKA-TEAM](https://daka-team.com/) avec pour mission principale le développement d'entrepôts de données ce qui m'amène à faire un peu de [Java](https://www.oracle.com/fr/java/), un peu de [Python](https://www.python.org/), un peu de  [Debian](https://www.debian.org/index.fr.html), beaucoup de [Talend](https://www.talend.com/fr/) et beaucoup de [PostgreSQL](https://www.postgresql.org/).
     
-Je m'intéresse également à tout ce que peux faire la fondation [APACHE](https://www.apache.org/), particulièrement la suite suivante :        
+Je m'intéresse également à tout ce que peux faire la fondation [Apache](https://www.Apache.org/), particulièrement la suite suivante :        
 
--   [APACHE CAMEL](https://camel.apache.org/)       
--   [APACHE KARAF](https://karaf.apache.org/)       
--   [APACHE KAFKA](https://kafka.apache.org/)       
--   [APACHE ACTIVEMQ](https://activemq.apache.org/)       
--   [APACHE CASSANDRA](https://cassandra.apache.org/_/index.html)       
+[Apache Camel](https://camel.Apache.org/)       
+[Apache Karaf](https://karaf.Apache.org/)       
+[Apache Kafka](https://kafka.Apache.org/)       
+[Apache ActiveMQ](https://activemq.Apache.org/)       
+[Apache Cassandra](https://cassandra.Apache.org/_/index.html)       
 
-Pour le déploiement, j'utilise [DOCKER](https://www.docker.com/) bien que très intéressé par [NIX](https://nixos.org/)
+Pour le déploiement, j'utilise [Docker](https://www.docker.com/) bien que très intéressé par [Nix](https://nixos.org/)
 
 Du fait de ma formation initiale de statisticien, je suis plus à l'aise avec l'utilisation de [R](https://posit.co/products/open-source/rstudio/) et toute la suite proposée à côté :[`tidyverse`](https://www.tidyverse.org/), [`shiny`](https://shiny.posit.co/), [`quarto`](https://quarto.org/docs/authoring/markdown-basics.html),`....`
 
