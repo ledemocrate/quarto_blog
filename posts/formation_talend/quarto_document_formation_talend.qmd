@@ -1,6 +1,6 @@
 ---
-title: "Formation DATA"
-subtitle: "Utilisation d'un ETL : Talend Open Studio"
+title: "De l'utilisation de Talend pour l'OpenData de l'Assemblée Nationale"
+subtitle: "Formation DATA"
 author:
     name: GOLLENTZ Quentin
     url: https://www.linkedin.com/in/quentin-gollentz-697993172/
@@ -46,21 +46,25 @@ text-align: center;
 
 ::: {.justify}
 
-Dans la suite du document, nous proposons des exercices qui sont liés les uns des autres.\
-Il est donc nécessaire de suivre dans l'ordre le document car certains exercices sont conditionnés aux précédents.\
-Nous proposons le traitement de données issu de l'[Open Data de l'Assemblée Nationale](https://data.assemblee-nationale.fr/), en vue de développer une API permettant d'obtenir les informations relatives à un député.
+Dans la suite du document, nous proposons des exercices qui sont liés les uns des autres.       
+Il est donc nécessaire de suivre dans l’ordre le document car certains exercices sont conditionnés aux précédents.        
+Nous proposons le traitement de données issu de l’[Open Data de l’Assemblée Nationale](https://data.assemblee-nationale.fr/), en vue de développer une API permettant d’obtenir les informations relatives à un député. Nous réaliserons également une route permettant à un utilisateur de voter sur un texte de loi donné.       
 
-Pour la réalisation des exercices, il sera nécessaire d'avoir :
+Pour la réalisation des exercices, il sera nécessaire d’avoir :       
 
--   Talend en version 7.3.1 pour faire des traitements informatiques
--   Notepad++ pour visualiser et éditer des fichiers
--   Dbeaver pour interagir avec une base de données
--   PostgreSQL pour disposer d'une base de données
--   Postman pour interagir avec des API
+-   **Talend** en version 7.3.1 pour faire des traitements informatiques
+    -   dont activemq
+    -   dont apache camel
+-   **Notepad++** pour visualiser et éditer des fichiers
+-   **Dbeaver** pour interagir avec une base de données
+-   **PostgreSQL** pour disposer d'une base de données
+-   **Postman** pour interagir avec des API
+-   **Git** pour le développement collaboratif (Éventuellement un compte **Bitbucket** ou **Github**)
 -   Connexion internet
 -   Une compréhension basique de l'anglais technique
 -   Une compréhension basique de la science des données
--   Une compréhension basique de l'informatique décisionnelle
+-   Une compréhension basique de l’informatique décisionnelle
+-   Une compréhension basique de la Politique
 
 :::
 
@@ -68,18 +72,30 @@ Pour la réalisation des exercices, il sera nécessaire d'avoir :
 
 ## 1.1 Présentation du principe ETL
 
+### 1.1.1 Présentation du principe ESB
+    
 ::: {.justify}
+    
+    
+L'Enterprise Service Bus (ESB) est un modèle d'architecture logicielle qui prend en charge l'échange de données en temps réel entre des applications disparates. Les grandes entreprises disposent de plusieurs applications qui exécutent diverses fonctions en utilisant des modèles de données, des protocoles et des restrictions de sécurité différents. L'ESB facilite l'intégration des applications en effectuant des opérations telles que la transformation des données, la conversion des protocoles et le routage des messages. Les applications transmettent les données pertinentes à l'ESB, qui les convertit et les transmet à d'autres applications qui en ont besoin.
 
-**L'ETL est un acronyme pour EXTRACT TRANSFORM AND LOAD.**
+Talend ESB (Enterprise Service Bus), développé par la société Talend, permet le développement de bus applicatif de type middleware messaging et facilite grandement l'exposition de données via des API (Rest & SOAP)
 
-C'est un concept signifiant le chargement de données d'un point A vers un point B ou les données de A sont éventuellement transformé afin d'être chargés dans B.\
-Un logiciel ETL (Extract, Transform, Load) permet d'extraire des données brutes depuis une base de données, pour ensuite les restructurer, et enfin les charger.\
-Les premiers ETL ont fait leur apparition dans les années 1970, mais ont beaucoup évolué pour répondre aux nouveaux besoins liés à l'essor du Cloud, des [SaaS (logiciels en tant que service)](https://www.lebigdata.fr/definition-saas) et du Big Data.\
-Désormais, les ETL doivent permettre l'ingestion en temps réel, l'enrichissement de données, la prise en charge de milliards de transactions. Ils prennent aussi en charge les données structurées ou non structurées en provenance de sources sur site ou sur le Cloud.\
-De même, ces plateformes doivent désormais être scalables, flexibles, résistantes aux pannes, et sécurisées.
+:::
 
+### 1.1.2 Présentation du principe ETL
+
+::: {.justify}
+C’est un concept signifiant le chargement de données d’un point A vers un point B ou les données de A sont éventuellement transformé afin d’être chargés dans B.       
+Un logiciel ETL (Extract, Transform, Load) permet d’extraire des données brutes depuis une base de données, pour ensuite les restructurer, et enfin les charger.       
+    
+Les premiers ETL ont fait leur apparition dans les années 1970, mais ont beaucoup évolué pour répondre aux nouveaux besoins liés à l’essor du Cloud, des SaaS (logiciels en tant que service) et du Big Data.        
+Désormais, les ETL doivent permettre l’ingestion en temps réel, l’enrichissement de données, la prise en charge de milliards de transactions. Ils prennent aussi en charge les données structurées ou non structurées en provenance de sources sur site ou sur le Cloud.        
+    
+De même, ces plateformes doivent désormais être scalables, flexibles, résistantes aux pannes, et sécurisées.        
+    
 La différence entre l’ETL et l’ELT réside dans le fait que les données sont transformées en informations décisionnelles et dans la quantité de données conservée dans les entrepôts.
-
+    
 -   L’ETL (Extract/Transform/Load) est une approche d’intégration qui recueille des informations auprès de sources distantes, les transforme en formats et styles définis, puis les charge dans des bases de données, sources de données ou entrepôts.
 
 ![](img/ETL.png)
@@ -93,22 +109,34 @@ La différence entre l’ETL et l’ELT réside dans le fait que les données so
 
 Les deux approches sont viables, mais les décideurs informatiques, lorsqu’ils créent une architecture de données, doivent prendre en compte les capacités internes et l’impact croissant des technologies Cloud.
 
-**Talend est donc un logiciel ETL de manière simplifier afin que le développeur ne s'occupe que de la partie règle de métier.**
+**Talend ESB** (Enterprise Service Bus) est donc également un logiciel ETL de manière simplifier afin que le développeur ne s’occupe que de la partie règle de métier.
 
 :::
 
-## 1.2 Présentation d'un WORKSPACE
+### 1.1.3  Présentation de la différence entre ETL & ESB
 
 ::: {.justify}
 
-[Les projet Talend sont stockés dans un espace de travail (workspace)](https://business-intelligence.developpez.com/faq/talend/?page=I).
+L’ESB (Enterprise Service Bus) et l’ETL (Extract, Transform, Load) sont deux technologies positionnées sur le transport et la transformation de la donnée au sein du système d’information. Mais, historiquement, elles répondent à des objectifs différents. L’ESB permet des échanges de données fiables et sécurisés entre les différentes applications du SI tandis que l’ETL centralise et homogénéise les données de sources multiples vers une seule et même application de destination.
 
-Chaque projet Talend contient un ensemble de Jobs (traduit sous forme de "classe"), ces jobs Talend sont stockés dans un projet Talend.
+Concrètement, l’ESB est adaptée lorsqu’il s’agit de traiter une fréquence élevée de flux de données avec une volumétrie limitée. Plutôt orientée services, sa fonction est de transporter et décloisonner l’information pour la rendre accessible sur les différents outils métiers qui composent le SI.
 
-Ci-dessous, vous verrez l'arborescence d'un projet Talend :
+Par ailleurs, l’ETL peut traiter un important volume de données de manière performante, mais sur un nombre d’échanges limité. Sa fonction est d’agréger toutes les informations pour traiter la donnée comme un ensemble standardisé. C'est une approche particulièrement adaptée pour les projets de Business Intelligence et de data warehousing.
 
--   workspace
-    -   projet1
+:::
+
+## 1.2 Présentation d’un workspace
+
+::: {.justify}
+
+Les projet Talend sont stockés dans un espace de travail (workspace)
+
+Chaque projet Talend contient un ensemble de Jobs (traduit sous forme de “classe”), ces jobs Talend sont stockés dans un projet Talend.
+
+Ci-dessous, vous verrez l’arborescence d’un projet Talend :       
+
+-   workspace 
+    -   projet1 
         -   businessProcess (les Business Models)
         -   code (les Routines)
         -   configuration (les fichiers de configuration)
@@ -120,21 +148,20 @@ Ci-dessous, vous verrez l'arborescence d'un projet Talend :
         -   process (les jobs)
         -   sqlPatterns (les patterns sql)
         -   temp (les fichiers temporaires)
-    -   projet2
+    -   projet2 
         -   businessProcess
         -   code
-        -   ...
+        -   …
 
-Avant de créer son premier WORKSPACE, il convient de lancer Talend Studio.\
-En supposant que les étapes précédentes ont été respectées, il convient de :\
+Avant de créer son premier workspace , il convient de lancer Talend Studio.
 
--   Se rendre dans ce chemin : *C:/ESB_731/Studio*        
--   Faire un double clic gauche sur l'exécutable ***TOS_ESB-win-x86_64.exe*** afin de démarrer Talend Studio.
+En supposant que les étapes précédentes ont été respectées, il convient de : 
+
+-   Se rendre dans ce chemin : *C:/ESB_731/Studio*
+-   Faire un double clic gauche sur l’exécutable ***TOS_ESB-win-x86_64.exe*** afin de démarrer Talend Studio.
+
 
 :::{.callout-tip}
-
-## Recommandation
-
 Il est recommandé de créer un raccourci vers l'exécutable dans son Bureau afin d'éviter une navigation inutile.       
 Rappel : CTRL+C sur l'exécutable puis CTRL+V sur le Bureau
 :::
@@ -154,7 +181,7 @@ Pour pouvoir changer d'endroit, il convient de :
 
 :::
 
-## 1.3 Présentation de TALEND OPEN STUDIO
+## 1.3 Présentation du Studio
 
 ::: {.justify}
 
@@ -169,7 +196,7 @@ Rappel commande utile :
 
 :::
 
-### BARRE PRINCIPALE
+### 1.3.1 Présentation de la Barre Principal
 
 ::: {.justify}
 
@@ -183,7 +210,7 @@ Rappel commande utile :
 
 :::
 
-### QUADRANT NORD OUEST {#quad-no}
+### 1.3.2 Présentation du Quadrant Nord Ouest {#quad-no}
 
 ::: {.justify}
 
@@ -191,22 +218,29 @@ Rappel commande utile :
     
 -   BUSINESS MODELS : (Aucune idée de l’utilité ou non)       
 -   JOBS : L’endroit où l’on peut retrouver les différents JOB, par JOB on entend un traitement de données.       
--   ROUTES : La principale différence entre les ROUTES et les JOB est que lorsque vous démarrez une route, elle écoute ou STREAM indéfiniment les entrées (fichier, message, etc.), et chaque fois qu'elles sont disponibles, elles sont traitées et envoyées à destination, jusqu'à ce que la route soit arrêtée.         
-D'autre part, un JOB est un processus par lots ou BATCH qui est lancé à la demande pour gérer certaines entrées (fichiers, base de données, etc.) et se termine lorsque toutes les entrées sont traitées.   
+-   ROUTES : La principale différence entre les ROUTES et les JOB est que lorsque vous démarrez une route, elle écoute ou STREAM indéfiniment les entrées (fichier, message, etc.), et chaque fois qu’elles sont disponibles, elles sont traitées et envoyées à destination, jusqu’à ce que la route soit arrêtée.
+D’autre part, un JOB est un processus par lots ou BATCH qui est lancé à la demande pour gérer certaines entrées (fichiers, base de données, etc.) et se termine lorsque toutes les entrées sont traitées.
 
 :::{.callout-tip}
-
-## Utile
-
 Un point important à noter est que vous pouvez appeler des Jobs Talend à partir d'une Route Talend si vous le souhaitez.
 :::
 
--   SERVICES : Un webservice est une fonction qui a pour rôle de mettre un disposition un service via internet. Le webservice est une interface entre deux applications, et leur permet tout comme l’API, de communiquer entre elles.         
-Le webservice permet à des applications de communiquer entre elles même si elles fonctionnent avec des langages différents. Les webservices les plus connus sont de types SOAP, REST et HTTP.         
-Fonctionnement d’un webservice
-    -   **Étape 1** : Un utilisateur sur un ordinateur ou un mobile fait une demande. On l’appelle le client. Sa demande représente une requête qui est envoyée dans un langage spécfique : XML, HTTP ou encore JSON.
-    -   **Étape 2** : La requête issue du client est envoyée sur un serveur distant via un protocole de type SOAP, REST ou HTTP.
-    -   **Étape 3** : Le serveur va émettre une réponse qui aura le même format que celui du protocole de la demande.       
+-   SERVICES : Un webservice est une fonction qui a pour rôle de mettre un disposition un service via internet. Le webservice est une interface entre deux applications, et leur permet tout comme l’API, de communiquer entre elles.
+Le webservice permet à des applications de communiquer entre elles même si elles fonctionnent avec des langages différents. Les webservices les plus connus sont de types SOAP, REST et HTTP.
+
+:::{.callout-tip}
+Les services de type REST peuvent se développer de la même manière qu’un job, seule la construction et le déploiement divergent.
+:::
+
+:::{.callout-tip}
+Fonctionnement d’un webservice : 
+
+-   **Étape 1** : Un utilisateur sur un ordinateur ou un mobile fait une demande. On l’appelle le client. Sa demande représente une requête qui est envoyée dans un langage spécfique : XML, HTTP ou encore JSON.       
+-   **Étape 2** : La requête issue du client est envoyée sur un serveur distant via un protocole de type SOAP, REST ou HTTP.
+-   **Étape 3** : Le serveur va émettre une réponse qui aura le même format que celui du protocole de la demande.         
+:::
+
+     
 -   CONTEXTE : L’endroit où l’on peut retrouver les variables de contexte qui sont disponibles à l’exécution du JOB que l’on oppose aux variables globales qui sont disponibles dans le JOB.       
 Ces variables peuvent être regroupées dans une catégorie qu'on appelle GROUPE et peuvent prendre leurs valeurs en fonction d'un ENVIRONNEMENT.        
 
@@ -233,7 +267,7 @@ On peut faire remarquer que ces **metadata** peuvent être paramètrées par des
 
 :::        
 
-### QUADRANT NORD EST {#quad-ne}
+### 1.3.3 Présentation du Quadrant Nord Est {#quad-ne}
 
 ::: {.justify}
 
@@ -253,9 +287,6 @@ Dans l'onglet Code, on peut voir le code du job.
 Celui-ci n'est là qu'à titre informatif et ne peut être modifié, il permet néanmoins de détecter d'éventuel erreur de compilation. 
 
 :::{.callout-warning}
-
-## Attention
-
 Seule l’onglet Designer permet de développer.  
 Ne permet de détecter les erreurs qui peuvent se produire dans l'éxécution du job
 :::
@@ -264,7 +295,7 @@ Ne permet de détecter les erreurs qui peuvent se produire dans l'éxécution du
 :::
 
 
-### QUADRANT SUD OUEST {#quad-so}
+### 1.3.4 Présentation du Quadrant Sud Ouest {#quad-so}
 
 ::: {.justify}
 

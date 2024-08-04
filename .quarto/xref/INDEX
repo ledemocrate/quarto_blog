@@ -43,5 +43,14 @@
   },
   "posts/data_non_structure_sur_pgs_bis/quarto_data_unstructured_pgs_bis.qmd": {
     "quarto_data_unstructured_pgs_bis.html": "1060cdfd"
+  },
+  "posts/apache_docker_debian/apache_docker_debian.qmd": {
+    "apache_docker_debian.html": "2fee3722"
+  },
+  "docs/posts/tidytuesday_20240804/tidytuesday_20240804.qmd": {
+    "tidytuesday_20240804.html": "201fac33"
+  },
+  "posts/tidytuesday_20240804/tidytuesday_20240804.qmd": {
+    "tidytuesday_20240804.html": "1ba208d7"
   }
 }
