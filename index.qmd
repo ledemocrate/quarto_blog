@@ -1,5 +1,5 @@
 ---
-title: "GOLLENTZ Quentin, Artisant de la Data depuis ~~1994~~"
+title: "GOLLENTZ Quentin, Artisan de la Data depuis ~~1994~~"
 image: hansi.jpg
 about:
   template: jolla
