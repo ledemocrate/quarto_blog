@@ -9,10 +9,10 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.266">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="GOLLENTZ Quentin">
-  <title>Société Alsacienne d’Artisanat de la Data - De l’utilisation d’Apache dans Docker avec Windows</title>
+  <title>Société Alsacienne d'Artisanat de la Data – De l’utilisation d’Apache dans Docker avec Windows</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,57 +327,109 @@
     }
   </style>
   <script>
+
     
+
     function getGiscusTheme() {
+
     const quartoTheme = localStorage.getItem("quarto-color-scheme");
+
     const giscusTheme = quartoTheme === "alternate" ? "dark" : "light";
+
     // const giscusTheme = quartoTheme === "alternate" ? "dark" : "assets/giscus-light-custom.css";
+
     return giscusTheme;
+
   }
+
+  
 
   function setGiscusTheme() {
+
     function sendMessage(message) {
+
       const iframe = document.querySelector('iframe.giscus-frame');
+
       if (!iframe) return;
+
       iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+
     }
+
     sendMessage({
+
       setConfig: {
+
         theme: getGiscusTheme(),
+
       },
+
     });
+
   }
 
+  
+
   document.addEventListener('DOMContentLoaded', function () {
+
     const giscusAttributes = {
+
       "src": "https://giscus.app/client.js",
+
       "data-repo": "ledemocrate/blog_comment",
+
       "data-repo-id": "R_kgDOJ4CCXA",
+
       "data-category": "General",
+
       "data-category-id": "DIC_kwDOJ4CCXM4CXvqe",
+
       "data-mapping": "pathname",
+
       "data-strict": "0",
+
       "data-reactions-enabled": "1",
+
       "data-emit-metadata": "0",
+
       "data-input-position": "top",
+
       "data-theme": getGiscusTheme(),
+
       "data-lang": "en",
+
       "crossorigin": "anonymous",
+
       "async": "",
+
     };
 
+  
+
     // Dynamically create script tag
+
     const giscusScript = document.createElement("script");
+
     Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+
     document.body.appendChild(giscusScript);
 
+  
+
     // Update giscus theme when theme switcher is clicked
+
     const toggle = document.querySelector('.quarto-color-scheme-toggle');
+
     if (toggle) {
+
       toggle.addEventListener('click', setGiscusTheme);
+
     }
+
   });
+
     
+
   </script>
 </head>
 <body class="quarto-light">
@@ -404,7 +456,7 @@
     </div>
 </div>
 
-  <p class="date">22-04-2024</p>
+  <p class="date">08-10-2024</p>
 </section>
 <section id="définition-du-logiciel-libre" class="slide level2">
 <h2>Définition du logiciel libre <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/ll-logos2.png" height="120px" style="vertical-align:middle;"></h2>
@@ -465,15 +517,201 @@
 <p>Un conteneur permet d’isoler chaque service : le serveur web, la base de données, des applications pouvant être exécutées de façon indépendante dans leur conteneur dédié, contenant uniquement les dépendances nécessaires. Chaque conteneur peut être relié aux autres par des réseaux virtuels. Il est possible de monter des volumes de disque de la machine hôte dans un conteneur.</p>
 <p>Docker vous permet d’envoyer du code plus rapidement, de standardiser les opérations de vos applications, de migrer aisément du code et de faire des économies en améliorant l’utilisation des ressources. Avec Docker, vous obtenez un objet unique que vous pouvez exécuter n’importe où de manière fiable.</p>
 </section>
+<section id="le-logiciel-talend" class="slide level2">
+<h2>Le logiciel Talend <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/TalendLogoCoral.png" height="120px" style="vertical-align:middle;"></h2>
+<p>Talend Open Studio est un logiciel libre sous la licence Apache.<br>
+Il va nous permettre de dévelloper des routes sous Apache Camel afin d’intégrer les divers message dans :</p>
+<ul>
+<li>Apache Cassandra</li>
+<li>Aapache ActiveMQ</li>
+<li>Apache Kafka</li>
+</ul>
+<p>La route développée va être déployée dans Apache Karaf.</p>
+</section>
 <section id="quid-de-windows" class="slide level2">
 <h2>Quid de Windows <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/00epgates1-facebookJumbo-v3.jpg" height="120px" style="vertical-align:middle;"></h2>
 <p>Simple, Docker ne fonctionne pas sur Windows.<br>
 Pour pouvoir utiliser Docker sur Windows, il va falloir installer Linux sur Wndows.<br>
 Linux 1 - 0 Windows</p>
-<p>On a jamais vu la réciproque, c’est à dire quelqu’un installer windows sur linux</p>
+<p>On a jamais vu la réciproque, c’est à dire quelqu’un installer windows sur Linux</p>
+</section>
+<section id="création-dun-container-apache-cassandra" class="slide level2">
+<h2>Création d’un container Apache Cassandra</h2>
+<p>Etape 1 : Mettre dans un dossier le fichier <strong>docker-compose.yml</strong> avec le contenu suivant</p>
+<pre><code>version: '3'
+services:
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    volumes:
+      - /var/lib/cassandra
+  sample-data:
+    image: cassandra:latest
+    depends_on:
+      - cassandra
+    restart: "no"
+    entrypoint: ["/sample_data.sh"]
+    volumes:
+      - ./sample_data.sh:/sample_data.sh</code></pre>
+<p>Etape 2 : Mettre dans le même dossier le fichier <strong>sample_data.sh</strong> avec le contenu suivant</p>
+<pre><code>#!/usr/bin/env bash
 
+until printf "" 2&gt;&gt;/dev/null &gt;&gt;/dev/tcp/cassandra/9042; do 
+    sleep 5;
+    echo "Waiting for cassandra...";
+done
+
+echo "Creating keyspace and tables..."
+cqlsh cassandra -e "CREATE KEYSPACE IF NOT EXISTS democratie WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };"
+cqlsh cassandra -e "CREATE TABLE IF NOT EXISTS democratie.vote (loi_code text,depute_code text, vote_code int, PRIMARY KEY (loi_code,depute_code));""</code></pre>
+<p>Etape 3 : Exécuter la commande suivante dans le dossier</p>
+<pre><code>docker-compose -f docker-compose.yml up -d</code></pre>
+</section>
+<section id="création-dun-container-apache-activemq" class="slide level2">
+<h2>Création d’un container Apache ActiveMQ</h2>
+<p>Etape 1 : Mettre dans un dossier le fichier <strong>docker-compose.yml</strong> avec le contenu suivant</p>
+<pre><code>version: '3.2'
+services:
+  activemq:
+    image:  symptoma/activemq:latest
+    container_name: 'activemq'
+    ports:
+      - "9000:61616"
+      - "8161:8161"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"</code></pre>
+<p>Etape 2 : Exécuter la commande suivante dans le dossier</p>
+<pre><code>docker-compose -f docker-compose.yml up -d</code></pre>
+</section>
+<section id="création-dune-route-apache-camel-via-talend" class="slide level2">
+<h2>Création d’une route Apache Camel (via Talend)</h2>
+</section>
+<section id="création-dun-container-apache-karaf" class="slide level2">
+<h2>Création d’un container Apache Karaf</h2>
+<p>Etape 1 : Mettre dans un dossier le fichier <strong>post_vote_docker_global_cql_0.1.kar</strong> dévellopé précédemment</p>
+<p>Etape 2 : Mettre dans le même dossier l’archive d’un Apache Karaf <strong>container.tar.gz</strong></p>
+<p>Etape 3 : Mettre dans le même dossier le fichier <strong>Dockerfile</strong> avec le contenu suivant</p>
+<pre><code>FROM openjdk:11-jdk-slim-sid
+
+MAINTAINER quentingollentz
+
+ARG kar_filename=post_vote_docker_global_cql_0.1.kar
+
+ENV KAR_FILENAME ${kar_filename}
+ENV KARAF_VERSION=4.2.7
+
+COPY container.tar.gz ./
+
+RUN mkdir /opt/karaf; \
+    tar --strip-components=1 -C /opt/karaf -xzf container.tar.gz; \
+    rm container.tar.gz;
+
+COPY ${KAR_FILENAME} /opt/karaf/deploy/
+
+EXPOSE 8040 8052 
+
+ENTRYPOINT ["/bin/bash"]
+
+CMD ["/opt/karaf/bin/trun", "run"]</code></pre>
+<p>Etape 4 : Mettre dans le même dossier le fichier <strong>docker-compose.yml</strong> avec le contenu suivant</p>
+<pre><code>version: '3.0'
+services:
+    karaf_docker:
+        image: karaf_docker
+        container_name: karaf_docker
+        restart: always
+        ports:
+            - "8040:8040"
+            - "8052:8052"
+        stdin_open: true
+        tty: true
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+    zookeeper:
+        image: confluentinc/cp-zookeeper:latest
+        environment:
+         ZOOKEEPER_CLIENT_PORT: 2181
+         ZOOKEEPER_SERVER_ID: 1
+        ports:
+            - "2181:2181"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+
+    kafka-1:
+        image: confluentinc/cp-kafka:latest
+        ports:
+            - "9092:9092"
+            - "29092:29092"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        environment:
+          KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:19092,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092,DOCKER://host.docker.internal:29092
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+          KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+          KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+          KAFKA_BROKER_ID: 1
+        depends_on:
+          - zookeeper
+
+    kafka-2:
+        image: confluentinc/cp-kafka:latest
+        ports:
+            - "9093:9093"
+            - "29093:29093"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        environment:
+          KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-2:19093,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9093,DOCKER://host.docker.internal:29093
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+          KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+          KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+          KAFKA_BROKER_ID: 2
+        depends_on:
+            - zookeeper
+
+    kafka-3:
+        image: confluentinc/cp-kafka:latest
+        ports:
+            - "9094:9094"
+            - "29094:29094"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        environment:
+          KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-3:19094,EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9094,DOCKER://host.docker.internal:29094
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT
+          KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+          KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+          KAFKA_BROKER_ID: 3
+        depends_on:
+            - zookeeper
+</code></pre>
+<p>Etape 5 : Exécuter les commandes suivantes dans le dossier</p>
+<pre><code>docker build -t karaf_docker .
+docker-compose -f karaf_docker.yml up -d</code></pre>
+</section>
+<section id="test-de-lenvironnement-dévellopé" class="slide level2">
+<h2>Test de l’environnement dévellopé</h2>
+<pre><code>library(httr)
+
+headers = c(
+  'Content-Type' = 'application/json'
+)
+
+body = '{
+  "loi_code": "SUCCEED_2024_20_04_2024",
+  "vote_code": "2",
+  "depute_code": "QUENTIN"
+}';
+
+res &lt;- VERB("POST", url = "http://localhost:8052/assemblee_nationale", body = body, add_headers(headers))
+headers(res)</code></pre>
+
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
@@ -722,18 +960,7 @@ Linux 1 - 0 Windows</p>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -765,7 +992,47 @@ Linux 1 - 0 Windows</p>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -802,7 +1069,11 @@ Linux 1 - 0 Windows</p>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

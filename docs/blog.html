@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.266">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Société Alsacienne d'Artisanat de la Data – blog</title>
+<title>blog – Société Alsacienne d'Artisanat de la Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,12 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -62,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -97,8 +99,35 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -107,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
@@ -118,38 +147,38 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" rel="" target="" aria-current="page">
- <span class="menu-text">Journal</span></a>
+    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+<span class="menu-text">Journal</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ledemocrate" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/ledemocrate"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.reddit.com/user/goldentzgrahams" rel="" target=""><i class="bi bi-reddit" role="img">
+    <a class="nav-link" href="https://www.reddit.com/user/goldentzgrahams"> <i class="bi bi-reddit" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/quentin-gollentz-697993172/" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/quentin-gollentz-697993172/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.playstation.com/fr-fr/playstation-network/" rel="" target=""><i class="bi bi-playstation" role="img">
+    <a class="nav-link" href="https://www.playstation.com/fr-fr/playstation-network/"> <i class="bi bi-playstation" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -163,6 +192,7 @@ ul.task-list li input[type="checkbox"] {
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Apache ActiveMQ">Apache ActiveMQ <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Apache Camel">Apache Camel <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Apache Kafka">Apache Kafka <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Apache Karaf">Apache Karaf <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Debian">Debian <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Docker">Docker <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Talend">Talend <span class="quarto-category-count">(1)</span></div><div class="category" data-category="assemblée nationale">assemblée nationale <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="democratie participitative">democratie participitative <span class="quarto-category-count">(1)</span></div><div class="category" data-category="essai">essai <span class="quarto-category-count">(1)</span></div><div class="category" data-category="geojson">geojson <span class="quarto-category-count">(1)</span></div><div class="category" data-category="postgresql">postgresql <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="réseau">réseau <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistique">statistique <span class="quarto-category-count">(1)</span></div><div class="category" data-category="théorie des graphes">théorie des graphes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidydata">tidydata <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidytuesday">tidytuesday <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidyverse">tidyverse <span class="quarto-category-count">(1)</span></div><div class="category" data-category="vote">vote <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
+
 
 
 
@@ -194,51 +224,14 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="tidytuesday,tidyverse" data-listing-date-sort="1722774495000" data-listing-file-modified-sort="1722774495295" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="0" data-categories="Apache Camel,Apache Kafka,Apache ActiveMQ,Apache Karaf,Docker,Talend,Debian" data-listing-date-sort="1728391335000" data-listing-file-modified-sort="1728391335147" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2327">
 <div class="body">
-<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html">
 <h3 class="no-anchor listing-title">
-Analyse de données - TidyTuesday
+<a href="./posts/apache_docker_debian/apache_docker_debian.html" class="no-external">De l’utilisation d’Apache dans Docker avec Windows</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/apache_docker_debian/apache_docker_debian.html" class="no-external">Création d’une route POST_VOTE</a>
 </div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('tidytuesday'); return false;">
-tidytuesday
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('tidyverse'); return false;">
-tidyverse
-</div>
-</div>
-<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html">
-<div class="listing-description">
-<p>Summer Movies</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html">
-<div class="listing-date">
-Aug 4, 2024
-</div>
-<div class="listing-reading-time">
-4 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Apache Camel,Apache Kafka,Apache ActiveMQ,Apache Karaf,Docker,Talend,Debian" data-listing-date-sort="1713796337000" data-listing-file-modified-sort="1713796337843" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-<div class="body">
-<a href="./posts/apache_docker_debian/apache_docker_debian.html">
-<h3 class="no-anchor listing-title">
-De l’utilisation d’Apache dans Docker avec Windows
-</h3>
-<div class="listing-subtitle">
-Création d’une route POST_VOTE
-</div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Apache Camel'); return false;">
 Apache Camel
@@ -262,39 +255,66 @@ Talend
 Debian
 </div>
 </div>
-<a href="./posts/apache_docker_debian/apache_docker_debian.html">
 <div class="listing-description">
-
+<a href="./posts/apache_docker_debian/apache_docker_debian.html" class="no-external"></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/apache_docker_debian/apache_docker_debian.html">
+<a href="./posts/apache_docker_debian/apache_docker_debian.html" class="no-external">
 <div class="listing-date">
-Apr 22, 2024
+Oct 8, 2024
 </div>
 <div class="listing-reading-time">
-6 min
+12 min
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1713535060000" data-listing-file-modified-sort="1713535060105" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="75">
+<div class="quarto-post image-right" data-index="1" data-categories="tidytuesday,tidyverse" data-listing-date-sort="1722774496000" data-listing-file-modified-sort="1722774496000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="619">
 <div class="body">
-<a href="./posts/formation_talend/quarto_document_formation_talend.html">
 <h3 class="no-anchor listing-title">
-De l’utilisation de Talend pour l’OpenData de l’Assemblée Nationale
+<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html" class="no-external">Analyse de données - TidyTuesday</a>
 </h3>
 <div class="listing-subtitle">
-Formation DATA
+<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('tidytuesday'); return false;">
+tidytuesday
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('tidyverse'); return false;">
+tidyverse
+</div>
 </div>
 <div class="listing-description">
-<p>Application sur l’Open Data de l’Assemblée Nationale</p>
+<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html" class="no-external">Summer Movies</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/tidytuesday_20240804/tidytuesday_20240804.html" class="no-external">
+<div class="listing-date">
+Aug 4, 2024
+</div>
+<div class="listing-reading-time">
+4 min
 </div>
 </a>
 </div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1713535062000" data-listing-file-modified-sort="1713535062000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="75" data-listing-word-count-sort="14950">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/formation_talend/quarto_document_formation_talend.html" class="no-external">De l’utilisation de Talend pour l’OpenData de l’Assemblée Nationale</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/formation_talend/quarto_document_formation_talend.html" class="no-external">Formation DATA</a>
+</div>
+<div class="listing-description">
+<a href="./posts/formation_talend/quarto_document_formation_talend.html" class="no-external">Application sur l’Open Data de l’Assemblée Nationale</a>
+</div>
+</div>
 <div class="metadata">
-<a href="./posts/formation_talend/quarto_document_formation_talend.html">
+<a href="./posts/formation_talend/quarto_document_formation_talend.html" class="no-external">
 <div class="listing-date">
 Apr 19, 2024
 </div>
@@ -304,95 +324,14 @@ Apr 19, 2024
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="democratie participitative,statistique,essai" data-listing-date-sort="1711899259000" data-listing-file-modified-sort="1711899259053" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="3" data-categories="data science,R,python,geojson,postgresql,tidydata" data-listing-date-sort="1711899260000" data-listing-file-modified-sort="1711899260000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="919">
 <div class="body">
-<a href="./posts/democratie_empirique/democratie_empirique.html">
 <h3 class="no-anchor listing-title">
-De la démocratie théorique à la démocratie empirique
+<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html" class="no-external">De la données non structurées en base de données structurées</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html" class="no-external">Application aux données géographiques</a>
 </div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('democratie participitative'); return false;">
-democratie participitative
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('statistique'); return false;">
-statistique
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('essai'); return false;">
-essai
-</div>
-</div>
-<a href="./posts/democratie_empirique/democratie_empirique.html">
-<div class="listing-description">
-<p>Indice de mesure démocratique</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/democratie_empirique/democratie_empirique.html">
-<div class="listing-date">
-Mar 31, 2024
-</div>
-<div class="listing-reading-time">
-4 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="théorie des graphes,réseau,vote,assemblée nationale" data-listing-date-sort="1711899259000" data-listing-file-modified-sort="1711899259727" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16">
-<div class="body">
-<a href="./posts/graphe_inter_vote/graphe_inter_vote.html">
-<h3 class="no-anchor listing-title">
-De la notion de graphe inter-vote à la notion de représentativité
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('théorie des graphes'); return false;">
-théorie des graphes
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('réseau'); return false;">
-réseau
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('vote'); return false;">
-vote
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('assemblée nationale'); return false;">
-assemblée nationale
-</div>
-</div>
-<a href="./posts/graphe_inter_vote/graphe_inter_vote.html">
-<div class="listing-description">
-<p>Application à l’Assemblée Nationale</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/graphe_inter_vote/graphe_inter_vote.html">
-<div class="listing-date">
-Mar 31, 2024
-</div>
-<div class="listing-reading-time">
-16 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="data science,R,python,geojson,postgresql,tidydata" data-listing-date-sort="1711899258000" data-listing-file-modified-sort="1711899258224" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<div class="body">
-<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html">
-<h3 class="no-anchor listing-title">
-De la données non structurées en base de données structurées
-</h3>
-<div class="listing-subtitle">
-Application aux données géographiques
-</div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
 data science
@@ -413,19 +352,88 @@ postgresql
 tidydata
 </div>
 </div>
-<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html">
 <div class="listing-description">
-
+<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html" class="no-external"></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html">
+<a href="./posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html" class="no-external">
 <div class="listing-date">
 Mar 31, 2024
 </div>
 <div class="listing-reading-time">
 5 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="democratie participitative,statistique,essai" data-listing-date-sort="1711899260000" data-listing-file-modified-sort="1711899260000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="749">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/democratie_empirique/democratie_empirique.html" class="no-external">De la démocratie théorique à la démocratie empirique</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/democratie_empirique/democratie_empirique.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('democratie participitative'); return false;">
+democratie participitative
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistique'); return false;">
+statistique
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('essai'); return false;">
+essai
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/democratie_empirique/democratie_empirique.html" class="no-external">Indice de mesure démocratique</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/democratie_empirique/democratie_empirique.html" class="no-external">
+<div class="listing-date">
+Mar 31, 2024
+</div>
+<div class="listing-reading-time">
+4 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="théorie des graphes,réseau,vote,assemblée nationale" data-listing-date-sort="1711899260000" data-listing-file-modified-sort="1711899260000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3056">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/graphe_inter_vote/graphe_inter_vote.html" class="no-external">De la notion de graphe inter-vote à la notion de représentativité</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/graphe_inter_vote/graphe_inter_vote.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('théorie des graphes'); return false;">
+théorie des graphes
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('réseau'); return false;">
+réseau
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('vote'); return false;">
+vote
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('assemblée nationale'); return false;">
+assemblée nationale
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/graphe_inter_vote/graphe_inter_vote.html" class="no-external">Application à l’Assemblée Nationale</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/graphe_inter_vote/graphe_inter_vote.html" class="no-external">
+<div class="listing-date">
+Mar 31, 2024
+</div>
+<div class="listing-reading-time">
+16 min
 </div>
 </a>
 </div>
@@ -470,18 +478,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -513,7 +510,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -548,7 +585,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -563,15 +604,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -580,7 +634,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -622,6 +684,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -693,6 +778,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
