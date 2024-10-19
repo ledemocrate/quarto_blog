@@ -2,9 +2,10 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/formation_talend/quarto_document_formation_talend.html",
+      "/posts/kaggle/escort_analysis.html",
       "/posts/apache_docker_debian/apache_docker_debian.html",
       "/posts/tidytuesday_20240804/tidytuesday_20240804.html",
-      "/posts/formation_talend/quarto_document_formation_talend.html",
       "/posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html",
       "/posts/democratie_empirique/democratie_empirique.html",
       "/posts/graphe_inter_vote/graphe_inter_vote.html"

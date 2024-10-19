@@ -44,8 +44,6 @@ Passionné par la science des données avec pour domaine d’application de pré
 Mon leitmotiv est depuis lors la création d'un système de vote en ligne afin d'arriver à une vrai démocratie.
 Plus précisément que chaque citoyen, c'est à dire soumis à la Loi, puisse participer à la décision collective à travers le vote de la Loi.        
 J'ai notamment découvert le projet [Belenios](https://www.belenios.org/)
-      
-Je travaille actuellement dans une entreprise [DAKA-TEAM](https://daka-team.com/) avec pour mission principale le développement d'entrepôts de données ce qui m'amène à faire un peu de [Java](https://www.oracle.com/fr/java/), un peu de [Python](https://www.python.org/), un peu de  [Debian](https://www.debian.org/index.fr.html), beaucoup de [Talend](https://www.talend.com/fr/) et beaucoup de [PostgreSQL](https://www.postgresql.org/).
 
 Vous pouvez trouver une version exhaustive de mon [curriculum vitae](pdf/cv.pdf)
     
