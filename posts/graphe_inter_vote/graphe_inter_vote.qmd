@@ -341,6 +341,3 @@ On peut alors définir $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})}=\frac{\sum_{i=1}^
 -   Si $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})} > 0.5$ alors globalement l'**assemblée élective** et l'**assemblée participative** ont la **même attitudes** vis à vis du gouvernement $G$
 -   Si $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})}  < 0.5$ alors globalement l'**assemblée élective** et l'**assemblée participative** ont des **attitudes différentes** vis à vis du gouvernement $G$
 -   Si $\bar{DIV_{i}(\bar{V_i^E},\bar{V_i^P})}  = 0.5$ alors globalement il est difficile de dire si l'**assemblée élective** et l'**assemblée participative** ont des **attitudes différentes** ou la .
-    
-    
-!!! Test

@@ -7,7 +7,7 @@ author:
     email: quentin.gollentz@daka-team.com
 date: last-modified
 date-format: "DD-MM-YYYY"
-description: "Indice de mesure démocratique"
+description: "Analyse du prix d'une escort à Moscou"
 title-block-banner: "#ECF4FA"
 format: 
   html:
@@ -28,4 +28,4 @@ editor:
     wrap: 72
 ---
 
-#  La dictature s'est toujours chez les autres
+#  Présentation des données

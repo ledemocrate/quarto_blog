@@ -23,11 +23,18 @@ format:
     html-math-method: katex
     self_contained: no
 css: css/styles.css
-bibliography: references.bib
 editor: 
   markdown: 
     wrap: 72
 ---
+
+```{=html}
+<video 
+   src="video/honestwork.mp4" 
+  width="1000" 
+  height="500">
+</video>
+```
 
 # Summer Movies
 

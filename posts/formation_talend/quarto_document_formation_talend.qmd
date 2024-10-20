@@ -27,19 +27,14 @@ format:
     toc-title: Summary
     toc-depth: 3
     html-math-method: katex
-css: css/styles.css
-bibliography: references.bib
 engine: knitr
+css: css/styles.css
 ---
-```{css echo=FALSE}
-.column {
-text-align: center;
-}
-```
-```{css, echo = FALSE}
-.justify {
-  text-align: justify !important
-}
-```
 
-Je vous invite à consulter le pdf suivant [De l'utilisation de Talend pour l'OpenData de l'Assemblée Nationale](pdf/talend_opendata.pdf)
+```{=html}
+<embed src="pdf/talend_opendata.pdf" width="800px" height="2100px" />
+
+<object data="talend_opendata.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+    <a href="pdf/talend_opendata.pdf">Cliquez pour télécharger.</a>
+</object>
+```

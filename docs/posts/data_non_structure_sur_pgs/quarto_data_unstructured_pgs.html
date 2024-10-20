@@ -9,10 +9,10 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.266">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="GOLLENTZ Quentin">
-  <title>Société Alsacienne d’Artisanat de la Data - De la données non structurées en base de données structurées</title>
+  <title>Société Alsacienne d'Artisanat de la Data – De la données non structurées en base de données structurées</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -71,7 +71,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -85,7 +85,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -99,6 +99,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -411,57 +412,109 @@
     }
   </style>
   <script>
+
     
+
     function getGiscusTheme() {
+
     const quartoTheme = localStorage.getItem("quarto-color-scheme");
+
     const giscusTheme = quartoTheme === "alternate" ? "dark" : "light";
+
     // const giscusTheme = quartoTheme === "alternate" ? "dark" : "assets/giscus-light-custom.css";
+
     return giscusTheme;
+
   }
+
+  
 
   function setGiscusTheme() {
+
     function sendMessage(message) {
+
       const iframe = document.querySelector('iframe.giscus-frame');
+
       if (!iframe) return;
+
       iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+
     }
+
     sendMessage({
+
       setConfig: {
+
         theme: getGiscusTheme(),
+
       },
+
     });
+
   }
 
+  
+
   document.addEventListener('DOMContentLoaded', function () {
+
     const giscusAttributes = {
+
       "src": "https://giscus.app/client.js",
+
       "data-repo": "ledemocrate/blog_comment",
+
       "data-repo-id": "R_kgDOJ4CCXA",
+
       "data-category": "General",
+
       "data-category-id": "DIC_kwDOJ4CCXM4CXvqe",
+
       "data-mapping": "pathname",
+
       "data-strict": "0",
+
       "data-reactions-enabled": "1",
+
       "data-emit-metadata": "0",
+
       "data-input-position": "top",
+
       "data-theme": getGiscusTheme(),
+
       "data-lang": "en",
+
       "crossorigin": "anonymous",
+
       "async": "",
+
     };
 
+  
+
     // Dynamically create script tag
+
     const giscusScript = document.createElement("script");
+
     Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+
     document.body.appendChild(giscusScript);
 
+  
+
     // Update giscus theme when theme switcher is clicked
+
     const toggle = document.querySelector('.quarto-color-scheme-toggle');
+
     if (toggle) {
+
       toggle.addEventListener('click', setGiscusTheme);
+
     }
+
   });
+
     
+
   </script>
 </head>
 <body class="quarto-light">
@@ -508,18 +561,18 @@ La donnée peut être représenté selon différentes formes :</p>
 <ul>
 <li>JSON</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>                <span class="dt">"civ"</span><span class="fu">:</span> <span class="st">"M."</span><span class="fu">,</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>                <span class="dt">"prenom"</span><span class="fu">:</span> <span class="st">"David"</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>                <span class="dt">"nom"</span><span class="fu">:</span> <span class="st">"Habib"</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>                <span class="dt">"alpha"</span><span class="fu">:</span> <span class="st">"HabibD"</span><span class="fu">,</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>                <span class="dt">"trigramme"</span><span class="fu">:</span> <span class="st">"DHA"</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a></a><span class="fu">{</span></span>
+<span id="cb1-2"><a></a>                <span class="dt">"civ"</span><span class="fu">:</span> <span class="st">"M."</span><span class="fu">,</span></span>
+<span id="cb1-3"><a></a>                <span class="dt">"prenom"</span><span class="fu">:</span> <span class="st">"David"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a></a>                <span class="dt">"nom"</span><span class="fu">:</span> <span class="st">"Habib"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a></a>                <span class="dt">"alpha"</span><span class="fu">:</span> <span class="st">"HabibD"</span><span class="fu">,</span></span>
+<span id="cb1-6"><a></a>                <span class="dt">"trigramme"</span><span class="fu">:</span> <span class="st">"DHA"</span></span>
+<span id="cb1-7"><a></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>CSV</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource csv number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>civ;prenom;nom;alpha;trigramme</span>
-<span id="cb2-2"><a href="#cb2-2"></a>M.;David;Habib;HabibD;DHA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource csv number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>civ;prenom;nom;alpha;trigramme</span>
+<span id="cb2-2"><a></a>M.;David;Habib;HabibD;DHA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="concept-de-tidy-data" class="slide level2">
 <h2>Concept de Tidy Data <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/wadley_wickam_tidy_data.jpg" height="120px" style="vertical-align:middle;"></h2>
@@ -555,14 +608,14 @@ Liste d’exemple de <em>Messy Data</em> à partir de <a href="https://www.mongo
 <h2>L’avantage du Tidy Data <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pourquoi_tidy_data.jpg" height="120px" style="vertical-align:middle;"></h2>
 <p><img data-src="img/pourquoi_tidy_data.jpg"> <span class="citation" data-cites="julia_allison">(<a href="#/citations-et-discussion" role="doc-biblioref" onclick="">Lowndes and Horst 2020</a>)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a>tidydata_format <span class="ot">&lt;-</span> table1 <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">select</span>(country,year,population) <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2000</span>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a>tidydata_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-3"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a>tidydata_format <span class="ot">&lt;-</span> table1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a></a>  <span class="fu">select</span>(country,year,population) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2000</span>)</span>
+<span id="cb3-8"><a></a>tidydata_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 x 3
   country      year population
@@ -571,8 +624,8 @@ Liste d’exemple de <em>Messy Data</em> à partir de <a href="https://www.mongo
 2 Brazil       2000  174504898
 3 China        2000 1280428583</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>not_tidydata_format <span class="ot">&lt;-</span> table4b <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">1999</span><span class="st">`</span>) </span>
-<span id="cb5-2"><a href="#cb5-2"></a>not_tidydata_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>not_tidydata_format <span class="ot">&lt;-</span> table4b <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">1999</span><span class="st">`</span>) </span>
+<span id="cb5-2"><a></a>not_tidydata_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 x 2
   country         `2000`
@@ -581,8 +634,8 @@ Liste d’exemple de <em>Messy Data</em> à partir de <a href="https://www.mongo
 2 Brazil       174504898
 3 China       1280428583</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>also_not_tidydata_format <span class="ot">&lt;-</span> table2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2000</span>) </span>
-<span id="cb7-2"><a href="#cb7-2"></a>also_not_tidydata_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>also_not_tidydata_format <span class="ot">&lt;-</span> table2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2000</span>) </span>
+<span id="cb7-2"><a></a>also_not_tidydata_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 x 4
   country      year type            count
@@ -601,10 +654,10 @@ Liste d’exemple de <em>Messy Data</em> à partir de <a href="https://www.mongo
 <p>Prenons l’exemple des <a href="https://www.data.gouv.fr/fr/datasets/contours-detailles-des-circonscriptions-des-legislatives/">circonscriptions françaises</a>.</p>
 <p>Si une circonscription se limitait à un point, on pourrait considérer la structure suivante :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="sc">~</span> ID, <span class="sc">~</span> code_dpt, <span class="sc">~</span> nom_dpt, <span class="sc">~</span> nom_reg, <span class="sc">~</span> num_circ, <span class="sc">~</span> lattitude, <span class="sc">~</span> longitude,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">44.953424</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">48.009421</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">tribble</span>(</span>
+<span id="cb9-2"><a></a>  <span class="sc">~</span> ID, <span class="sc">~</span> code_dpt, <span class="sc">~</span> nom_dpt, <span class="sc">~</span> nom_reg, <span class="sc">~</span> num_circ, <span class="sc">~</span> lattitude, <span class="sc">~</span> longitude,</span>
+<span id="cb9-3"><a></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">44.953424</span>,</span>
+<span id="cb9-4"><a></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">48.009421</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 x 7
   ID    code_dpt nom_dpt   nom_reg                       num_c~1 latti~2 longi~3
@@ -621,10 +674,10 @@ Liste d’exemple de <em>Messy Data</em> à partir de <a href="https://www.mongo
 <p>Première solution :<br>
 Multiplier les <strong>colonnes</strong> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="sc">~</span> ID, <span class="sc">~</span> code_dpt, <span class="sc">~</span> nom_dpt, <span class="sc">~</span> nom_reg, <span class="sc">~</span> num_circ, <span class="sc">~</span> lattitude_point1, <span class="sc">~</span> lattitude_point1,<span class="sc">~</span> lattitude_point2, <span class="sc">~</span> lattitude_point2,<span class="sc">~</span> lattitude_point3, <span class="sc">~</span> lattitude_point3,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">44.953424</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">45.953424</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">46.953424</span>,</span>
-<span id="cb11-4"><a href="#cb11-4"></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">48.009421</span>, <span class="fl">6.981539</span>,<span class="fl">49.009421</span>, <span class="fl">6.981539</span>,<span class="fl">50.009421</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">tribble</span>(</span>
+<span id="cb11-2"><a></a>  <span class="sc">~</span> ID, <span class="sc">~</span> code_dpt, <span class="sc">~</span> nom_dpt, <span class="sc">~</span> nom_reg, <span class="sc">~</span> num_circ, <span class="sc">~</span> lattitude_point1, <span class="sc">~</span> lattitude_point1,<span class="sc">~</span> lattitude_point2, <span class="sc">~</span> lattitude_point2,<span class="sc">~</span> lattitude_point3, <span class="sc">~</span> lattitude_point3,</span>
+<span id="cb11-3"><a></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">44.953424</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">45.953424</span>,<span class="sc">-</span><span class="fl">0.454946</span>,<span class="fl">46.953424</span>,</span>
+<span id="cb11-4"><a></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">48.009421</span>, <span class="fl">6.981539</span>,<span class="fl">49.009421</span>, <span class="fl">6.981539</span>,<span class="fl">50.009421</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 x 11
   ID    code_dpt nom_dpt nom_reg num_c~1 latti~2 latti~3 latti~4 latti~5 latti~6
@@ -640,15 +693,15 @@ Multiplier les <strong>colonnes</strong> :</p>
 <p>Deuxième solution :<br>
 Multiplier les <strong>lignes</strong> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="sc">~</span> ID, <span class="sc">~</span> code_dpt, <span class="sc">~</span> nom_dpt, <span class="sc">~</span> nom_reg, <span class="sc">~</span> num_circ, <span class="sc">~</span> lattitude, <span class="sc">~</span> lattitude,</span>
-<span id="cb13-3"><a href="#cb13-3"></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.474946</span>,<span class="fl">44.953424</span>,</span>
-<span id="cb13-4"><a href="#cb13-4"></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.254946</span>,<span class="fl">45.953424</span>,</span>
-<span id="cb13-5"><a href="#cb13-5"></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.44946</span>,<span class="fl">46.953424</span>,</span>
-<span id="cb13-6"><a href="#cb13-6"></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">49.009421</span>,</span>
-<span id="cb13-7"><a href="#cb13-7"></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">50.009421</span>,</span>
-<span id="cb13-8"><a href="#cb13-8"></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">51.009421</span>,</span>
-<span id="cb13-9"><a href="#cb13-9"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">tribble</span>(</span>
+<span id="cb13-2"><a></a>  <span class="sc">~</span> ID, <span class="sc">~</span> code_dpt, <span class="sc">~</span> nom_dpt, <span class="sc">~</span> nom_reg, <span class="sc">~</span> num_circ, <span class="sc">~</span> lattitude, <span class="sc">~</span> lattitude,</span>
+<span id="cb13-3"><a></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.474946</span>,<span class="fl">44.953424</span>,</span>
+<span id="cb13-4"><a></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.254946</span>,<span class="fl">45.953424</span>,</span>
+<span id="cb13-5"><a></a>   <span class="st">"33004"</span>,<span class="st">"33"</span>, <span class="st">"GIRONDE"</span>, <span class="st">"AQUITAINE-LIMOUSIN-POITOU-CHARENTES"</span>,<span class="st">"75"</span>,<span class="sc">-</span><span class="fl">0.44946</span>,<span class="fl">46.953424</span>,</span>
+<span id="cb13-6"><a></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">49.009421</span>,</span>
+<span id="cb13-7"><a></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">50.009421</span>,</span>
+<span id="cb13-8"><a></a>   <span class="st">"33004"</span>,<span class="st">"68"</span>, <span class="st">"HAUT-RHIN"</span>, <span class="st">"ALSACE-CHAMPAGNE-ARDENNE-LORRAINE"</span>,<span class="st">"44"</span>, <span class="fl">6.981539</span>,<span class="fl">51.009421</span>,</span>
+<span id="cb13-9"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 x 7
   ID    code_dpt nom_dpt   nom_reg                       num_c~1 latti~2 latti~3
@@ -662,35 +715,34 @@ Multiplier les <strong>lignes</strong> :</p>
 # ... with abbreviated variable names 1: num_circ, 2: lattitude, 3: lattitude</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <p>=&gt; Nous somme contraint de considérer le type JSON</p>
 </section>
 <section id="le-type-geometry" class="slide level2">
 <h2>Le type geometry <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/france_metropolitaine.png" height="120px" style="vertical-align:middle;"></h2>
 <p>Considérons le type de variable <code>geometry</code> dans <code>R</code> dont la valeur est une liste de point.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(geojsonsf)</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">library</span>(sf)</span>
-<span id="cb15-4"><a href="#cb15-4"></a></span>
-<span id="cb15-5"><a href="#cb15-5"></a>france_metropolitaine <span class="ot">=</span> <span class="fu">geojson_sf</span>(<span class="st">"data/france-circonscriptions-legislatives-2012.json"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">select</span>(num_circ,code_dpt,geometry)<span class="sc">%&gt;%</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">rename</span>(<span class="at">circo =</span> num_circ,<span class="at">departementCode =</span> code_dpt) <span class="sc">%&gt;%</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">filter</span>(departementCode<span class="sc">!=</span><span class="st">"ZD"</span>,</span>
-<span id="cb15-9"><a href="#cb15-9"></a>         departementCode<span class="sc">!=</span><span class="st">"ZN"</span>,</span>
-<span id="cb15-10"><a href="#cb15-10"></a>         departementCode<span class="sc">!=</span><span class="st">"ZS"</span>,</span>
-<span id="cb15-11"><a href="#cb15-11"></a>         departementCode<span class="sc">!=</span><span class="st">"ZX"</span>,</span>
-<span id="cb15-12"><a href="#cb15-12"></a>         departementCode<span class="sc">!=</span><span class="st">"ZP"</span>,</span>
-<span id="cb15-13"><a href="#cb15-13"></a>         departementCode<span class="sc">!=</span><span class="st">"ZW"</span>,</span>
-<span id="cb15-14"><a href="#cb15-14"></a>         departementCode<span class="sc">!=</span><span class="st">"2B"</span>,</span>
-<span id="cb15-15"><a href="#cb15-15"></a>         departementCode<span class="sc">!=</span><span class="st">"2A"</span>,</span>
-<span id="cb15-16"><a href="#cb15-16"></a>         departementCode<span class="sc">!=</span><span class="st">"ZA"</span>,</span>
-<span id="cb15-17"><a href="#cb15-17"></a>         departementCode<span class="sc">!=</span><span class="st">"ZM"</span>,</span>
-<span id="cb15-18"><a href="#cb15-18"></a>         departementCode<span class="sc">!=</span><span class="st">"ZC"</span>,</span>
-<span id="cb15-19"><a href="#cb15-19"></a>         departementCode<span class="sc">!=</span><span class="st">"ZB"</span>)</span>
-<span id="cb15-20"><a href="#cb15-20"></a></span>
-<span id="cb15-21"><a href="#cb15-21"></a>france_metropolitaine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(geojsonsf)</span>
+<span id="cb15-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-3"><a></a><span class="fu">library</span>(sf)</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a>france_metropolitaine <span class="ot">=</span> <span class="fu">geojson_sf</span>(<span class="st">"data/france-circonscriptions-legislatives-2012.json"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a></a>  <span class="fu">select</span>(num_circ,code_dpt,geometry)<span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a></a>  <span class="fu">rename</span>(<span class="at">circo =</span> num_circ,<span class="at">departementCode =</span> code_dpt) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a></a>  <span class="fu">filter</span>(departementCode<span class="sc">!=</span><span class="st">"ZD"</span>,</span>
+<span id="cb15-9"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZN"</span>,</span>
+<span id="cb15-10"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZS"</span>,</span>
+<span id="cb15-11"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZX"</span>,</span>
+<span id="cb15-12"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZP"</span>,</span>
+<span id="cb15-13"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZW"</span>,</span>
+<span id="cb15-14"><a></a>         departementCode<span class="sc">!=</span><span class="st">"2B"</span>,</span>
+<span id="cb15-15"><a></a>         departementCode<span class="sc">!=</span><span class="st">"2A"</span>,</span>
+<span id="cb15-16"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZA"</span>,</span>
+<span id="cb15-17"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZM"</span>,</span>
+<span id="cb15-18"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZC"</span>,</span>
+<span id="cb15-19"><a></a>         departementCode<span class="sc">!=</span><span class="st">"ZB"</span>)</span>
+<span id="cb15-20"><a></a></span>
+<span id="cb15-21"><a></a>france_metropolitaine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 535 features and 2 fields
 Geometry type: GEOMETRY
@@ -710,9 +762,13 @@ First 10 features:
 9      5              01 POLYGON ((5.51137 46.26436,...
 10     1              02 POLYGON ((3.320684 49.69935...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">plot</span>(france_metropolitaine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">plot</span>(france_metropolitaine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="quarto_data_unstructured_pgs_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -720,49 +776,49 @@ First 10 features:
 <h2>Quid de PostgreSQL <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/pgs.jpg" height="120px" style="vertical-align:middle;"></h2>
 <p>Ci-dessous un script permettant de reproduire la même chose en <code>SQL</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">CREATE</span> EXTENSION postgis;</span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> assemblee_elective.circonscription(</span>
-<span id="cb18-4"><a href="#cb18-4"></a>  circo <span class="dt">VARCHAR</span>,</span>
-<span id="cb18-5"><a href="#cb18-5"></a>  departementCode <span class="dt">VARCHAR</span>,</span>
-<span id="cb18-6"><a href="#cb18-6"></a>  geometry geometry);</span>
-<span id="cb18-7"><a href="#cb18-7"></a> </span>
-<span id="cb18-8"><a href="#cb18-8"></a> <span class="kw">WITH</span> <span class="kw">DATA</span> <span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="st">'{</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="st">    "type": "FeatureCollection",</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a><span class="st">    "features": [</span></span>
-<span id="cb18-11"><a href="#cb18-11"></a><span class="st">        {</span></span>
-<span id="cb18-12"><a href="#cb18-12"></a><span class="st">            "type": "Feature",</span></span>
-<span id="cb18-13"><a href="#cb18-13"></a><span class="st">            "properties": {</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a><span class="st">                "ID": "33004",</span></span>
-<span id="cb18-15"><a href="#cb18-15"></a><span class="st">                "code_dpt": "33",</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a><span class="st">                "nom_dpt": "GIRONDE",</span></span>
-<span id="cb18-17"><a href="#cb18-17"></a><span class="st">                "nom_reg": "AQUITAINE-LIMOUSIN-POITOU-CHARENTES",</span></span>
-<span id="cb18-18"><a href="#cb18-18"></a><span class="st">                "num_circ": "4",</span></span>
-<span id="cb18-19"><a href="#cb18-19"></a><span class="st">                "code_reg": "75"</span></span>
-<span id="cb18-20"><a href="#cb18-20"></a><span class="st">            },</span></span>
-<span id="cb18-21"><a href="#cb18-21"></a><span class="st">            "geometry": {</span></span>
-<span id="cb18-22"><a href="#cb18-22"></a><span class="st">                "type": "Polygon",</span></span>
-<span id="cb18-23"><a href="#cb18-23"></a><span class="st">                "coordinates": [</span></span>
-<span id="cb18-24"><a href="#cb18-24"></a><span class="st">                    [</span></span>
-<span id="cb18-25"><a href="#cb18-25"></a><span class="st">                        [</span></span>
-<span id="cb18-26"><a href="#cb18-26"></a><span class="st">                            -0.454946,</span></span>
-<span id="cb18-27"><a href="#cb18-27"></a><span class="st">                            44.953424</span></span>
-<span id="cb18-28"><a href="#cb18-28"></a><span class="st">                        ],</span></span>
-<span id="cb18-29"><a href="#cb18-29"></a><span class="st">                        [...</span></span>
-<span id="cb18-30"><a href="#cb18-30"></a><span class="st">}'</span>:<span class="ch">:json</span> <span class="kw">AS</span> fc)</span>
-<span id="cb18-31"><a href="#cb18-31"></a></span>
-<span id="cb18-32"><a href="#cb18-32"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> assemblee_elective.circonscription(geometry,departementcode,circo)</span>
-<span id="cb18-33"><a href="#cb18-33"></a></span>
-<span id="cb18-34"><a href="#cb18-34"></a><span class="kw">SELECT</span></span>
-<span id="cb18-35"><a href="#cb18-35"></a></span>
-<span id="cb18-36"><a href="#cb18-36"></a>  ST_AsText(ST_GeomFromGeoJSON(feat<span class="op">-&gt;&gt;</span><span class="st">'geometry'</span>)) <span class="kw">AS</span> geometry,</span>
-<span id="cb18-37"><a href="#cb18-37"></a>  <span class="fu">CAST</span>(<span class="kw">REPLACE</span>(<span class="fu">CAST</span>(feat<span class="op">-&gt;</span><span class="st">'properties'</span><span class="op">-&gt;</span><span class="st">'code_dpt'</span> <span class="kw">AS</span> <span class="dt">varchar</span>),<span class="st">'"'</span>,<span class="st">''</span>) <span class="kw">AS</span> <span class="dt">varchar</span>) <span class="kw">AS</span> departementCode,</span>
-<span id="cb18-38"><a href="#cb18-38"></a>  <span class="fu">CAST</span>(<span class="kw">REPLACE</span>(<span class="fu">CAST</span>(feat<span class="op">-&gt;</span><span class="st">'properties'</span><span class="op">-&gt;</span><span class="st">'num_circ'</span> <span class="kw">AS</span> <span class="dt">varchar</span>),<span class="st">'"'</span>,<span class="st">''</span>) <span class="kw">AS</span> <span class="dt">varchar</span>) <span class="kw">AS</span> circo</span>
-<span id="cb18-39"><a href="#cb18-39"></a>  </span>
-<span id="cb18-40"><a href="#cb18-40"></a><span class="kw">FROM</span> (</span>
-<span id="cb18-41"><a href="#cb18-41"></a>  <span class="kw">SELECT</span> json_array_elements(fc<span class="op">-&gt;</span><span class="st">'features'</span>) <span class="kw">AS</span> feat</span>
-<span id="cb18-42"><a href="#cb18-42"></a>  <span class="kw">FROM</span> <span class="kw">data</span> </span>
-<span id="cb18-43"><a href="#cb18-43"></a>) <span class="kw">AS</span> f;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a></a><span class="kw">CREATE</span> EXTENSION postgis;</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> assemblee_elective.circonscription(</span>
+<span id="cb18-4"><a></a>  circo <span class="dt">VARCHAR</span>,</span>
+<span id="cb18-5"><a></a>  departementCode <span class="dt">VARCHAR</span>,</span>
+<span id="cb18-6"><a></a>  geometry geometry);</span>
+<span id="cb18-7"><a></a> </span>
+<span id="cb18-8"><a></a> <span class="kw">WITH</span> <span class="kw">DATA</span> <span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="st">'{</span></span>
+<span id="cb18-9"><a></a><span class="st">    "type": "FeatureCollection",</span></span>
+<span id="cb18-10"><a></a><span class="st">    "features": [</span></span>
+<span id="cb18-11"><a></a><span class="st">        {</span></span>
+<span id="cb18-12"><a></a><span class="st">            "type": "Feature",</span></span>
+<span id="cb18-13"><a></a><span class="st">            "properties": {</span></span>
+<span id="cb18-14"><a></a><span class="st">                "ID": "33004",</span></span>
+<span id="cb18-15"><a></a><span class="st">                "code_dpt": "33",</span></span>
+<span id="cb18-16"><a></a><span class="st">                "nom_dpt": "GIRONDE",</span></span>
+<span id="cb18-17"><a></a><span class="st">                "nom_reg": "AQUITAINE-LIMOUSIN-POITOU-CHARENTES",</span></span>
+<span id="cb18-18"><a></a><span class="st">                "num_circ": "4",</span></span>
+<span id="cb18-19"><a></a><span class="st">                "code_reg": "75"</span></span>
+<span id="cb18-20"><a></a><span class="st">            },</span></span>
+<span id="cb18-21"><a></a><span class="st">            "geometry": {</span></span>
+<span id="cb18-22"><a></a><span class="st">                "type": "Polygon",</span></span>
+<span id="cb18-23"><a></a><span class="st">                "coordinates": [</span></span>
+<span id="cb18-24"><a></a><span class="st">                    [</span></span>
+<span id="cb18-25"><a></a><span class="st">                        [</span></span>
+<span id="cb18-26"><a></a><span class="st">                            -0.454946,</span></span>
+<span id="cb18-27"><a></a><span class="st">                            44.953424</span></span>
+<span id="cb18-28"><a></a><span class="st">                        ],</span></span>
+<span id="cb18-29"><a></a><span class="st">                        [...</span></span>
+<span id="cb18-30"><a></a><span class="st">}'</span>:<span class="ch">:json</span> <span class="kw">AS</span> fc)</span>
+<span id="cb18-31"><a></a></span>
+<span id="cb18-32"><a></a><span class="kw">INSERT</span> <span class="kw">INTO</span> assemblee_elective.circonscription(geometry,departementcode,circo)</span>
+<span id="cb18-33"><a></a></span>
+<span id="cb18-34"><a></a><span class="kw">SELECT</span></span>
+<span id="cb18-35"><a></a></span>
+<span id="cb18-36"><a></a>  ST_AsText(ST_GeomFromGeoJSON(feat<span class="op">-&gt;&gt;</span><span class="st">'geometry'</span>)) <span class="kw">AS</span> geometry,</span>
+<span id="cb18-37"><a></a>  <span class="fu">CAST</span>(<span class="kw">REPLACE</span>(<span class="fu">CAST</span>(feat<span class="op">-&gt;</span><span class="st">'properties'</span><span class="op">-&gt;</span><span class="st">'code_dpt'</span> <span class="kw">AS</span> <span class="dt">varchar</span>),<span class="st">'"'</span>,<span class="st">''</span>) <span class="kw">AS</span> <span class="dt">varchar</span>) <span class="kw">AS</span> departementCode,</span>
+<span id="cb18-38"><a></a>  <span class="fu">CAST</span>(<span class="kw">REPLACE</span>(<span class="fu">CAST</span>(feat<span class="op">-&gt;</span><span class="st">'properties'</span><span class="op">-&gt;</span><span class="st">'num_circ'</span> <span class="kw">AS</span> <span class="dt">varchar</span>),<span class="st">'"'</span>,<span class="st">''</span>) <span class="kw">AS</span> <span class="dt">varchar</span>) <span class="kw">AS</span> circo</span>
+<span id="cb18-39"><a></a>  </span>
+<span id="cb18-40"><a></a><span class="kw">FROM</span> (</span>
+<span id="cb18-41"><a></a>  <span class="kw">SELECT</span> json_array_elements(fc<span class="op">-&gt;</span><span class="st">'features'</span>) <span class="kw">AS</span> feat</span>
+<span id="cb18-42"><a></a>  <span class="kw">FROM</span> <span class="kw">data</span> </span>
+<span id="cb18-43"><a></a>) <span class="kw">AS</span> f;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>On obtient un jeu de données qui est TIDY.</p>
 <p><img data-src="img/dbeaver.png"></p>
@@ -771,66 +827,66 @@ First 10 features:
 <h2>Application : Rattachement adresse à une circonscription <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/assemble_nationale.png" height="120px" style="vertical-align:middle;"></h2>
 <p>L’objectif étant à partir d’une adresse de déterminer la circonscription à laquelle appartient l’adresse en <code>python</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a></span>
-<span id="cb19-2"><a href="#cb19-2"></a></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="im">import</span> os</span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="im">import</span> psycopg2</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="im">import</span> geopy <span class="im">as</span> gp</span>
-<span id="cb19-8"><a href="#cb19-8"></a></span>
-<span id="cb19-9"><a href="#cb19-9"></a></span>
-<span id="cb19-10"><a href="#cb19-10"></a>db <span class="op">=</span> <span class="st">'bdd_democratie'</span>  </span>
-<span id="cb19-11"><a href="#cb19-11"></a>host_db <span class="op">=</span> <span class="st">'176.147.16.188'</span>   </span>
-<span id="cb19-12"><a href="#cb19-12"></a>db_port <span class="op">=</span> <span class="st">'5432'</span>  </span>
-<span id="cb19-13"><a href="#cb19-13"></a>db_user <span class="op">=</span> <span class="st">"postgres"</span>  </span>
-<span id="cb19-14"><a href="#cb19-14"></a>db_password <span class="op">=</span> <span class="st">'postgres'</span></span>
-<span id="cb19-15"><a href="#cb19-15"></a></span>
-<span id="cb19-16"><a href="#cb19-16"></a></span>
-<span id="cb19-17"><a href="#cb19-17"></a>conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(</span>
-<span id="cb19-18"><a href="#cb19-18"></a>    host<span class="op">=</span>host_db,</span>
-<span id="cb19-19"><a href="#cb19-19"></a>    database<span class="op">=</span>db,</span>
-<span id="cb19-20"><a href="#cb19-20"></a>    user<span class="op">=</span>db_user,</span>
-<span id="cb19-21"><a href="#cb19-21"></a>    port <span class="op">=</span> db_port,</span>
-<span id="cb19-22"><a href="#cb19-22"></a>    password<span class="op">=</span>db_password)</span>
-<span id="cb19-23"><a href="#cb19-23"></a></span>
-<span id="cb19-24"><a href="#cb19-24"></a>engine <span class="op">=</span> create_engine(<span class="st">"postgresql://"</span><span class="op">+</span> db_user <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_password <span class="op">+</span> <span class="st">"@"</span> <span class="op">+</span> host_db <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_port <span class="op">+</span> <span class="st">"/"</span> <span class="op">+</span> db)  </span>
-<span id="cb19-25"><a href="#cb19-25"></a></span>
-<span id="cb19-26"><a href="#cb19-26"></a>adress <span class="op">=</span> <span class="st">"24 parc de la vallée, 68530 Buhl"</span></span>
-<span id="cb19-27"><a href="#cb19-27"></a>locator <span class="op">=</span> gp.Nominatim(user_agent<span class="op">=</span><span class="st">"myGeocoder"</span>)</span>
-<span id="cb19-28"><a href="#cb19-28"></a></span>
-<span id="cb19-29"><a href="#cb19-29"></a>location <span class="op">=</span> locator.geocode(adress)</span>
-<span id="cb19-30"><a href="#cb19-30"></a>location.longitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a></span>
+<span id="cb19-2"><a></a></span>
+<span id="cb19-3"><a></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb19-4"><a></a><span class="im">import</span> os</span>
+<span id="cb19-5"><a></a><span class="im">import</span> psycopg2</span>
+<span id="cb19-6"><a></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
+<span id="cb19-7"><a></a><span class="im">import</span> geopy <span class="im">as</span> gp</span>
+<span id="cb19-8"><a></a></span>
+<span id="cb19-9"><a></a></span>
+<span id="cb19-10"><a></a>db <span class="op">=</span> <span class="st">'bdd_democratie'</span>  </span>
+<span id="cb19-11"><a></a>host_db <span class="op">=</span> <span class="st">'176.147.16.188'</span>   </span>
+<span id="cb19-12"><a></a>db_port <span class="op">=</span> <span class="st">'5432'</span>  </span>
+<span id="cb19-13"><a></a>db_user <span class="op">=</span> <span class="st">"postgres"</span>  </span>
+<span id="cb19-14"><a></a>db_password <span class="op">=</span> <span class="st">'postgres'</span></span>
+<span id="cb19-15"><a></a></span>
+<span id="cb19-16"><a></a></span>
+<span id="cb19-17"><a></a>conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(</span>
+<span id="cb19-18"><a></a>    host<span class="op">=</span>host_db,</span>
+<span id="cb19-19"><a></a>    database<span class="op">=</span>db,</span>
+<span id="cb19-20"><a></a>    user<span class="op">=</span>db_user,</span>
+<span id="cb19-21"><a></a>    port <span class="op">=</span> db_port,</span>
+<span id="cb19-22"><a></a>    password<span class="op">=</span>db_password)</span>
+<span id="cb19-23"><a></a></span>
+<span id="cb19-24"><a></a>engine <span class="op">=</span> create_engine(<span class="st">"postgresql://"</span><span class="op">+</span> db_user <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_password <span class="op">+</span> <span class="st">"@"</span> <span class="op">+</span> host_db <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_port <span class="op">+</span> <span class="st">"/"</span> <span class="op">+</span> db)  </span>
+<span id="cb19-25"><a></a></span>
+<span id="cb19-26"><a></a>adress <span class="op">=</span> <span class="st">"24 parc de la vallée, 68530 Buhl"</span></span>
+<span id="cb19-27"><a></a>locator <span class="op">=</span> gp.Nominatim(user_agent<span class="op">=</span><span class="st">"myGeocoder"</span>)</span>
+<span id="cb19-28"><a></a></span>
+<span id="cb19-29"><a></a>location <span class="op">=</span> locator.geocode(adress)</span>
+<span id="cb19-30"><a></a>location.longitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>7.179495</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>location.latitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>location.latitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>47.9343092</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>query_param <span class="op">=</span> <span class="st">"ST_SetSRID(ST_MakePoint("</span> <span class="op">+</span> <span class="bu">str</span>(location.longitude)  <span class="op">+</span> <span class="st">" , "</span> <span class="op">+</span> <span class="bu">str</span>(location.latitude) <span class="op">+</span> <span class="st">"),4326)"</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>query_param</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>query_param <span class="op">=</span> <span class="st">"ST_SetSRID(ST_MakePoint("</span> <span class="op">+</span> <span class="bu">str</span>(location.longitude)  <span class="op">+</span> <span class="st">" , "</span> <span class="op">+</span> <span class="bu">str</span>(location.latitude) <span class="op">+</span> <span class="st">"),4326)"</span></span>
+<span id="cb23-2"><a></a>query_param</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'ST_SetSRID(ST_MakePoint(7.179495 , 47.9343092),4326)'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>query_kernel <span class="op">=</span> <span class="st">"SELECT nom_dpt, geometry as circonscription, "</span> <span class="op">+</span>  query_param  <span class="op">+</span> <span class="st">" as point, ST_Contains(geometry,"</span> <span class="op">+</span> query_param <span class="op">+</span> <span class="st">") as point_in_circo FROM assemblee_elective.circonscription;"</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>query_kernel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>query_kernel <span class="op">=</span> <span class="st">"SELECT nom_dpt, geometry as circonscription, "</span> <span class="op">+</span>  query_param  <span class="op">+</span> <span class="st">" as point, ST_Contains(geometry,"</span> <span class="op">+</span> query_param <span class="op">+</span> <span class="st">") as point_in_circo FROM assemblee_elective.circonscription;"</span></span>
+<span id="cb25-2"><a></a>query_kernel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'SELECT nom_dpt, geometry as circonscription, ST_SetSRID(ST_MakePoint(7.179495 , 47.9343092),4326) as point, ST_Contains(geometry,ST_SetSRID(ST_MakePoint(7.179495 , 47.9343092),4326)) as point_in_circo FROM assemblee_elective.circonscription;'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
-<span id="cb27-2"><a href="#cb27-2"></a>cursor.execute(query_kernel)</span>
-<span id="cb27-3"><a href="#cb27-3"></a></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="bu">print</span>(<span class="st">"Voci le résultat ci-dessous : "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb27-2"><a></a>cursor.execute(query_kernel)</span>
+<span id="cb27-3"><a></a></span>
+<span id="cb27-4"><a></a><span class="bu">print</span>(<span class="st">"Voci le résultat ci-dessous : "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Voci le résultat ci-dessous : </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>mobile_records <span class="op">=</span> cursor.fetchall()</span>
-<span id="cb29-2"><a href="#cb29-2"></a>mobile_records[<span class="dv">292</span>] <span class="co"># Mon adresse appartient bien à la belle circonscription du HAUT-RHIN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>mobile_records <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb29-2"><a></a>mobile_records[<span class="dv">292</span>] <span class="co"># Mon adresse appartient bien à la belle circonscription du HAUT-RHIN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>('HAUT-RHIN', '0103000020E6100000010000001900000082FE428F18ED1B40A47213B534014840B1FD648C0F131C40DC2C5E2C0C074840865AD3BCE3341C40D9B5BDDD920A48400C2252D32E561C403CF6B3588A10484028B517D1763C1C40BF9CD9AED01148403F912749D76C1C40C328081EDF184840ECA694D74A981C40570740DCD5214840B98AC56F0ACB1C408194D8B5BD274840B2DAFCBFEA181D40B265F9BA0C274840AF5C6F9BA9401D402975C93846204840309B00C3F2671D40A81DFE9AAC1F48407A39ECBE63E81D4052431B800D1A48406F2A52616CE11D40B2D5E59480144840DBDE6E490EC81D405A492BBEA11648402461DF4E22921D402C4487C091164840AD18AE0E80781D40C51C041DAD104840E355D636C5531D40C6C210397D0F4840998235CEA6431D40A3CA30EE06094840D177B7B244671D40DB166536C80648401D1D5723BB621D401230BABC39024840AAB706B64A501D40952C27A1F4F74740D5EAABAB02C51C407B4ACE893DF247409D6340F67A471C401BD5E940D6F34740CF68AB92C8EE1B404AEB6F09C0FD474082FE428F18ED1B40A47213B534014840', '0101000020E61000009D2E8B89CDB71C400C2DA17197F74740', True)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>mobile_records[<span class="dv">132</span>] <span class="co"># Mon adresse n'appartient pas à la moins belle circonscription du BAS-RHIN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a>mobile_records[<span class="dv">132</span>] <span class="co"># Mon adresse n'appartient pas à la moins belle circonscription du BAS-RHIN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>('BAS-RHIN', '0103000020E6100000010000000A0000008A8F4FC8CEEB1E40B2F2CB608C46484029EACC3D24EC1E4009FD4CBD6E47484026FBE769C0F01E409DD9AED00749484092B442DA18271F40FB668163A34B48404CC11A67D3311F40FB20CB82894B484085ED27637C381F404DBB9866BA414840F5B9DA8AFD151F40912BF52C083F4840DEE522BE13D31E40EFA83121E64048403BE5D18DB0C81E401EFB592C454448408A8F4FC8CEEB1E40B2F2CB608C464840', '0101000020E61000009D2E8B89CDB71C400C2DA17197F74740', False)</code></pre>
 </div>
@@ -844,10 +900,12 @@ First 10 features:
 <section id="citations-et-discussion" class="slide level2 smaller scrollable">
 <h2>Citations et discussion <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/hansi.jpg" height="120px" style="vertical-align:middle;"></h2>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-open_data" class="csl-entry" role="listitem">
 <span>“Carte Des Circonscriptions Législatives 2012 Et 2017.”</span> 2017. <a href="https://www.data.gouv.fr/fr/datasets/r/efa8c2e6-b8f7-4594-ad01-10b46b06b56a">https://www.data.gouv.fr/fr/datasets/r/efa8c2e6-b8f7-4594-ad01-10b46b06b56a</a>.
 </div>
@@ -1074,42 +1132,80 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
     </script>
     <div class="giscus">
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1143,18 +1239,7 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1186,7 +1271,47 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1223,7 +1348,11 @@ Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical 
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
