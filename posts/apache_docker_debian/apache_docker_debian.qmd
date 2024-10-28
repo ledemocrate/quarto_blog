@@ -190,7 +190,7 @@ services:
     image:  symptoma/activemq:latest
     container_name: 'activemq'
     ports:
-      - "9000:61616"
+      - "61616:61616"
       - "8161:8161"
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -203,8 +203,38 @@ docker-compose -f docker-compose.yml up -d
 
 ## Création d'une route Apache Camel (via Talend)
 
+Etape 1 : Mettre dans un dossier le fichier **post_vote.java** avec le contenu suivant  
 
+```{java}
+import org.apache.camel.builder.RouteBuilder;
 
+public class post_vote extends RouteBuilder {
+
+    @Override
+    public void configure() throws Exception {
+				
+		from("jetty://http://0.0.0.0:11/assemblee_nationale")
+			.setHeader("businessStartDate").simple("${date:now:yyyy-MM-dd'T'HH:mm:ss.SSSZ}")
+			.log("${body}")
+			.to("activemq:queue:VOTE?exchangePattern=InOnly");
+    }
+}
+```
+Etape 2 : Mettre dans un dossier le fichier **docker-compose.yml** avec le contenu suivant  
+
+```
+version: '3'
+services:
+  camel:
+    image: apache/camel-jbang:4.4.0
+    command: 
+      -  run /integrations/post_vote.java
+```
+Etape 3 : Exécuter les commandes suivantes dans le dossier
+
+```
+docker run -p 11:11 -v .:/integrations apache/camel-jbang:4.4.0 run /integrations/post_vote.java --prompt
+```
 
 ## Création d'un container Apache Karaf
 
@@ -324,7 +354,7 @@ docker-compose -f karaf_docker.yml up -d
 
 ## Test de l'environnement dévellopé
 
-```
+```{R}
 library(httr)
 
 headers = c(
@@ -337,7 +367,7 @@ body = '{
   "depute_code": "QUENTIN"
 }';
 
-res <- VERB("POST", url = "http://localhost:8052/assemblee_nationale", body = body, add_headers(headers))
+res <- VERB("POST", url = "http://localhost:11/assemblee_nationale", body = body, add_headers(headers))
 headers(res)
 ```
 
