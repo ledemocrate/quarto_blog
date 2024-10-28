@@ -36,7 +36,9 @@ Bonjour à vous,
 Née le 25 Juillet 1994 à Guebwiller.        
 Titulaire d’un [Master Économétrie & Statistique](https://ecogestion.unistra.fr/formations/masters/analyse-et-politique-economique/statistique-et-econometrie/), obtenu en 2018 à l’Université de Strasbourg.       
 
-De par mon expérience professionnelle, j'ai acquis des compétences dans l'univers de la DATA et plus particulièrement celles liés au rôle d'INGÉNIEUR DATA.   
+De par mon expérience professionnelle, j'ai acquis des compétences dans l'univers de la DATA et plus particulièrement celles liés au rôle d'INGÉNIEUR DATA.        
+Dans le cadre de ces expériences, j'ai pus apprendre à maitriser le logiciel [Talend Open Studio](https://www.talend.com/products/talend-open-studio/) à utiliser l'API MANAGER [Gravitee](https://images.credential.net/embed/bvbekygh.png) et me former à [Semarchy DI](https://www.semarchy.com/fr/).       
+J'ai également été responsable d'un [CSE](https://www.service-public.fr/particuliers/vosdroits/F34474)
     
 Passionné par la science des données avec pour domaine d’application de prédilection :    
 [L'OpenData de l'Assemblée Nationale](https://data.assemblee-nationale.fr/).
@@ -47,18 +49,25 @@ J'ai notamment découvert le projet [Belenios](https://www.belenios.org/)
 
 Vous pouvez trouver une version exhaustive de mon [curriculum vitae](pdf/cv.pdf)
     
-Je m'intéresse également à tout ce que peux faire la fondation [Apache](https://www.Apache.org/), particulièrement la suite suivante :        
+Je m'intéresse également à tout ce que peux faire la fondation [Apache](https://www.Apache.org/), particulièrement la suite suivante :    
+[Apache ActiveMQ](https://activemq.Apache.org/)       
 [Apache Camel](https://camel.Apache.org/)       
+[Apache Cassandra](https://cassandra.Apache.org/_/index.html)       
 [Apache Karaf](https://karaf.Apache.org/)       
 [Apache Kafka](https://kafka.Apache.org/)       
-[Apache ActiveMQ](https://activemq.Apache.org/)       
-[Apache Cassandra](https://cassandra.Apache.org/_/index.html)       
+[Apache Spark](https://spark.Apache.org/)       
 
 Pour le déploiement, j'utilise [Docker](https://www.docker.com/) bien que très intéressé par [Nix](https://nixos.org/)
+        
+Puisque l'avenir (ou le présent) est au Cloud et que je ne puissse maitriser l'ensemble des Cloud Provider, j'ai décidé de me former à l'ingénérie des données sur [Microsoft Azure](https://portal.azure.com/) en passant l'ensemble des certifications associés au rôle de DATE ENGINEER :        
+[AZ-900](https://learn.microsoft.com/fr-fr/users/GollentzQuentin-5678/credentials/7F4A70BF45868C5A?ref=https%3A%2F%2Fwww.linkedin.com%2F)        
+[DP-900](https://learn.microsoft.com/fr-fr/users/GollentzQuentin-5678/credentials/A7E94B5E231A60B8?ref=https%3a%2f%2fwww.linkedin.com%2f)        
+[DP-203](404 NOT FOUND - WORK IN PROGRESS)        
 
+    
 Du fait de ma formation initiale de statisticien, je suis plus à l'aise avec l'utilisation de [R](https://posit.co/products/open-source/rstudio/) et toute la suite proposée à côté :[`tidyverse`](https://www.tidyverse.org/), [`shiny`](https://shiny.posit.co/), [`quarto`](https://quarto.org/docs/authoring/markdown-basics.html),`....`
 
-Je suis également un chineur de [Rapsberry Pi](https://www.raspberrypi.com/software/).
+Je suis également un chineur de [Rapsberry Pi](https://www.raspberrypi.com/software/) et souhaite en créer des machines à voter.
 
 Pour le moment, pendant mon temps libre je m'occupe à la réalisation d'un mini-projet de bureau de vote en ligne ayant pour but de mesurer la différence de vote entre une assemblée élective et une assemblée participative et ainsi déterminer un indice de représentativité.       
 Le code peut être consulté sur [GitHub](https://github.com/ledemocrate/bureaudevote_2022_2027)  
@@ -73,7 +82,9 @@ Je tiens également à remercier les contributeurs au projet [R4pi](https://r4pi
     
 Vous pouvez me joindre sur [Linkdin](https://www.linkedin.com/in/quentin-gollentz-697993172/) ou [GitHub](https://github.com/ledemocrate) mais également [Redit](https://www.reddit.com/user/goldentzgrahams).         
 Vous pouvez également me joindre par [mail](mailto:ledemocratealsacien@gmail.com;quentin.gollentz@outlook.com) ou me défiez aux  [échecs](https://www.chess.com/member/goldentzgrahamz).        
-
+        
+Si vous avez trop d'argent et que vous ne savez pas quoi en faire vous pouvez m'offrir un [café](https://buymeacoffee.com/ledemocrate)    
+    
 Merci à vous pour m'avoir lu.
 
 PS : Vous pouvez trouver une version exhaustive de l'oeuvre [Du Contrat social](pdf/du_contrat_social.pdf) de 1762 par Jean-Jacques ROUSSEAU.
