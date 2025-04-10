@@ -62,7 +62,7 @@ Pour le déploiement, j'utilise [Docker](https://www.docker.com/) bien que très
 Puisque l'avenir (ou le présent) est au Cloud et que je ne puissse maitriser l'ensemble des Cloud Provider, j'ai décidé de me former à l'ingénérie des données sur [Microsoft Azure](https://portal.azure.com/) en passant l'ensemble des certifications associés au rôle de DATE ENGINEER :        
 [AZ-900](https://learn.microsoft.com/fr-fr/users/GollentzQuentin-5678/credentials/7F4A70BF45868C5A?ref=https%3A%2F%2Fwww.linkedin.com%2F)        
 [DP-900](https://learn.microsoft.com/fr-fr/users/GollentzQuentin-5678/credentials/A7E94B5E231A60B8?ref=https%3a%2f%2fwww.linkedin.com%2f)        
-[DP-203](404 NOT FOUND - WORK IN PROGRESS)        
+[DP-203](https://learn.microsoft.com/fr-fr/users/gollentzquentin-5678/credentials/fc9deae03b6ba641?ref=https%3A%2F%2Fwww.linkedin.com%2F)        
 
     
 Du fait de ma formation initiale de statisticien, je suis plus à l'aise avec l'utilisation de [R](https://posit.co/products/open-source/rstudio/) et toute la suite proposée à côté :[`tidyverse`](https://www.tidyverse.org/), [`shiny`](https://shiny.posit.co/), [`quarto`](https://quarto.org/docs/authoring/markdown-basics.html),`....`
@@ -89,3 +89,4 @@ Merci à vous pour m'avoir lu.
 
 PS : Vous pouvez trouver une version exhaustive de l'oeuvre [Du Contrat social](pdf/du_contrat_social.pdf) de 1762 par Jean-Jacques ROUSSEAU.
 
+![](img/velo.jpg) 
