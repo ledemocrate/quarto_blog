@@ -58,5 +58,8 @@
   },
   "posts/test/test.qmd": {
     "test.html": "c4c1ca23"
+  },
+  "posts/tidytuesday_14052025/tidytuesday_15052025.qmd": {
+    "tidytuesday_15052025.html": "723d3529"
   }
 }
