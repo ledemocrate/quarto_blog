@@ -61,5 +61,14 @@
   },
   "posts/tidytuesday_14052025/tidytuesday_15052025.qmd": {
     "tidytuesday_15052025.html": "723d3529"
+  },
+  "posts/tidytuesday_10092025/tidytuesday_10092025.qmd": {
+    "tidytuesday_10092025.html": "f20c33d3"
+  },
+  "posts/test_github_rshiny/test.qmd": {
+    "test.html": "d8323971"
+  },
+  "posts/quarto_shiny/quarto_shiny.qmd": {
+    "quarto_shiny.html": "52634958"
   }
 }
