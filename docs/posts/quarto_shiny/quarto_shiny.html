@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">16-09-2025</p>
+        <p class="date">20-09-2025</p>
       </div>
     </div>
     
@@ -297,57 +297,158 @@ document.addEventListener('DOMContentLoaded', function () {
 #|   Please set `embed-resources: false` in your metadata.
 #| standalone: true
 #| viewerHeight: 600
-library(shiny)
 library(bslib)
-
-# Define UI for app that draws a histogram ----
-ui &lt;- page_sidebar(
-  sidebar = sidebar(open = "open",
-    numericInput("n", "Sample count", 100),
-    checkboxInput("pause", "Pause", FALSE),
+library(shiny)
+library(readr)
+library(utils)
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(jsonlite)
+library(maps)
+library(ggplot2)
+if (FALSE) {
+  library(munsell)
+}
+country_lists &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-09/country_lists.csv')
+nodes &lt;- utils::read.delim("https://gist.githubusercontent.com/tadast/8827699/raw/61b2107766d6fd51e2bd02d9f78f6be081340efc/countries_codes_and_coordinates.csv", header = TRUE,
+                    quote = '"', sep = ",",
+                    col.names = c('name', 'id_1', 'id_2', 'id','lat','lon')) %&gt;%
+  mutate_if(is.character, str_trim)
+## Interface Utilisateur (UI)
+# Définit la structure visuelle de votre application
+## Interface Utilisateur (UI)
+ui &lt;- fluidPage(
+  tags$head(
+    tags$style(HTML("
+      body {
+        background-color: white !important;
+      }
+      .container-fluid {
+        padding: 0 !important;
+        /* Ajout de display: flex pour utiliser le modèle de boîte flexible */
+        display: flex;
+        flex-direction: column;
+        height: 100vh; /* La hauteur du conteneur est la hauteur de la fenêtre */
+      }
+      .row {
+        flex-shrink: 0; /* Empêche les lignes du haut de se réduire */
+      }
+      #visa_plot {
+        width: 100% !important;
+        /* Le graphique prend l'espace restant */
+        flex-grow: 1;
+      }
+      /* Ajustements pour les marges des lignes */
+      .fluid-row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    "))
   ),
-  plotOutput("plot", width=1100)
+  titlePanel("Visas Obligatoire pour voyager dans le pays source"),
+  
+  # Nouvelle disposition : l'entrée en haut, le graphique en dessous
+  fluidRow(
+    column(12,
+           selectInput("country_selector", "Choisir un pays :",
+                       choices = sort(unique(nodes$id_1)),
+                       selected = "FR")
+    )
+  ),
+  fluidRow(
+    column(12,
+           plotOutput("visa_plot")
+    )
+  )
 )
 
 server &lt;- function(input, output, session) {
-  data &lt;- reactive({
-    input$resample
-    if (!isTRUE(input$pause)) {
-      invalidateLater(1000)
+  # Expression réactive pour filtrer les données en fonction de la sélection
+  reactive_data &lt;- reactive({
+    
+    data_visa_required &lt;- country_lists %&gt;%
+      rename(from = code) %&gt;%
+      mutate(
+        data_visa_required = lapply(visa_required, fromJSON)
+      ) %&gt;%
+      unnest(data_visa_required) %&gt;%
+      select(from, data_visa_required)
+    
+    data_visa_required &lt;- unnest(data = data_visa_required , cols=data_visa_required) %&gt;%
+      select(from, code) %&gt;%
+      rename(to = code) %&gt;%
+      filter(from == input$country_selector)
+    
+    if (nrow(data_visa_required) == 0) {
+      return(NULL)
     }
-    rnorm(input$n)
+    
+    edges_for_plot &lt;- data_visa_required %&gt;%
+      inner_join(nodes %&gt;% select(id_1, lon, lat), by = c('from' = 'id_1'),relationship = "many-to-many") %&gt;%
+      rename(x = lon, y = lat) %&gt;%
+      inner_join(nodes %&gt;% select(id_1, lon, lat), by = c('to' = 'id_1'),relationship = "many-to-many") %&gt;%
+      rename(xend = lon, yend = lat)
+    
+    countries_in_edges &lt;- unique(c(edges_for_plot$from, edges_for_plot$to))
+    
+    filtered_nodes &lt;- nodes %&gt;%
+      filter(id_1 %in% countries_in_edges)
+    
+    return(list(edges = edges_for_plot, nodes = filtered_nodes))
   })
   
-  output$plot &lt;- renderPlot({
-    hist(data(),
-      breaks = 40,
-      xlim = c(-2, 2),
-      ylim = c(0, 1),
-      lty = "blank",
-      xlab = "value",
-      freq = FALSE,
-      main = ""
-    )
+  output$visa_plot &lt;- renderPlot({
+    plot_data &lt;- reactive_data()
     
-    x &lt;- seq(from = -2, to = 2, length.out = 500)
-    y &lt;- dnorm(x)
-    lines(x, y, lwd=1.5)
-    
-    lwd &lt;- 5
-    abline(v=0, col="red", lwd=lwd, lty=2)
-    abline(v=mean(data()), col="blue", lwd=lwd, lty=1)
-
-    legend(legend = c("Normal", "Mean", "Sample mean"),
-      col = c("black", "red", "blue"),
-      lty = c(1, 2, 1),
-      lwd = c(1, lwd, lwd),
-      x = 1,
-      y = 0.9
-    )
-  }, res=140)
+    if (is.null(plot_data)) {
+      ggplot() +
+        geom_text(aes(x = 0, y = 0, label = "No visa required countries found for this selection."),
+                  size = 5) +
+        theme_void()
+    } else {
+      maptheme &lt;- theme(
+        panel.background = element_rect(fill = "white", color = NA),
+        plot.background = element_rect(fill = "white", color = NA),
+        panel.grid = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.background = element_rect(fill = "white", color = NA),
+        legend.text = element_text(color = "black"),
+        legend.title = element_text(color = "black"),
+        plot.margin = unit(c(0, 0, 0, 0), 'cm'),
+        text = element_text(color = "black")
+      )
+      
+      country_shapes &lt;- geom_polygon(
+        aes(x = long, y = lat, group = group),
+        data = map_data('world'),
+        fill = "white",
+        color = "#4A4A4A",
+        linewidth = 0.15
+      )
+      
+      ggplot(plot_data$nodes) +
+        country_shapes +
+        geom_curve(aes(x = x, y = y, xend = xend, yend = yend),
+                   data = plot_data$edges, curvature = 0.33,
+                   color = "black", alpha = 0.5) +  
+        scale_size_continuous(guide = FALSE, range = c(0.25, 2)) +
+        geom_point(aes(x = lon, y = lat),
+                   shape = 21, fill = 'black',  
+                   color = 'black', stroke = 0.5) +
+        scale_size_continuous(guide = FALSE, range = c(1, 6)) +
+        geom_text(aes(x = lon, y = lat, label = name),
+                  hjust = 0, nudge_x = 1, nudge_y = 4,
+                  size = 3, color = "black", fontface = "bold") +
+        maptheme
+    }
+  })
 }
 
-# Create Shiny app ----
+# Lancement de l'application
 shinyApp(ui = ui, server = server)</code></pre>
 
 
