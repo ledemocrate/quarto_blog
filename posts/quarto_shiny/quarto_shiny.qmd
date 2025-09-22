@@ -64,7 +64,7 @@ ui <- fluidPage(
       }
     "))
   ),
-  titlePanel("Visas Obligatoire pour voyager dans le pays source"),
+ uiOutput("dynamic_title"),
   
   # Nouvelle disposition : l'entrée en haut, le graphique en dessous
   fluidRow(
@@ -82,6 +82,14 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
+    # Titre dynamique
+    output$dynamic_title <- renderUI({
+    tags$div(
+      class = "shiny-title-panel",
+      h2(paste("Visas obligatoires pour voyager depuis :", input$country_selector))
+    )
+  })
+
   # Expression réactive pour filtrer les données en fonction de la sélection
   reactive_data <- reactive({
     

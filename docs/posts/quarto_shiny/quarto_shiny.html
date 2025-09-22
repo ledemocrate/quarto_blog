@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">20-09-2025</p>
+        <p class="date">21-09-2025</p>
       </div>
     </div>
     
@@ -346,7 +346,7 @@ ui &lt;- fluidPage(
       }
     "))
   ),
-  titlePanel("Visas Obligatoire pour voyager dans le pays source"),
+ uiOutput("dynamic_title"),
   
   # Nouvelle disposition : l'entrée en haut, le graphique en dessous
   fluidRow(
@@ -364,6 +364,14 @@ ui &lt;- fluidPage(
 )
 
 server &lt;- function(input, output, session) {
+    # Titre dynamique
+    output$dynamic_title &lt;- renderUI({
+    tags$div(
+      class = "shiny-title-panel",
+      h2(paste("Visas obligatoires pour voyager depuis :", input$country_selector))
+    )
+  })
+
   # Expression réactive pour filtrer les données en fonction de la sélection
   reactive_data &lt;- reactive({
     
