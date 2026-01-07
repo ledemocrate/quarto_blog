@@ -1,0 +1,90 @@
+---
+title: "Tidytuesday 30-12-2025 : Données des nouvelles de Nöel"
+categories: ['Nettoyage des données','Analyse des données']
+author:
+    name: GOLLENTZ Quentin
+    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@daka-team.com
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Traitement des données du 30-12-2025"
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+    self_contained: no
+css: css/styles.css
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Nettoyage des données
+
+```{r}
+#| warning: false
+library(tidyverse)
+library(tidytuesdayR)
+
+# Préparation des données
+
+tuesdata <- tt_load('2025-12-30')
+
+
+christmas_novel_text <- tuesdata$christmas_novel_text %>%
+  remove_missing() %>%
+  group_by(gutenberg_id) %>% 
+  mutate(text = paste0(text, collapse = " \n ")) %>%
+  unique()
+
+
+ganz_data <- tuesdata$christmas_novel_authors %>%
+  inner_join(tuesdata$christmas_novels, by = 'gutenberg_author_id', keep = NULL) %>%
+  inner_join(christmas_novel_text, by = 'gutenberg_id', keep = NULL)
+
+
+```     
+
+# Nombre de nouvelle par auteur
+
+```{r}
+ganz_data %>%
+ggplot(aes(x = fct_infreq(author))) +
+  geom_bar() +
+  labs(title = "Nombre de nouvelle par auteur", x = "Auteur", y = "Nombre de nouvelle") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_y_continuous(breaks = function(x) seq(ceiling(min(x)), floor(max(x)), by = 1))
+```     
+
+# Nombre de mots écrits par auteur
+
+```{r}
+ganz_data_number_word <- ganz_data %>%
+  select(author, text) %>%
+  mutate(number_word = str_count(text, "\\w+")) %>%
+  group_by(author) %>%
+  summarize(number_word = sum(number_word, na.rm = TRUE)) %>%
+  arrange(desc(number_word)) %>%
+  mutate(author = factor(author, levels = author))   # <-- ordre respecté
+
+
+ganz_data_number_word %>%
+  ggplot(aes(x = author, y = number_word)) +
+  geom_col() +
+  labs(
+    title = "Nombre de mots écrits par auteur",
+    x = "Auteur",
+    y = "Nombre de mots"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  scale_y_continuous(labels = scales::comma)
+```
