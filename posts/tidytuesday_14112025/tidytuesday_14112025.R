@@ -1,0 +1,58 @@
+library(tidyverse)
+library(tidytuesdayR)
+
+# Chargement des données
+
+tuesdata <- tt_load('2025-01-14')
+
+# On observe une liste de 2 dataset aillant 2 schema different
+# Nous allons donc combiner les lignes 
+# - mettre des NA dans le cas où les colonnes ne matchent pas
+# - ajouter une colonne id pour identifier la source
+
+tuesdata_compact <- data.table::rbindlist(tuesdata,fill=TRUE,idcol = "id" )
+
+# En observant les données on constate quelque soucis
+
+compte_participation[compte_participation$speaker_name %>% str_detect(",")]
+
+# Pour certaine lignes, il y a plusieurs participant, il faut décomposer ces lignes
+
+tuesdata_compact <- 
+  tuesdata_compact %>% 
+  separate_longer_delim(speaker_name,delim= ", ") %>% 
+  separate_longer_delim(speaker_name,delim= "and ") %>%
+  mutate(speaker_name = str_trim(speaker_name, side = "both")) %>%
+  filter(speaker_name != "") %>%
+  rename(NomInstitution = speaker_affiliation) %>% # Renommer temporairement pour utiliser le code précédent sans le modifier en profondeur
+  mutate(NomInstitution_uniforme = tolower(NomInstitution)) %>%
+  mutate(NomInstitution_uniforme = str_trim(NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub("[[:punct:]]", "", NomInstitution_uniforme)) %>%
+  # Suppression des articles et mots courants (version étendue)
+  mutate(NomInstitution_uniforme = gsub("^the ", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub("^a ", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub("^an ", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" university$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" college$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" institute$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" school$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" center$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" department$", "", NomInstitution_uniforme)) %>%
+  # Suppression des suffixes d'entités légales
+  mutate(NomInstitution_uniforme = gsub(",? pbc$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(",? llc$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(",? inc$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" inc\\.$", "", NomInstitution_uniforme)) %>% # Avec le point
+  # Remplacements d'abréviations courantes (à adapter selon tes données)
+  mutate(NomInstitution_uniforme = gsub(" univ$", " university", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" r&d uk ltd$", "", NomInstitution_uniforme)) %>%
+  # Suppression des informations supplémentaires (qui contiennent souvent des mots clés comme "director", "@")
+  mutate(NomInstitution_uniforme = gsub(" .*@.*$", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = gsub(" - .*", "", NomInstitution_uniforme)) %>%
+  mutate(NomInstitution_uniforme = str_trim(NomInstitution_uniforme)) %>% # Nettoyage final des espaces
+  rename(speaker_affiliation_uniforme = NomInstitution_uniforme) # Renommer la nouvelle colonne
+
+
+compte_participation_bis <- tuesdata_compact %>% count(speaker_affiliation_uniforme)
+compte_participation <- tuesdata_compact %>% count(speaker_name)
+
