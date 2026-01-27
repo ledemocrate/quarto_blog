@@ -31,8 +31,6 @@ editor:
 
 ```{r}
 #| warning: false
-#| echo: false
-#| fig-height: 12
 
 library(networkD3)
 library(tidyverse)
@@ -106,17 +104,17 @@ sankeyNetwork(
   nodeWidth = 30,
   sinksRight = FALSE,
   margin = list(right = 50, left = 50, top = 20, bottom = 20),
-  iterations = 64,
-  width = "100%", 
-  height = "800px"
+  iterations = 64
 ) 
 
 
-javascript_string <- '
-function(el) {
-  d3.select(el).selectAll(".link")
-    .style("stroke", d => d.source.color);
-}'
+#javascript_string <- '
+#function(el) {
+#  d3.select(el).selectAll(".link")
+#    .style("stroke", d => d.source.color);
+#}'
 
-htmlwidgets::onRender(x = sankey_widget, jsCode = javascript_string)
+#htmlwidgets::onRender(x = sankey_widget, jsCode = javascript_string)
+
+sankey_widget
 ```
