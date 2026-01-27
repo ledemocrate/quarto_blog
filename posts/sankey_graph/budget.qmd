@@ -1,0 +1,128 @@
+---
+title: "Création d'un graphique de type SANSEY"
+categories: ['Graphique','Budget']
+author:
+    name: GOLLENTZ Quentin
+    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@daka-team.com
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Graphique d'un budget"
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+    self_contained: no
+editor: 
+  markdown: 
+    wrap: 72
+css: css/styles.css
+---
+
+# Chargement des librairies
+
+```{r}
+#| warning: false
+#| column: screen-inset
+#| fig-width: 18
+#| fig-height: 20
+
+library(networkD3)
+library(tidyverse)
+
+
+data <- readODS::read_ods("C:/Users/Utilisateur/Documents/PROJET_PERSO/budget_allivial/data/budget_sankay.csv")
+
+nodes <- unique(c(data$source, data$target))
+
+# Attribuer un groupe à chaque nœud (exemple : "Revenus", "Dépenses", etc.)
+node_groups <- data.frame(
+  name = nodes,
+  group = c("REVENUE", 
+            "REVENUE",
+            "REVENUE",
+            "REVENUE",
+            "REVENUE",
+            "REVENUE",
+            "REVENUE",
+            "REVENUE",
+            "DEPENSE",
+            "DEPENSE",
+            "INVESTISSEMENT",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "DEPENSE",
+            "INVESTISSEMENT",
+            "INVESTISSEMENT",
+            "INVESTISSEMENT",
+            "INVESTISSEMENT",
+            "DEPENSE",
+            "DEPENSE")
+)
+
+# Préparation des données
+links <- data.frame(
+  source = match(data$source, unique(c(data$source, data$target))) - 1,
+  target = match(data$target, unique(c(data$source, data$target))) - 1,
+  value = data$value
+)
+
+nodes <- data.frame(
+  name = unique(c(data$source, data$target))
+)
+
+
+# Création du graphique interactif
+sankey_widget <-
+sankeyNetwork(
+  Links = links,
+  Nodes = node_groups,
+  Source = "source",
+  Target = "target",
+  Value = "value",
+  NodeID = "name",
+  NodeGroup = "group",  # Utilise la colonne 'group' pour les couleurs
+  colourScale = "d3.scaleOrdinal().range(['#177245', '#d70a53', '#ffa812'])",
+  fontSize = 14,
+  nodeWidth = 30,
+  sinksRight = FALSE, # Aide à mieux répartir si vous avez des flux terminaux variés
+  margin = list(right = 10, left = 10, top = 10, bottom = 10),
+  iterations = 64 # Plus d'itérations pour un meilleur étalement
+) 
+
+
+javascript_string <- 
+  'function(el) {
+     // Coloration des liens
+     d3.select(el).selectAll(".link").style("stroke", d => d.source.color);
+     
+     // FORCE LE SVG A PRENDRE TOUTE LA PLACE DU CONTENEUR
+     d3.select(el).select("svg")
+       .attr("width", "100%")
+       .attr("height", "100%")
+       .attr("preserveAspectRatio", "none");
+  }'
+
+htmlwidgets::onRender(x = sankey_widget, jsCode = javascript_string)
+```

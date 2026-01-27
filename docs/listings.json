@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/sankey_graph/budget.html",
       "/posts/tidytuesday_3012025/tidytuesday_30122025.html",
       "/posts/tidytuesday_14112025/tidytuesday_14112025.html",
       "/posts/quarto_shiny/quarto_shiny.html",
