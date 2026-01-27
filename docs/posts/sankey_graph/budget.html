@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
-
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -4852,27 +4818,6 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
 </script>
-<style type="text/css">@layer htmltools {
-.html-fill-container {
-display: flex;
-flex-direction: column;
-
-min-height: 0;
-min-width: 0;
-}
-.html-fill-container > .html-fill-item {
-
-flex: 1 1 auto;
-min-height: 0;
-min-width: 0;
-}
-.html-fill-container > :not(.html-fill-item) {
-
-flex: 0 0 auto;
-}
-}
-</style>
-
 <script>(function() {
   // If window.HTMLWidgets is already defined, then use it; otherwise create a
   // new object. This allows preceding code to set options that affect the
@@ -6451,7 +6396,6 @@ this._y1=this._y2,this._y2=n}};var _w=function t(n){function e(t){return new qc(
 
 
 <style type="text/css"></style>
-<link href="data:text/css,%3Cstyle%3E%2Ehtml%2Dwidget%20%7Bmargin%2Dtop%3A%20%2D50px%20%21important%3B%20margin%2Dbottom%3A%200px%20%21important%3B%7D%2EsankeyNetwork%20svg%20%7Bwidth%3A%20100%25%20%21important%3Bheight%3A%20100%25%20%21important%3B%7D%3C%2Fstyle%3E" rel="stylesheet">
 </head>
 
 <body class="floating nav-fixed">
@@ -6559,110 +6503,18 @@ this._y1=this._y2,this._y2=n}};var _w=function t(n){function e(t){return new qc(
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<section id="chargement-des-librairies" class="level1 page-columns page-full">
+<section id="chargement-des-librairies" class="level1">
 <h1>Chargement des librairies</h1>
-<div class="cell page-columns page-full">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkD3)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> readODS<span class="sc">::</span><span class="fu">read_ods</span>(<span class="st">&quot;C:/Users/Utilisateur/Documents/PROJET_PERSO/budget_allivial/data/budget_sankay.csv&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>nodes <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(data<span class="sc">$</span>source, data<span class="sc">$</span>target))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Attribuer un groupe à chaque nœud (exemple : &quot;Revenus&quot;, &quot;Dépenses&quot;, etc.)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>node_groups <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> nodes,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(<span class="st">&quot;REVENUE&quot;</span>, </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;REVENUE&quot;</span>,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;INVESTISSEMENT&quot;</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;INVESTISSEMENT&quot;</span>,</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;INVESTISSEMENT&quot;</span>,</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;INVESTISSEMENT&quot;</span>,</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;INVESTISSEMENT&quot;</span>,</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>,</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;DEPENSE&quot;</span>)</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Préparation des données</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="fu">match</span>(data<span class="sc">$</span>source, <span class="fu">unique</span>(<span class="fu">c</span>(data<span class="sc">$</span>source, data<span class="sc">$</span>target))) <span class="sc">-</span> <span class="dv">1</span>,</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">target =</span> <span class="fu">match</span>(data<span class="sc">$</span>target, <span class="fu">unique</span>(<span class="fu">c</span>(data<span class="sc">$</span>source, data<span class="sc">$</span>target))) <span class="sc">-</span> <span class="dv">1</span>,</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> data<span class="sc">$</span>value</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>nodes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">unique</span>(<span class="fu">c</span>(data<span class="sc">$</span>source, data<span class="sc">$</span>target))</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Création du graphique interactif</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>sankey_widget <span class="ot">&lt;-</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">sankeyNetwork</span>(</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">Links =</span> links,</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">Nodes =</span> node_groups,</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">Source =</span> <span class="st">&quot;source&quot;</span>,</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">Target =</span> <span class="st">&quot;target&quot;</span>,</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="st">&quot;value&quot;</span>,</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">NodeID =</span> <span class="st">&quot;name&quot;</span>,</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">NodeGroup =</span> <span class="st">&quot;group&quot;</span>,  <span class="co"># Utilise la colonne &#39;group&#39; pour les couleurs</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="at">colourScale =</span> <span class="st">&quot;d3.scaleOrdinal().range([&#39;#177245&#39;, &#39;#d70a53&#39;, &#39;#ffa812&#39;])&quot;</span>,</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontSize =</span> <span class="dv">14</span>,</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">nodeWidth =</span> <span class="dv">30</span>,</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">sinksRight =</span> <span class="cn">FALSE</span>, <span class="co"># Aide à mieux répartir si vous avez des flux terminaux variés</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">margin =</span> <span class="fu">list</span>(<span class="at">right =</span> <span class="dv">10</span>, <span class="at">left =</span> <span class="dv">10</span>, <span class="at">top =</span> <span class="dv">10</span>, <span class="at">bottom =</span> <span class="dv">10</span>),</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">64</span> <span class="co"># Plus d&#39;itérations pour un meilleur étalement</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>javascript_string <span class="ot">&lt;-</span> </span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;function(el) {</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="st">     // Coloration des liens</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="st">     d3.select(el).selectAll(&quot;.link&quot;).style(&quot;stroke&quot;, d =&gt; d.source.color);</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="st">     </span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="st">     // FORCE LE SVG A PRENDRE TOUTE LA PLACE DU CONTENEUR</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="st">     d3.select(el).select(&quot;svg&quot;)</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="st">       .attr(&quot;width&quot;, &quot;100%&quot;)</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="st">       .attr(&quot;height&quot;, &quot;100%&quot;)</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="st">       .attr(&quot;preserveAspectRatio&quot;, &quot;none&quot;);</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="st">  }&#39;</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>htmlwidgets<span class="sc">::</span><span class="fu">onRender</span>(<span class="at">x =</span> sankey_widget, <span class="at">jsCode =</span> javascript_string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display column-screen-inset">
-<div class="sankeyNetwork html-widget html-fill-item" id="htmlwidget-1879a181df2dbb54906c" style="width:100%;height:722px;"></div>
-<script type="application/json" data-for="htmlwidget-1879a181df2dbb54906c">{"x":{"links":{"source":[0,1,2,3,4,5,6,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,9,10,10,10,10,11,11],"target":[5,5,5,6,6,7,7,8,9,12,11,10,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],"value":[2550,116.1,28,300,30,2694.1,330,585,861,374,204,1000,483.66,10.75,8.84,26,20,35.98,300,50,5,322.2,41.6666666666667,100,42,200,300,200,300,200,4]},"nodes":{"name":["SALAIRE NET","AIDE TRANSPORT","TICKET RESTAURANT","REMBOURSEMENT CREANCE","DIVIDENDE ET INTERET","RECETTE FIXE","RECETTE VARIABLE","RECETTE","DEPENSE FIXE","DEPENSE VARIABLE","INVESTISSEMENT","LOISIRS","IMPREVU","LOYER + CHARGE","BANQUE","ASSURANCE HABITATION","ELECTRICITE","BBOX","TELEPHONE MOBILE","FRAIS DE NOURRITURE","FRAIS CHAT","FRAIS DE VELO","FRAIS DE TRANSPORT","FRAIS DE NOEL","FRAIS MEDICAUX","IMPOT","BOURSE","PRÊT","EPARNE","THESAURISATION","DEUTSCHKURS","VOCABLE"],"group":["REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","DEPENSE","DEPENSE","INVESTISSEMENT","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","INVESTISSEMENT","INVESTISSEMENT","INVESTISSEMENT","INVESTISSEMENT","DEPENSE","DEPENSE"]},"options":{"NodeID":"name","NodeGroup":"group","LinkGroup":null,"colourScale":"d3.scaleOrdinal().range(['#177245', '#d70a53', '#ffa812'])","fontSize":14,"fontFamily":null,"nodeWidth":30,"nodePadding":10,"units":"","margin":{"top":10,"right":10,"bottom":10,"left":10},"iterations":64,"sinksRight":false}},"evals":[],"jsHooks":{"render":[{"code":"function(el) {\n     // Coloration des liens\n     d3.select(el).selectAll(\".link\").style(\"stroke\", d => d.source.color);\n     \n     // FORCE LE SVG A PRENDRE TOUTE LA PLACE DU CONTENEUR\n     d3.select(el).select(\"svg\")\n       .attr(\"width\", \"100%\")\n       .attr(\"height\", \"100%\")\n       .attr(\"preserveAspectRatio\", \"none\");\n  }","data":null}]}}</script>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-fd10873001370bb92369" style="width:100%;height:800px;" class="sankeyNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fd10873001370bb92369">{"x":{"links":{"source":[0,1,2,3,4,5,6,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,9,10,10,10,10,11,11],"target":[5,5,5,6,6,7,7,8,9,12,11,10,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],"value":[2550,116.1,28,300,30,2694.1,330,585,861,374,204,1000,483.66,10.75,8.84,26,20,35.98,300,50,5,322.2,41.6666666666667,100,42,200,300,200,300,200,4]},"nodes":{"name":["SALAIRE NET","AIDE TRANSPORT","TICKET RESTAURANT","REMBOURSEMENT CREANCE","DIVIDENDE ET INTERET","RECETTE FIXE","RECETTE VARIABLE","RECETTE","DEPENSE FIXE","DEPENSE VARIABLE","INVESTISSEMENT","LOISIRS","IMPREVU","LOYER + CHARGE","BANQUE","ASSURANCE HABITATION","ELECTRICITE","BBOX","TELEPHONE MOBILE","FRAIS DE NOURRITURE","FRAIS CHAT","FRAIS DE VELO","FRAIS DE TRANSPORT","FRAIS DE NOEL","FRAIS MEDICAUX","IMPOT","BOURSE","PRÊT","EPARNE","THESAURISATION","DEUTSCHKURS","VOCABLE"],"group":["REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","REVENUE","DEPENSE","DEPENSE","INVESTISSEMENT","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","DEPENSE","INVESTISSEMENT","INVESTISSEMENT","INVESTISSEMENT","INVESTISSEMENT","DEPENSE","DEPENSE"]},"options":{"NodeID":"name","NodeGroup":"group","LinkGroup":null,"colourScale":"d3.scaleOrdinal().range(['#177245', '#d70a53', '#ffa812'])","fontSize":14,"fontFamily":null,"nodeWidth":30,"nodePadding":10,"units":"","margin":{"top":20,"right":50,"bottom":20,"left":50},"iterations":64,"sinksRight":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
