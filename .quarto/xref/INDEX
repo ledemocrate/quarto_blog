@@ -79,5 +79,8 @@
   },
   "posts/sankey_graph/budget.qmd": {
     "budget.html": "d540eefc"
+  },
+  "posts/data_vector_sur_pgs/bdd_vectorielle.qmd": {
+    "bdd_vectorielle.html": "cde16106"
   }
 }

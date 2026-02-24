@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Société Alsacienne d'Artisanat de la Data",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nCréation d’un graphique de type SANSEY\n\n\n\n\n\n\nGraphique\n\n\nBudget\n\n\n\nGraphique d’un budget\n\n\n\n\n\nJan 27, 2026\n\n\n3 min\n\n\n\n\n\n\n\nTidytuesday 30-12-2025 : Données des nouvelles de Nöel\n\n\n\n\n\n\nNettoyage des données\n\n\nAnalyse des données\n\n\n\nTraitement des données du 30-12-2025\n\n\n\n\n\nJan 8, 2026\n\n\n2 min\n\n\n\n\n\n\n\nTidytuesday 11-11-2025 : ??\n\n\n\n\n\n\nNettoyage des données\n\n\nAnalyse des données\n\n\n\nTraitement des données du 11-11-2025\n\n\n\n\n\nJan 3, 2026\n\n\n2 min\n\n\n\n\n\n\n\nTest de déploiement d’application Rshiny dans un document Quarto\n\n\n\n\n\n\nRshiny\n\n\nIntegration\n\n\n\nTraitement des données du 15-05-2025\n\n\n\n\n\nSep 21, 2025\n\n\n7 min\n\n\n\n\n\n\n\nTidytuesday 15-05-2025 : Données des conférences useR\n\n\n\n\n\n\nNettoyage des données\n\n\nAnalyse des données\n\n\n\nTraitement des données du 15-05-2025\n\n\n\n\n\nMay 18, 2025\n\n\n2 min\n\n\n\n\n\n\n\nDe l’utilisation d’Apache dans Docker avec Windows\n\n\nCréation d’une route POST_VOTE\n\n\n\nApache Camel\n\n\nApache Kafka\n\n\nApache ActiveMQ\n\n\nApache Karaf\n\n\nDocker\n\n\nTalend\n\n\nDebian\n\n\n\n\n\n\n\n\n\nOct 28, 2024\n\n\n13 min\n\n\n\n\n\n\n\nDe la notion de graphe inter-vote à la notion de représentativité\n\n\n\n\n\n\nthéorie des graphes\n\n\nréseau\n\n\nvote\n\n\nassemblée nationale\n\n\n\nApplication à l’Assemblée Nationale\n\n\n\n\n\nOct 20, 2024\n\n\n16 min\n\n\n\n\n\n\n\nDe l’utilisation de Talend pour l’OpenData de l’Assemblée Nationale\n\n\nFormation DATA\n\n\nApplication sur l’Open Data de l’Assemblée Nationale\n\n\n\n\n\nOct 20, 2024\n\n\n1 min\n\n\n\n\n\n\n\nDe la données non structurées en base de données structurées\n\n\nApplication aux données géographiques\n\n\n\ndata science\n\n\nR\n\n\npython\n\n\ngeojson\n\n\npostgresql\n\n\ntidydata\n\n\n\n\n\n\n\n\n\nMar 31, 2024\n\n\n5 min\n\n\n\n\n\n\n\nDe la démocratie théorique à la démocratie empirique\n\n\n\n\n\n\ndemocratie participitative\n\n\nstatistique\n\n\nessai\n\n\n\nIndice de mesure démocratique\n\n\n\n\n\nMar 31, 2024\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\nPrésentation d’une BDD de type vectorielle\n\n\n\ndata science\n\nR\n\npython\n\npgvector\n\npostgresql\n\ntidydata\n\n\n\n\n\n\n\n\n\nFeb 24, 2026\n\n5 min\n\n\n\n\n\n\nCréation d’un graphique de type SANSEY\n\n\n\nGraphique\n\nBudget\n\n\n\nGraphique d’un budget\n\n\n\n\n\nFeb 3, 2026\n\n3 min\n\n\n\n\n\n\nTidytuesday 11-11-2025 : ??\n\n\n\nNettoyage des données\n\nAnalyse des données\n\n\n\nTraitement des données du 11-11-2025\n\n\n\n\n\nFeb 3, 2026\n\n2 min\n\n\n\n\n\n\nTidytuesday 30-12-2025 : Données des nouvelles de Nöel\n\n\n\nNettoyage des données\n\nAnalyse des données\n\n\n\nTraitement des données du 30-12-2025\n\n\n\n\n\nJan 7, 2026\n\n2 min\n\n\n\n\n\n\nTidytuesday 15-05-2025 : Données des conférences useR\n\n\n\nNettoyage des données\n\nAnalyse des données\n\n\n\nTraitement des données du 15-05-2025\n\n\n\n\n\nDec 3, 2025\n\n2 min\n\n\n\n\n\n\nDe la données non structurées en base de données structurées\n\n\n\ndata science\n\nR\n\npython\n\ngeojson\n\npostgresql\n\ntidydata\n\n\n\n\n\n\n\n\n\nDec 3, 2025\n\n5 min\n\n\n\n\n\n\nDe la démocratie théorique à la démocratie empirique\n\n\n\ndemocratie participitative\n\nstatistique\n\nessai\n\n\n\nIndice de mesure démocratique\n\n\n\n\n\nDec 3, 2025\n\n4 min\n\n\n\n\n\n\nDe l’utilisation de Talend pour l’OpenData de l’Assemblée Nationale\n\n\nApplication sur l’Open Data de l’Assemblée Nationale\n\n\n\n\n\nDec 3, 2025\n\n1 min\n\n\n\n\n\n\nDe la notion de graphe inter-vote à la notion de représentativité\n\n\n\nthéorie des graphes\n\nréseau\n\nvote\n\nassemblée nationale\n\n\n\nApplication à l’Assemblée Nationale\n\n\n\n\n\nDec 3, 2025\n\n16 min\n\n\n\n\n\n\nTest de déploiement d’application Rshiny dans un document Quarto\n\n\n\nRshiny\n\nIntegration\n\n\n\nTraitement des données du 15-05-2025\n\n\n\n\n\nDec 3, 2025\n\n7 min\n\n\n\n\n\n\nDe l’utilisation d’Apache dans Docker avec Windows\n\n\n\nApache Camel\n\nApache Kafka\n\nApache ActiveMQ\n\nApache Karaf\n\nDocker\n\nTalend\n\nDebian\n\n\n\n\n\n\n\n\n\nDec 3, 2025\n\n13 min\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/graphe_inter_vote/graphe_inter_vote.html",
@@ -481,5 +481,82 @@
     "title": "Création d’un graphique de type SANSEY",
     "section": "",
     "text": "Chargement des librairies\n\n\nCode\nlibrary(networkD3)\nlibrary(tidyverse)\n\n\ndata &lt;- readODS::read_ods(\"C:/Users/Utilisateur/Documents/PROJET_PERSO/budget_allivial/data/budget_sankay.csv\")\n\nnodes &lt;- unique(c(data$source, data$target))\n\n# Attribuer un groupe à chaque nœud (exemple : \"Revenus\", \"Dépenses\", etc.)\nnode_groups &lt;- data.frame(\n  name = nodes,\n  group = c(\"REVENUE\", \n            \"REVENUE\",\n            \"REVENUE\",\n            \"REVENUE\",\n            \"REVENUE\",\n            \"REVENUE\",\n            \"REVENUE\",\n            \"REVENUE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"INVESTISSEMENT\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"DEPENSE\",\n            \"INVESTISSEMENT\",\n            \"INVESTISSEMENT\",\n            \"INVESTISSEMENT\",\n            \"INVESTISSEMENT\",\n            \"DEPENSE\",\n            \"DEPENSE\")\n)\n\n# Préparation des données\nlinks &lt;- data.frame(\n  source = match(data$source, unique(c(data$source, data$target))) - 1,\n  target = match(data$target, unique(c(data$source, data$target))) - 1,\n  value = data$value\n)\n\nnodes &lt;- data.frame(\n  name = unique(c(data$source, data$target))\n)\n\n\n# Création du graphique interactif\nsankey_widget &lt;-\nsankeyNetwork(\n  Links = links,\n  Nodes = node_groups,\n  Source = \"source\",\n  Target = \"target\",\n  Value = \"value\",\n  NodeID = \"name\",\n  NodeGroup = \"group\",  # Utilise la colonne 'group' pour les couleurs\n  colourScale = \"d3.scaleOrdinal().range(['#177245', '#d70a53', '#ffa812'])\",\n  fontSize = 14,\n  nodeWidth = 30,\n  sinksRight = FALSE,\n  margin = list(right = 50, left = 50, top = 20, bottom = 20),\n  iterations = 64\n) \n\n\n#javascript_string &lt;- '\n#function(el) {\n#  d3.select(el).selectAll(\".link\")\n#    .style(\"stroke\", d =&gt; d.source.color);\n#}'\n\n#htmlwidgets::onRender(x = sankey_widget, jsCode = javascript_string)\n\nsankey_widget"
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#présentation-dun-vecteur",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#présentation-dun-vecteur",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Présentation d’un vecteur",
+    "text": "Présentation d’un vecteur\nUn vecteur un ensemble de nombre par exemple \\([1,2,3]\\).\nCes nombres permettent de représenter des objets abstraits — comme des mots, des phrases ou des documents — dans un espace mathématique.\n👉 Plus deux vecteurs sont proches, plus leur contenu est similaire.\n👉 Plus ils sont éloignés, plus leur sens diffère.\nLa distance la plus utilisée est la distance cosinus, qui varie entre 0 (très similaire) et 1 (très différent)."
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#transformation-dun-texte-en-vecteur",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#transformation-dun-texte-en-vecteur",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Transformation d’un texte en vecteur",
+    "text": "Transformation d’un texte en vecteur\nEn NLP, on utilise des embeddings : des représentations numériques denses qui capturent le sens d’un texte.\nIls permettent :\n👉 la recherche sémantique\n👉 la détection de similarités\n👉 le clustering\n👉 la recommandation de documents\nLe modèle le plus courant pour cela est Sentence Transformers, notamment la famille all‑MiniLM."
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#le-modèle-minilm",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#le-modèle-minilm",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Le modèle minilm",
+    "text": "Le modèle minilm\nLe modèle all‑MiniLM‑L6‑v2 :\n👉 est léger et rapide\n👉 produit des vecteurs de 384 dimensions\n👉 offre un excellent rapport qualité/performance\nIl est idéal pour des applications embarquées ou des pipelines de traitement rapides."
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#mise-en-place-de-minilm",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#mise-en-place-de-minilm",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Mise en place de minilm",
+    "text": "Mise en place de minilm\n👉 Prérequis : Docker (Pour Windows nécessiter d’activer WSL2)\n👉 Etape 1 : Création d’un fichier Dockerfile avec le contenu suivant :\nFROM ollama/ollama:latest\n\nEXPOSE 11434\n\nENTRYPOINT [\"ollama\"]\nCMD [\"serve\"]\n👉 Etape 2 : Lancer les commandes suivantes:\ndocker build -t embeddings .\ndocker run -d -p 11434:11434 --name embeddings embeddings\ndocker exec -it embeddings ollama pull all-minilm"
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#stockage-des-vecteurs",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#stockage-des-vecteurs",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Stockage des vecteurs",
+    "text": "Stockage des vecteurs\npgvector est une extension PostgreSQL permettant :\n👉 de stocker des vecteurs,\n👉 d’effectuer des recherches de similarité,\n👉 d’indexer les embeddings pour accélérer les requêtes.\nC’est aujourd’hui une solution standard pour les bases vectorielles open‑source."
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#mise-en-place-de-pgvector",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#mise-en-place-de-pgvector",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Mise en place de pgvector",
+    "text": "Mise en place de pgvector\n👉 Etape 1 : Création d’un fichier docker-compose.yml avec le contenu suivant :\nversion: \"3.8\"\n\nservices:\n  db:\n    image: pgvector/pgvector:pg17\n    container_name: pgvector-db\n    environment:\n      POSTGRES_PASSWORD: postgres\n      POSTGRES_DB: mydb\n    ports:\n      - \"5432:5432\"\n👉 Etape 2 : Lancer les commandes suivantes:\n docker-compose up -d"
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#mise-en-place-de-pgvector-suite",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#mise-en-place-de-pgvector-suite",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Mise en place de pgvector (Suite)",
+    "text": "Mise en place de pgvector (Suite)\n👉 Etape 3 : Lancer dans la BDD le code SQL suivant\nCREATE EXTENSION IF NOT EXISTS vector;\n\nCREATE TABLE dossier_vecteurs \n(\n    id_dossier TEXT PRIMARY KEY, \n    titre TEXT,\n    embedding vector(384) --384 est la taille pour le modèle all-minilm\n);"
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#cas-dapplication-opendata-de-lassemblée-nationale",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#cas-dapplication-opendata-de-lassemblée-nationale",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Cas d’application : OpenData de l’Assemblée Nationale",
+    "text": "Cas d’application : OpenData de l’Assemblée Nationale\nRattacher un titre de scrutin à un titre de dossier législatif.\nPour chaque dossier législatif:\n👉 on extrait le titre,\n👉 on génère son embedding via MiniLM,\n👉 on stocke le tout dans PostgreSQL."
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#récupération-des-dossier-légilstatifs",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#récupération-des-dossier-légilstatifs",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Récupération des dossier légilstatifs",
+    "text": "Récupération des dossier légilstatifs\n######################################################\n#Rattacher un titre de scrutin à un titre de dossier législatif\n######################################################\n\n#Connection à la BDD\nlibrary(RPostgreSQL)\n\ndb &lt;- 'mydb'  #provide the name of your db\nhost_db &lt;- 'localhost' #i.e. # i.e. 'ec2-54-83-201-96.compute-1.amazonaws.com'  \ndb_port &lt;- '5432'  # or any other port specified by the DBA\ndb_user &lt;- \"postgres\"  \ndb_password &lt;- 'postgres'\noption &lt;- \"-c search_path=public\"\n\ncon &lt;- dbConnect(RPostgres::Postgres(), dbname = db, host=host_db, port=db_port, user=db_user, password=db_password,options=option) \n\n\n\n#LIBRAIRIE UTILISEE\nlibrary(jsonlite)  # Pour ouvrir fichier json\nlibrary(tidyverse) # Pour avoir tout l'univers tidy (coutau-suisse de R)\nlibrary(httr2)\n\n#Petit rappel des informations techniques, cela ne mange pas de pain\n\npath &lt;- getwd()\n\n#CHARGEMENT DES DONNEES VOTE\n# Endroit ou vous mettez les fichiers json en telechargeant sous le lien \nsetwd(paste0(path,\"/ETL/data/data_dossier\"))\n\n#Endroit ou telecharger les données\nurl &lt;- \"https://data.assemblee-nationale.fr/static/openData/repository/17/loi/dossiers_legislatifs/Dossiers_Legislatifs.json.zip\"\ndownload.file(url, destfile = basename(url))\n\n#Fichier zip donc dezippage\nunzip(\"Dossiers_Legislatifs.json.zip\")\n\n#L'archive ne nous sert plus à grand chose\nfile.remove(\"Dossiers_Legislatifs.json.zip\")\n\nembed_text &lt;- function(text) {\n  resp &lt;- request(\"http://localhost:11434/api/embeddings\") %&gt;%\n    req_body_json(list(\n      model = \"all-minilm\",\n      prompt = text\n    )) %&gt;%\n    req_perform()\n  \n  return(resp_body_json(resp)$embedding)\n}"
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#insertion-des-titre-de-dossier-dans-la-bdd",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#insertion-des-titre-de-dossier-dans-la-bdd",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Insertion des titre de dossier dans la BDD",
+    "text": "Insertion des titre de dossier dans la BDD\n\n#On se place là où les données sont (càd un niveau inférieur)\nsetwd(paste0(path,\"/ETL/data/data_dossier/json/document\"))\n\n#On recupere la liste des fichiers\nliste_dossier &lt;- list.files()\n\n#Fonction pour transformer un texte en vecteur\nembed_text &lt;- function(text) {\n  resp &lt;- request(\"http://localhost:11434/api/embeddings\") %&gt;%\n    req_body_json(list(\n      model = \"all-minilm\",\n      prompt = text\n    )) %&gt;%\n    req_perform()\n  \n  return(resp_body_json(resp)$embedding)\n}\n\n\n#Fonction visant pour chaque fichier de la liste a recuperer les informations\nread_data &lt;- function(liste){\n  \n  dossier &lt;- fromJSON(liste, flatten=TRUE)\n\n  dossier_id &lt;- dossier[[\"document\"]][[\"uid\"]]\n  titre &lt;- dossier[[\"document\"]][[\"titres\"]][[\"titrePrincipal\"]]\n  \n  #Étape BDD : Stockage\n  try({\n    vec &lt;- embed_text(titre)\n    vec_str &lt;- paste0(\"[\", paste(vec, collapse = \",\"), \"]\")\n    dbExecute(con, \n              \"INSERT INTO dossier_vecteurs (id_dossier, titre, embedding) \n               VALUES ($1, $2, $3) ON CONFLICT DO NOTHING\",\n              params = list(dossier_id, titre, vec_str))\n  })\n}\n#Application de la fonction pour chaque fichier de la liste\ndossier &lt;- lapply(liste_dossier, read_data)"
+  },
+  {
+    "objectID": "posts/data_vector_sur_pgs/bdd_vectorielle.html#rattachement-du-titre-du-scrutin-à-un-dossier",
+    "href": "posts/data_vector_sur_pgs/bdd_vectorielle.html#rattachement-du-titre-du-scrutin-à-un-dossier",
+    "title": "Présentation d’une BDD de type vectorielle",
+    "section": "Rattachement du titre du scrutin à un dossier",
+    "text": "Rattachement du titre du scrutin à un dossier\namendement &lt;- \"l'amendement n° 4 de Mme Pirès Beaune et les amendements identiques suivants à l'article premier de la proposition de loi visant à réduire et à encadrer les frais bancaires sur succession (deuxième lecture).\"\nvec &lt;- embed_text(amendement)\nvec_str &lt;- paste0(\"[\", paste(vec, collapse = \",\"), \"]\")\n\nvec_str\n\ndbGetQuery(con, \n          \"SELECT titre FROM dossier_vecteurs ORDER BY embedding &lt;=&gt; $1 LIMIT 1;\",\n          params = list(vec_str))\n👉 L’opérateur &lt;=&gt; calcule la distance cosinus.\n👉 Le résultat renvoie le dossier le plus proche sémantiquement."
   }
 ]

@@ -5,3 +5,5 @@
 
 /.quarto/
 /posts/formation_talend/video/
+
+**/*.quarto_ipynb

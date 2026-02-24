@@ -1,0 +1,246 @@
+---
+title: "Présentation d'une BDD de type vectorielle"
+subtitle: "Application aux données de dossier législatif"
+categories: ['data science', 'R','python','pgvector','postgresql','tidydata']
+author:
+    name: GOLLENTZ Quentin
+date: last-modified
+date-format: "DD-MM-YYYY"
+title-block-banner: "#ECF4FA"
+format: revealjs
+---
+
+## Présentation d'un vecteur
+
+Un vecteur un ensemble de nombre par exemple $[1,2,3]$.
+
+Ces nombres permettent de représenter des objets abstraits — comme des mots, des phrases ou des documents — dans un espace mathématique.
+
+👉 Plus deux vecteurs sont proches, plus leur contenu est similaire.\
+👉 Plus ils sont éloignés, plus leur sens diffère.
+
+La distance la plus utilisée est la distance cosinus, qui varie entre 0 (très similaire) et 1 (très différent).
+
+## Transformation d'un texte en vecteur
+
+En NLP, on utilise des embeddings : des représentations numériques denses qui capturent le sens d’un texte.
+
+Ils permettent :
+
+👉 la recherche sémantique\
+👉 la détection de similarités\
+👉 le clustering\
+👉 la recommandation de documents
+
+Le modèle le plus courant pour cela est Sentence Transformers, notamment la famille all‑MiniLM.
+
+## Le modèle minilm
+
+Le modèle all‑MiniLM‑L6‑v2 :
+
+👉 est léger et rapide\
+👉 produit des vecteurs de 384 dimensions\
+👉 offre un excellent rapport qualité/performance
+
+Il est idéal pour des applications embarquées ou des pipelines de traitement rapides.
+
+## Mise en place de minilm
+
+👉 Prérequis : Docker (Pour Windows nécessiter d'activer WSL2)
+
+👉 Etape 1 : Création d'un fichier Dockerfile avec le contenu suivant :
+
+``` dockerfile
+FROM ollama/ollama:latest
+
+EXPOSE 11434
+
+ENTRYPOINT ["ollama"]
+CMD ["serve"]
+```
+
+👉 Etape 2 : Lancer les commandes suivantes:
+
+``` docker
+docker build -t embeddings .
+docker run -d -p 11434:11434 --name embeddings embeddings
+docker exec -it embeddings ollama pull all-minilm
+```
+
+## Stockage des vecteurs
+
+pgvector est une extension PostgreSQL permettant :
+
+👉 de stocker des vecteurs,\
+👉 d’effectuer des recherches de similarité,\
+👉 d’indexer les embeddings pour accélérer les requêtes.
+
+C’est aujourd’hui une solution standard pour les bases vectorielles open‑source.
+
+## Mise en place de pgvector
+
+👉 Etape 1 : Création d'un fichier docker-compose.yml avec le contenu suivant :
+
+``` yaml
+version: "3.8"
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: pgvector-db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+```
+
+👉 Etape 2 : Lancer les commandes suivantes:
+
+``` docker
+ docker-compose up -d
+```
+
+## Mise en place de pgvector (Suite)
+
+👉 Etape 3 : Lancer dans la BDD le code SQL suivant
+
+``` sql
+CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE TABLE dossier_vecteurs 
+(
+    id_dossier TEXT PRIMARY KEY, 
+    titre TEXT,
+    embedding vector(384) --384 est la taille pour le modèle all-minilm
+);
+```
+
+## Cas d'application : OpenData de l'Assemblée Nationale
+
+Rattacher un titre de scrutin à un titre de dossier législatif.
+
+Pour chaque dossier législatif:\
+👉 on extrait le titre,\
+👉 on génère son embedding via MiniLM,\
+👉 on stocke le tout dans PostgreSQL.
+
+## Récupération des dossier légilstatifs
+
+```R
+######################################################
+#Rattacher un titre de scrutin à un titre de dossier législatif
+######################################################
+
+#Connection à la BDD
+library(RPostgreSQL)
+
+db <- 'mydb'  #provide the name of your db
+host_db <- 'localhost' #i.e. # i.e. 'ec2-54-83-201-96.compute-1.amazonaws.com'  
+db_port <- '5432'  # or any other port specified by the DBA
+db_user <- "postgres"  
+db_password <- 'postgres'
+option <- "-c search_path=public"
+
+con <- dbConnect(RPostgres::Postgres(), dbname = db, host=host_db, port=db_port, user=db_user, password=db_password,options=option) 
+
+
+
+#LIBRAIRIE UTILISEE
+library(jsonlite)  # Pour ouvrir fichier json
+library(tidyverse) # Pour avoir tout l'univers tidy (coutau-suisse de R)
+library(httr2)
+
+#Petit rappel des informations techniques, cela ne mange pas de pain
+
+path <- getwd()
+
+#CHARGEMENT DES DONNEES VOTE
+# Endroit ou vous mettez les fichiers json en telechargeant sous le lien 
+setwd(paste0(path,"/ETL/data/data_dossier"))
+
+#Endroit ou telecharger les données
+url <- "https://data.assemblee-nationale.fr/static/openData/repository/17/loi/dossiers_legislatifs/Dossiers_Legislatifs.json.zip"
+download.file(url, destfile = basename(url))
+
+#Fichier zip donc dezippage
+unzip("Dossiers_Legislatifs.json.zip")
+
+#L'archive ne nous sert plus à grand chose
+file.remove("Dossiers_Legislatifs.json.zip")
+
+embed_text <- function(text) {
+  resp <- request("http://localhost:11434/api/embeddings") %>%
+    req_body_json(list(
+      model = "all-minilm",
+      prompt = text
+    )) %>%
+    req_perform()
+  
+  return(resp_body_json(resp)$embedding)
+}
+
+```
+
+## Insertion des titre de dossier dans la BDD
+
+```R
+
+#On se place là où les données sont (càd un niveau inférieur)
+setwd(paste0(path,"/ETL/data/data_dossier/json/document"))
+
+#On recupere la liste des fichiers
+liste_dossier <- list.files()
+
+#Fonction pour transformer un texte en vecteur
+embed_text <- function(text) {
+  resp <- request("http://localhost:11434/api/embeddings") %>%
+    req_body_json(list(
+      model = "all-minilm",
+      prompt = text
+    )) %>%
+    req_perform()
+  
+  return(resp_body_json(resp)$embedding)
+}
+
+
+#Fonction visant pour chaque fichier de la liste a recuperer les informations
+read_data <- function(liste){
+  
+  dossier <- fromJSON(liste, flatten=TRUE)
+
+  dossier_id <- dossier[["document"]][["uid"]]
+  titre <- dossier[["document"]][["titres"]][["titrePrincipal"]]
+  
+  #Étape BDD : Stockage
+  try({
+    vec <- embed_text(titre)
+    vec_str <- paste0("[", paste(vec, collapse = ","), "]")
+    dbExecute(con, 
+              "INSERT INTO dossier_vecteurs (id_dossier, titre, embedding) 
+               VALUES ($1, $2, $3) ON CONFLICT DO NOTHING",
+              params = list(dossier_id, titre, vec_str))
+  })
+}
+#Application de la fonction pour chaque fichier de la liste
+dossier <- lapply(liste_dossier, read_data)
+
+```
+
+## Rattachement du titre du scrutin à un dossier
+
+```R
+amendement <- "l'amendement n° 4 de Mme Pirès Beaune et les amendements identiques suivants à l'article premier de la proposition de loi visant à réduire et à encadrer les frais bancaires sur succession (deuxième lecture)."
+vec <- embed_text(amendement)
+vec_str <- paste0("[", paste(vec, collapse = ","), "]")
+
+vec_str
+
+dbGetQuery(con, 
+          "SELECT titre FROM dossier_vecteurs ORDER BY embedding <=> $1 LIMIT 1;",
+          params = list(vec_str))
+```
+
+👉 L’opérateur \<=\> calcule la distance cosinus.   
+👉 Le résultat renvoie le dossier le plus proche sémantiquement.    
