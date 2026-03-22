@@ -1,6 +1,7 @@
 ---
+title: "Journal"
 listing:
-  contents: posts/*/*.qmd 
+  contents: posts
   sort: "date desc"
   type: default
   categories: true

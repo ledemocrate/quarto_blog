@@ -1,7 +1,14 @@
 {
   "listingMap": {
     "blog.qmd": [
-      "posts/*/*.qmd"
+      "posts/*/*.qmd",
+      "posts"
+    ],
+    "posts\\tidytuesday_03032026\\tidytuesday_03032026.qmd": [
+      "B3049D40"
+    ],
+    "posts\\tidytuesday_03032026\\index.qmd": [
+      "B3049D40"
     ]
   }
 }

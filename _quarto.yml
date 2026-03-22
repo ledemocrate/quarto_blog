@@ -22,6 +22,14 @@ website:
       - icon: playstation
         href: https://www.playstation.com/fr-fr/playstation-network/
         
+sidebar:
+  contents:
+    - section: "Articles"
+      contents: posts
+
+blog:
+  listing: true
+
 format:
   html:
     theme: litera

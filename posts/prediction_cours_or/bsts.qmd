@@ -1,0 +1,137 @@
+---
+title: "Prédiction de série temporelle : Modèle BSTS appliqué au cours de l'or"
+categories: ['Série temporelle', 'BSTS']
+author:
+  name: GOLLENTZ Quentin
+  url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Utilisation du modèle BSTS pour prédire le cours de l'or : formulation mathématique, inférence bayésienne et choix des priors."
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+    smooth-scroll: true
+    theme: cosmo
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+    self_contained: no
+css: css/styles.css
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Modèle BSTS pour la prédiction du cours de l'or
+
+## Introduction
+
+Le modèle **BSTS** (Bayesian Structural Time Series) est une approche puissante pour la modélisation et la prédiction de séries temporelles, combinant des composantes structurelles (tendance, saisonnalité, régresseurs) avec une inférence bayésienne. Ce document détaille son application à la prédiction du cours de l'or, en explicitant la formulation mathématique, l'inférence bayésienne et le choix des distributions a priori.
+
+---
+
+## 1. Formulation mathématique du modèle BSTS
+
+Le modèle BSTS décompose la série temporelle$y_t$(ici, le cours de l'or) en plusieurs composantes additives :
+
+$$
+y_{t} = \underbrace{\mu_{t}}_{trend} + \underbrace{\gamma_{t}}_{seasonal} + \underbrace{\beta^{T}x_{t}}_{regression} + \epsilon_{t}
+$$
+
+- $y_{t}$: cours de l'or au temps$t$.    
+- $\mu_{t}$: tendance (ex : hausse constante).   
+- $\gamma_{t}$: saisonnalité (ex : effet du Nouvel An chinois).   
+- $\beta^{T}x_{t}$: effets des variables explicatives (ex : taux directeur de la FED).    
+- $\epsilon_{t}$: bruit blanc gaussien,$\epsilon_t \sim \mathcal{N}(0, \sigma^2_\epsilon)$.   
+
+---
+
+### 1.1. Modélisation de la tendance locale linéaire
+
+La tendance est modélisée par un **modèle local linéaire** :
+
+$$
+\begin{aligned}
+\mu_{t} &= \mu_{t-1} + \delta_{t-1} + u_{t}, \quad u_t \sim \mathcal{N}(0, \sigma^2_u) \\
+\delta_{t} &= \delta_{t-1} + v_{t}, \quad v_t \sim \mathcal{N}(0, \sigma^2_v)
+\end{aligned}
+$$
+
+- $\mu_t$: niveau de la série au temps$t$.   
+- $\delta_t$: pente de la tendance.    
+- $u_t, v_t$: bruits gaussiens de variances$\sigma^2_u, \sigma^2_v$.    
+
+---
+
+### 1.2. Modélisation de la saisonnalité stochastique
+
+La saisonnalité est modélisée par une somme de sinusoïdes stochastiques :
+
+$$
+\gamma_{t} = -\sum_{s=1}^{S-1}\gamma_{t-s} + w_{t}, \quad w_t \sim \mathcal{N}(0, \sigma^2_w)
+$$
+
+- $S$: période saisonnière (ex : 12 pour des données     mensuelles).    
+- $w_t$: bruit saisonnier, de variance$\sigma^2_w$.     
+
+---
+
+## 2. Inférence bayésienne dans BSTS
+
+L'inférence bayésienne consiste à déduire la **distribution postérieure** des paramètres$p(\theta|X,y)$, où$\theta$représente l'ensemble des paramètres du modèle,$X$la matrice des régresseurs et$y$le vecteur des observations.
+
+### 2.1. Théorème de Bayes
+
+$$
+\underbrace{p(\theta|X,y)}_{postérieur} \propto \underbrace{p(y|X,\theta)}_{vraissemblance} \times \underbrace{p(\theta)}_{prior}
+$$
+
+- **Vraissemblance** :$p(y|X,\theta)$mesure la compatibilité des données avec les paramètres.
+- **Prior** :$p(\theta)$encode les connaissances a priori sur les paramètres.
+
+---
+
+### 2.2. Choix des distributions a priori
+
+Chaque composante du modèle BSTS a ses propres paramètres, auxquels on assigne des **priors Inverse-Gamma** pour les variances et des **priors Normaux** pour les coefficients.
+
+#### a. Tendance
+
+| Paramètre | Prior typique               | Rôle                                      |
+|-----------|-----------------------------|-------------------------------------------|
+|$\sigma^2_u$| Inv-Gamma(0.01, 0.01)       | Variabilité du niveau de la tendance.     |
+|$\sigma^2_v$| Inv-Gamma(0.01, 0.01)       | Variabilité de la pente de la tendance.   |
+
+#### b. Saisonnalité
+
+| Paramètre | Prior typique               | Rôle                                      |
+|-----------|-----------------------------|-------------------------------------------|
+|$\sigma^2_w$| Inv-Gamma(0.1, 0.1)         | Variabilité des amplitudes saisonnières.  |
+
+#### c. Régresseurs
+
+| Paramètre | Prior typique               | Rôle                                      |
+|-----------|-----------------------------|-------------------------------------------|
+|$\beta_j$| Normal(0,$\sigma^2_\beta$) | Coefficients de régression.              |
+|$\sigma^2_\beta$| Inv-Gamma(0.01, 0.01)   | Variabilité des coefficients.             |
+
+#### d. Bruit global
+
+| Paramètre | Prior typique               | Rôle                                      |
+|-----------|-----------------------------|-------------------------------------------|
+|$\sigma^2_\epsilon$| Inv-Gamma(0.001, 0.001) | Variabilité résiduelle non expliquée.     |
+
+---
+
+## 3. Implémentation pratique avec `bsts` en R
+
+Voici un exemple minimal d'implémentation du modèle BSTS pour prédire le cours de l'or :
+
+```{r}
+
+```

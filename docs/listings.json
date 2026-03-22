@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/prediction_cours_or/bsts.html",
+      "/posts/tidytuesday_03032026/index.html",
       "/posts/data_vector_sur_pgs/bdd_vectorielle.html",
       "/posts/sankey_graph/budget.html",
       "/posts/tidytuesday_14112025/tidytuesday_14112025.html",

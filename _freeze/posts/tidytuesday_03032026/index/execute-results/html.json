@@ -1,0 +1,15 @@
+{
+  "hash": "0d8b8eafce0cca974d3322e03d4df8c0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Tidytuesday 03-03-2026 : ??\"\ncategories: ['Nettoyage des données','Analyse des données']\ntags: ['data-science', 'r', 'python', 'pgvector']\nauthor:\n    name: GOLLENTZ Quentin\ndate: last-modified\ndate-format: \"DD-MM-YYYY\"\ndescription: \"Traitement des données du 03-03-2026\"\ntitle-block-banner: \"#ECF4FA\"\nformat: \n  html:\n    code-fold: true\n    embed-resources: true\n    smooth-scroll: true\n    theme: cosmo\n    fontcolor: black\n    toc: true\n    toc-location: left\n    toc-title: Summary\n    toc-depth: 3\n    html-math-method: katex\n    self_contained: no\ncss: css/styles.css\neditor: \n  markdown: \n    wrap: 72\n---\n\n# Chargement des librairies\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidytuesdayR)\n\n# Chargement des données\n\ntuesdata <- tt_load('2026-03-03')\n```\n:::\n\n\n## Data Dictionary\n\n### `clutch_size_cleaned.csv`\n\n|variable                    |class     |description                           |\n|:---------------------------|:---------|:-------------------------------------|\n|individual                  |integer   |The ID of the individual. |\n|age                         |integer   |The age of the individual. |\n|date                        |date      |Date of the record. |\n|locality                    |character |Locality. |\n|eggs                        |integer   |Number of eggs. |\n|body_mass_grams             |integer   |The body mass of the individual in grams. |\n|straight_carapace_length_mm |integer   |The carapace length in millimeters. |\n\n### `tortoise_body_condition_cleaned.csv`\n\n|variable                    |class     |description                           |\n|:---------------------------|:---------|:-------------------------------------|\n|individual                  |character |The ID of the individual. Here it is a character type because some IDs include letters. |\n|year                        |integer   |The year the measurement was taken. |\n|year_recode                 |integer   |Per-individual observation index: 1 for the first year an individual was observed, 2 for the second, and so on, ordered by year/recapture. |\n|season                      |character |Season of the year. |\n|locality                    |character |Locality. |\n|sex                         |character |Sex. |\n|body_mass_grams             |double    |The body mass of the individual in grams. |\n|body_condition_index        |double    |The index for the body condition. |\n|straight_carapace_length_mm |double    |The carapace length in millimeters. |\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

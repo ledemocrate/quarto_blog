@@ -82,5 +82,14 @@
   },
   "posts/data_vector_sur_pgs/bdd_vectorielle.qmd": {
     "bdd_vectorielle.html": "cde16106"
+  },
+  "posts/tidytuesday_03032026/tidytuesday_03032026.qmd": {
+    "tidytuesday_03032026.html": "74b80044"
+  },
+  "posts/tidytuesday_03032026/index.qmd": {
+    "index.html": "a48d0471"
+  },
+  "posts/prediction_cours_or/bsts.qmd": {
+    "bsts.html": "7dfde6cd"
   }
 }
