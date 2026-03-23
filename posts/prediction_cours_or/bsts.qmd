@@ -1,12 +1,12 @@
 ---
-title: "Prédiction de série temporelle : Modèle BSTS appliqué au cours de l'or"
+title: "Prédiction de série temporelle"
 categories: ['Série temporelle', 'BSTS']
 author:
   name: GOLLENTZ Quentin
   url: https://www.linkedin.com/in/quentin-gollentz-697993172/
 date: last-modified
 date-format: "DD-MM-YYYY"
-description: "Utilisation du modèle BSTS pour prédire le cours de l'or : formulation mathématique, inférence bayésienne et choix des priors."
+description: "Modèle BSTS appliqué au cours de l'or"
 title-block-banner: "#ECF4FA"
 format: 
   html:
@@ -20,11 +20,8 @@ format:
     toc-title: Summary
     toc-depth: 3
     html-math-method: katex
-    self_contained: no
+engine: knitr
 css: css/styles.css
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
 # Modèle BSTS pour la prédiction du cours de l'or
@@ -132,6 +129,28 @@ Chaque composante du modèle BSTS a ses propres paramètres, auxquels on assigne
 
 Voici un exemple minimal d'implémentation du modèle BSTS pour prédire le cours de l'or :
 
+
 ```{r}
+library(bsts)
+library(readr)
+library(dplyr)
+library(lubridate)
+
+gold <- read.csv("C:/Users/QuentinGOLLENTZ/Documents/PERSO/quarto_blog/posts/prediction_cours_or/data/monthly.csv")
+
+gold <- gold %>%
+  mutate(
+    Date = paste0(Date, "-01"),  # transforme 2025-04 → 2025-04-01
+    Date = as.Date(Date)
+  ) %>%
+  arrange(Date)
+
+# Extract double vector
+y <- gold$Price %>% as.double()
+
+plot(gold$Date, y, type = "l", col = "black", lwd = 2,
+     main = "Cours de l'or mois par mois",
+     xlab = "Date", ylab = "Prix de l'or")
+
 
 ```

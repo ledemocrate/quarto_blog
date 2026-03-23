@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="GOLLENTZ Quentin">
-<meta name="description" content="Utilisation du modèle BSTS pour prédire le cours de l’or : formulation mathématique, inférence bayésienne et choix des priors.">
+<meta name="description" content="Modèle BSTS appliqué au cours de l’or">
 
-<title>Prédiction de série temporelle : Modèle BSTS appliqué au cours de l’or – Société Alsacienne d&#39;Artisanat de la Data</title>
+<title>Prédiction de série temporelle – Société Alsacienne d’Artisanat de la Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -4091,10 +4126,10 @@ color: #202D56;
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Prédiction de série temporelle : Modèle BSTS appliqué au cours de l’or</h1>
+      <h1 class="title">Prédiction de série temporelle</h1>
                   <div>
         <div class="description">
-          Utilisation du modèle BSTS pour prédire le cours de l’or : formulation mathématique, inférence bayésienne et choix des priors.
+          Modèle BSTS appliqué au cours de l’or
         </div>
       </div>
                           <div class="quarto-categories">
@@ -4117,7 +4152,7 @@ color: #202D56;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">22-03-2026</p>
+        <p class="date">23-03-2026</p>
       </div>
     </div>
     
@@ -4347,6 +4382,166 @@ y_{t} = \underbrace{\mu_{t}}_{trend} + \underbrace{\gamma_{t}}_{seasonal} + \und
 <section id="implémentation-pratique-avec-bsts-en-r" class="level2">
 <h2 class="anchored" data-anchor-id="implémentation-pratique-avec-bsts-en-r">3. Implémentation pratique avec <code>bsts</code> en R</h2>
 <p>Voici un exemple minimal d’implémentation du modèle BSTS pour prédire le cours de l’or :</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bsts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;bsts&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Le chargement a nécessité le package : BoomSpikeSlab</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;BoomSpikeSlab&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Le chargement a nécessité le package : Boom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;Boom&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : &#39;Boom&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>L&#39;objet suivant est masqué depuis &#39;package:stats&#39;:
+
+    rWishart</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : &#39;BoomSpikeSlab&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>L&#39;objet suivant est masqué depuis &#39;package:stats&#39;:
+
+    knots</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Le chargement a nécessité le package : zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;zoo&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : &#39;zoo&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis &#39;package:base&#39;:
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Le chargement a nécessité le package : xts</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;xts&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : &#39;bsts&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>L&#39;objet suivant est masqué depuis &#39;package:BoomSpikeSlab&#39;:
+
+    SuggestBurn</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;readr&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;dplyr&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+######################### Warning from &#39;xts&#39; package ##########################
+#                                                                             #
+# The dplyr lag() function breaks how base R&#39;s lag() function is supposed to  #
+# work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
+# source() into this session won&#39;t work correctly.                            #
+#                                                                             #
+# Use stats::lag() to make sure you&#39;re not using dplyr::lag(), or you can add #
+# conflictRules(&#39;dplyr&#39;, exclude = &#39;lag&#39;) to your .Rprofile to stop           #
+# dplyr from breaking base R&#39;s lag() function.                                #
+#                                                                             #
+# Code in packages is not affected. It&#39;s protected by R&#39;s namespace mechanism #
+# Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
+#                                                                             #
+###############################################################################</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : &#39;dplyr&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis &#39;package:xts&#39;:
+
+    first, last</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package &#39;lubridate&#39; a été compilé avec la version R 4.5.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : &#39;lubridate&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis &#39;package:base&#39;:
+
+    date, intersect, setdiff, union</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>gold <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;C:/Users/QuentinGOLLENTZ/Documents/PERSO/quarto_blog/posts/prediction_cours_or/data/monthly.csv&quot;</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>gold <span class="ot">&lt;-</span> gold <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">paste0</span>(Date, <span class="st">&quot;-01&quot;</span>),  <span class="co"># transforme 2025-04 → 2025-04-01</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">as.Date</span>(Date)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Date)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract double vector</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> gold<span class="sc">$</span>Price <span class="sc">%&gt;%</span> <span class="fu">as.double</span>()</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gold<span class="sc">$</span>Date, y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Cours de l&#39;or mois par mois&quot;</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Prix de l&#39;or&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
