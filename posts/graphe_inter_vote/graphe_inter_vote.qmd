@@ -1,10 +1,15 @@
 ---
 title: "De la notion de graphe inter-vote à la notion de représentativité"
-categories: ['théorie des graphes', 'réseau','vote','assemblée nationale']
+categories:
+  - théorie des graphes
+  - réseau
+  - vote
+  - assemblée nationale
+
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
 description: "Application à l'Assemblée Nationale"

@@ -3,8 +3,8 @@ title: "Tidytuesday 11-11-2025 : ??"
 categories: ['Nettoyage des données','Analyse des données']
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
 description: "Traitement des données du 11-11-2025"
@@ -22,7 +22,6 @@ format:
     toc-depth: 3
     html-math-method: katex
     self_contained: no
-css: css/styles.css
 editor: 
   markdown: 
     wrap: 72

@@ -1,1 +1,8 @@
 /* css styles */
+
+/* Empêche les images flottantes de toucher le titre */
+#title-block-header + p img,
+#title-block-header + div img {
+  margin-top: 1.5rem !important;
+}
+

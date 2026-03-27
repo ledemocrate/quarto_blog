@@ -1,0 +1,17 @@
+{
+  "hash": "70ae18998c11261b7b4919a403675b86",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Tidytuesday 30-12-2025 : Données des nouvelles de Nöel\"\ncategories: ['Nettoyage des données','Analyse des données']\nauthor:\n    name: GOLLENTZ Quentin\n#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/\n    email: quentin.gollentz@outlook.com\ndate: last-modified\ndate-format: \"DD-MM-YYYY\"\ndescription: \"Traitement des données du 30-12-2025\"\ntitle-block-banner: \"#ECF4FA\"\nformat: \n  html:\n    code-fold: true\n    embed-resources: true\n    smooth-scroll: true\n    theme: cosmo\n    fontcolor: black\n    toc: true\n    toc-location: left\n    toc-title: Summary\n    toc-depth: 3\n    html-math-method: katex\n    self_contained: no\neditor: \n  markdown: \n    wrap: 72\n---\n\n# Nettoyage des données\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidytuesdayR)\n\n# Préparation des données\n\ntuesdata <- tt_load('2025-12-30')\n\n\nchristmas_novel_text <- tuesdata$christmas_novel_text %>%\n  remove_missing() %>%\n  group_by(gutenberg_id) %>% \n  mutate(text = paste0(text, collapse = \" \\n \")) %>%\n  unique()\n\n\nganz_data <- tuesdata$christmas_novel_authors %>%\n  inner_join(tuesdata$christmas_novels, by = 'gutenberg_author_id', keep = NULL) %>%\n  inner_join(christmas_novel_text, by = 'gutenberg_id', keep = NULL)\n```\n:::\n\n\n# Nombre de nouvelle par auteur\n\n\n::: {.cell}\n\n```{.r .cell-code}\nganz_data %>%\nggplot(aes(x = fct_infreq(author))) +\n  geom_bar() +\n  labs(title = \"Nombre de nouvelle par auteur\", x = \"Auteur\", y = \"Nombre de nouvelle\") +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +\n  scale_y_continuous(breaks = function(x) seq(ceiling(min(x)), floor(max(x)), by = 1))\n```\n\n::: {.cell-output-display}\n![](tidytuesday_30122025_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\n# Nombre de mots écrits par auteur\n\n\n::: {.cell}\n\n```{.r .cell-code}\nganz_data_number_word <- ganz_data %>%\n  select(author, text) %>%\n  mutate(number_word = str_count(text, \"\\\\w+\")) %>%\n  group_by(author) %>%\n  summarize(number_word = sum(number_word, na.rm = TRUE)) %>%\n  arrange(desc(number_word)) %>%\n  mutate(author = factor(author, levels = author))   # <-- ordre respecté\n\n\nganz_data_number_word %>%\n  ggplot(aes(x = author, y = number_word)) +\n  geom_col() +\n  labs(\n    title = \"Nombre de mots écrits par auteur\",\n    x = \"Auteur\",\n    y = \"Nombre de mots\"\n  ) +\n  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +\n  scale_y_continuous(labels = scales::comma)\n```\n\n::: {.cell-output-display}\n![](tidytuesday_30122025_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "tidytuesday_30122025_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

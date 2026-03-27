@@ -15,19 +15,13 @@ website:
         href: blog.qmd 
       - icon: github
         href: https://github.com/ledemocrate
-      - icon: reddit
-        href: https://www.reddit.com/user/goldentzgrahams
-      - icon: linkedin
-        href: https://www.linkedin.com/in/quentin-gollentz-697993172/
-      - icon: playstation
-        href: https://www.playstation.com/fr-fr/playstation-network/
-        
 sidebar:
   contents:
     - section: "Articles"
       contents: posts
 
 blog:
+  categories: true
   listing: true
 
 format:

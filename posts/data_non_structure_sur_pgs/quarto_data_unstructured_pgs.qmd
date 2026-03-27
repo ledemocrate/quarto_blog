@@ -4,14 +4,8 @@ subtitle: "Application aux données géographiques"
 categories: ['data science', 'R','python','geojson','postgresql','tidydata']
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
-    affiliations:
-        name: DAKA-TEAM
-        url: https://www.linkedin.com/company/daka%E2%80%A2tec/
-        city: La Madelaine
-        state: France
-        postal-code: 5900
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
 title-block-banner: "#ECF4FA"

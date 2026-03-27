@@ -4,6 +4,8 @@ categories: ['Nettoyage des données','Analyse des données']
 tags: ['data-science', 'r', 'python', 'pgvector']
 author:
     name: GOLLENTZ Quentin
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
 description: "Traitement des données du 03-03-2026"
@@ -21,7 +23,6 @@ format:
     toc-depth: 3
     html-math-method: katex
     self_contained: no
-css: css/styles.css
 editor: 
   markdown: 
     wrap: 72

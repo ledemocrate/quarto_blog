@@ -3,14 +3,8 @@ title: "De l'utilisation de Talend pour l'OpenData de l'Assemblée Nationale"
 subtitle: "Formation DATA"
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
-    affiliations:
-        name: DAKA-TEAM
-        url: https://www.linkedin.com/company/daka%E2%80%A2tec/
-        city: Lille
-        state: France
-        postal-code: 5900
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
 description: "Application sur l'Open Data de l'Assemblée Nationale"
@@ -29,12 +23,33 @@ format:
     html-math-method: katex
 engine: knitr
 css: css/styles.css
+resources:
+  - pdf/**
+editor: 
+  markdown: 
+    wrap: 72
+
 ---
 
 ```{=html}
-<embed src="pdf/talend_opendata.pdf" width="800px" height="2100px" />
 
-<object data="talend_opendata.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
-    <a href="pdf/talend_opendata.pdf">Cliquez pour télécharger.</a>
-</object>
+<div class="pdf-container">
+    <object 
+      data="pdf/talend_opendata.pdf"
+      type="application/pdf"
+      width="100%"
+      height="1000px"
+      style="margin-top: 1rem;"
+    >
+    </object>
+</div>
+
+
+
+<p style="text-align:center; font-size: 1.1rem; margin-top: 1rem;">
+    📄 <a href="pdf/talend_opendata.pdf" download>
+        Télécharger le PDF (clic ici)
+    </a>
+</p>
+
 ```

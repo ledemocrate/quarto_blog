@@ -3,7 +3,7 @@ library(bsts)
 library(readr)
 library(dplyr)
 library(lubridate)
-install.packages("bsts")
+
 path <- getwd()
 gold <- read.csv(paste0(path,"/data/monthly.csv"))
 

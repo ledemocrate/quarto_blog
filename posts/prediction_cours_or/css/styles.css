@@ -1,9 +1,14 @@
+
+/* Empêche l'image de fond de prendre toute la place */
 .quarto-title-block .quarto-title-banner {
-  background-image: url(img/BSTS.png);
-  background-size: 300px;
-  background-position: left;
+  background-image: url(img/BSTS.png);   /* ajuste le chemin si besoin */
+  background-size: 180px;                   /* taille de l'image */
   background-repeat: no-repeat;
-  padding-left: 10px;
-  background-origin: content-box;
-  color: #202D56;
+  background-position: 20px center;         /* centrée verticalement, 20px du bord */
+  
+  min-height: 160px;                        /* donne l'espace nécessaire pour le texte */
+  padding-left: 220px;                      /* espace réservé à l'image */
+  display: flex;
+  align-items: center;
 }
+

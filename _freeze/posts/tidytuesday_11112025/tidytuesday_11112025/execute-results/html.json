@@ -1,0 +1,15 @@
+{
+  "hash": "c82162387a319b6d46b2d84b081b1039",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Tidytuesday 11-11-2025 : ??\"\ncategories: ['Nettoyage des données','Analyse des données']\nauthor:\n    name: GOLLENTZ Quentin\n#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/\n    email: quentin.gollentz@outlook.com\ndate: last-modified\ndate-format: \"DD-MM-YYYY\"\ndescription: \"Traitement des données du 11-11-2025\"\ntitle-block-banner: \"#ECF4FA\"\nformat: \n  html:\n    code-fold: true\n    embed-resources: true\n    smooth-scroll: true\n    theme: cosmo\n    fontcolor: black\n    toc: true\n    toc-location: left\n    toc-title: Summary\n    toc-depth: 3\n    html-math-method: katex\n    self_contained: no\neditor: \n  markdown: \n    wrap: 72\n---\n\n# Chargement des librairies\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidytuesdayR)\n\n# Chargement des données\n\ntuesdata <- tt_load('2025-11-11')\n```\n:::\n\n\n## Data Dictionary\n\n### `who_tb_data.csv`\n\n| variable | class | description |\n|:-----------------------|:-----------------------|:-----------------------|\n| country | character | Country or territory name |\n| g_whoregion | character | WHO region |\n| iso_numeric | integer | ISO numeric country/territory code |\n| iso2 | character | ISO 2-character country/territory code. Note that Namibia's code (\"'NA'\") includes single quotes to avoid being encoded as missing |\n| iso3 | character | ISO 3-character country/territory code |\n| year | integer | Year of observation |\n| c_cdr | double | Case detection rate (all forms) \\[also known as TB treatment coverage\\], percent |\n| c_newinc_100k | double | Case notification rate, which is the total of new and relapse cases and cases with unknown previous TB treatment history per 100 000 population (calculated) |\n| cfr | double | Estimated TB case fatality ratio |\n| e_inc_100k | double | Estimated incidence (all forms) per 100 000 population |\n| e_inc_num | integer | Estimated number of incident cases (all forms) |\n| e_mort_100k | double | Estimated mortality of TB cases (all forms) per 100 000 population |\n| e_mort_exc_tbhiv_100k | double | Estimated mortality of TB cases (all forms, excluding HIV) per 100 000 population |\n| e_mort_exc_tbhiv_num | integer | Estimated number of deaths from TB (all forms, excluding HIV) |\n| e_mort_num | integer | Estimated number of deaths from TB (all forms) |\n| e_mort_tbhiv_100k | double | Estimated mortality of TB cases who are HIV-positive, per 100 000 population |\n| e_mort_tbhiv_num | integer | Estimated number of deaths from TB in people who are HIV-positive |\n| e_pop_num | integer | Estimated total population number |\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

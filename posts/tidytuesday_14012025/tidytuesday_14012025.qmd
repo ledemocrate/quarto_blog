@@ -1,13 +1,13 @@
 ---
-title: "Tidytuesday 15-05-2025 : Données des conférences useR"
+title: "Tidytuesday 14-01-2025 : Données des conférences useR"
 categories: ['Nettoyage des données','Analyse des données']
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
-description: "Traitement des données du 15-05-2025"
+description: "Traitement des données du 14-01-2025"
 title-block-banner: "#ECF4FA"
 format: 
   html:
@@ -22,8 +22,6 @@ format:
     toc-depth: 3
     html-math-method: katex
     self_contained: no
-css: css/styles.css
-bibliography: references.bib
 editor: 
   markdown: 
     wrap: 72

@@ -3,7 +3,8 @@ title: "Prédiction de série temporelle"
 categories: ['Série temporelle', 'BSTS']
 author:
   name: GOLLENTZ Quentin
-  url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+#  url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+  email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
 description: "Modèle BSTS appliqué au cours de l'or"
@@ -20,8 +21,11 @@ format:
     toc-title: Summary
     toc-depth: 3
     html-math-method: katex
-engine: knitr
+    self_contained: no
 css: css/styles.css
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 # Modèle BSTS pour la prédiction du cours de l'or
@@ -40,11 +44,11 @@ $$
 y_{t} = \underbrace{\mu_{t}}_{trend} + \underbrace{\gamma_{t}}_{seasonal} + \underbrace{\beta^{T}x_{t}}_{regression} + \epsilon_{t}
 $$
 
-- $y_{t}$: cours de l'or au temps$t$.    
+- $y_{t}$: cours de l'or au temps $t$.   
 - $\mu_{t}$: tendance (ex : hausse constante).   
 - $\gamma_{t}$: saisonnalité (ex : effet du Nouvel An chinois).   
 - $\beta^{T}x_{t}$: effets des variables explicatives (ex : taux directeur de la FED).    
-- $\epsilon_{t}$: bruit blanc gaussien,$\epsilon_t \sim \mathcal{N}(0, \sigma^2_\epsilon)$.   
+- $\epsilon_{t}$: bruit blanc gaussien,$\epsilon_t \sim \mathcal{N}(0, \sigma^2_\epsilon)$.    
 
 ---
 
@@ -59,8 +63,8 @@ $$
 \end{aligned}
 $$
 
-- $\mu_t$: niveau de la série au temps$t$.   
-- $\delta_t$: pente de la tendance.    
+- $\mu_t$: niveau de la série au temps $t$.    
+- $\delta_t$: pente de la tendance.   
 - $u_t, v_t$: bruits gaussiens de variances$\sigma^2_u, \sigma^2_v$.    
 
 ---
@@ -73,14 +77,14 @@ $$
 \gamma_{t} = -\sum_{s=1}^{S-1}\gamma_{t-s} + w_{t}, \quad w_t \sim \mathcal{N}(0, \sigma^2_w)
 $$
 
-- $S$: période saisonnière (ex : 12 pour des données     mensuelles).    
-- $w_t$: bruit saisonnier, de variance$\sigma^2_w$.     
+- $S$: période saisonnière (ex : 12 pour des données mensuelles).    
+- $w_t$: bruit saisonnier, de variance$\sigma^2_w$.   
 
 ---
 
 ## 2. Inférence bayésienne dans BSTS
 
-L'inférence bayésienne consiste à déduire la **distribution postérieure** des paramètres$p(\theta|X,y)$, où$\theta$représente l'ensemble des paramètres du modèle,$X$la matrice des régresseurs et$y$le vecteur des observations.
+L'inférence bayésienne consiste à déduire la **distribution postérieure** des paramètres $p(\theta|X,y)$, où $\theta$ représente l'ensemble des paramètres du modèle,$X$ la matrice des régresseurs et$y$le vecteur des observations.
 
 ### 2.1. Théorème de Bayes
 
@@ -88,8 +92,109 @@ $$
 \underbrace{p(\theta|X,y)}_{postérieur} \propto \underbrace{p(y|X,\theta)}_{vraissemblance} \times \underbrace{p(\theta)}_{prior}
 $$
 
-- **Vraissemblance** :$p(y|X,\theta)$mesure la compatibilité des données avec les paramètres.
-- **Prior** :$p(\theta)$encode les connaissances a priori sur les paramètres.
+- **Vraissemblance** :$p(y|X,\theta)$mesure la compatibilité des données avec les paramètres.    
+- **Prior** :$p(\theta)$encode les connaissances a priori sur les paramètres.    
+
+### 2.2 Exemple illustratif en R
+
+
+```{r}
+#| warning: false
+library(statsr)
+library(ggplot2)
+library(tidyverse)
+
+data(tapwater)
+glimpse(tapwater)
+
+ggplot(tapwater, aes(x = tthm)) +
+  geom_histogram(bins = 10, fill = "#FF6B6B", alpha = 0.7) +
+  labs(
+    title = "Histogramme de pph",
+    x = "pph",
+    y = "Fréquence"
+  ) +
+  theme_minimal()
+
+set.seed(42)
+
+# Hyperparamètres du prior
+m_0 = 35
+n_0 = 25
+s2_0 = 156.25
+v_0 = n_0 - 1
+
+# Statistiques de l'échantillon
+Y = tapwater$tthm
+ybar = mean(Y)
+s2 = var(Y)
+n = length(Y)
+
+# Hyperparamètres du posterior
+n_n = n_0 + n
+m_n = (n*ybar + n_0*m_0) / n_n
+v_n = v_0 + n
+s2_n = ((n-1)*s2 + v_0*s2_0 + n_0*n*(m_0 - ybar)^2/n_n) / v_n
+
+# Inference statsr
+bayes_inference(
+  tthm, data = tapwater, prior = "NG",
+  mu_0 = m_0, n_0 = n_0, s_0 = sqrt(s2_0), v_0 = v_0,
+  stat = "mean", type = "ci", method = "theoretical",
+  show_res = TRUE, show_summ = TRUE, show_plot = FALSE
+)
+
+# -----------------------------
+# 1. Distribution de sigma (prior & posterior)
+# -----------------------------
+
+# Prior : phi = 1/sigma^2 ~ Gamma(v0/2, v0*s2_0/2)
+phi_prior = rgamma(5000, shape = v_0/2, rate = v_0*s2_0/2)
+sigma_prior = 1/sqrt(phi_prior)
+
+# Posterior : phi_n = 1/sigma^2 ~ Gamma(vn/2, vn*s2_n/2)
+phi_post = rgamma(5000, shape = v_n/2, rate = v_n*s2_n/2)
+sigma_post = 1/sqrt(phi_post)
+
+df_sigma = tibble(
+  sigma = c(sigma_prior, sigma_post),
+  type = rep(c("Prior", "Posterior"), each = 5000)
+)
+
+ggplot(df_sigma, aes(x = sigma, fill = type, color = type)) +
+  geom_density(alpha = 0.3, linewidth = 1) +
+  labs(
+    title = "Distribution a priori et a posteriori de σ",
+    x = "σ",
+    y = "Densité"
+  ) +
+  theme_minimal()
+
+# -----------------------------
+# 2. Distribution de mu (prior & posterior)
+# -----------------------------
+
+# Prior : mu ~ Normal(m0, sigma/sqrt(n0))
+mu_prior = rnorm(5000, mean = m_0, sd = sigma_prior / sqrt(n_0))
+
+# Posterior : mu_n ~ Normal(mn, sigma/sqrt(nn))
+mu_post = rnorm(5000, mean = m_n, sd = sigma_post / sqrt(n_n))
+
+df_mu = tibble(
+  mu = c(mu_prior, mu_post),
+  type = rep(c("Prior", "Posterior"), each = 5000)
+)
+
+ggplot(df_mu, aes(x = mu, fill = type, color = type)) +
+  geom_density(alpha = 0.3, linewidth = 1) +
+  labs(
+    title = "Distribution a priori et a posteriori de μ",
+    x = "μ",
+    y = "Densité"
+  ) +
+  theme_minimal()
+
+```
 
 ---
 
@@ -129,14 +234,17 @@ Chaque composante du modèle BSTS a ses propres paramètres, auxquels on assigne
 
 Voici un exemple minimal d'implémentation du modèle BSTS pour prédire le cours de l'or :
 
-
 ```{r}
+#| warning: false
+
 library(bsts)
 library(readr)
 library(dplyr)
 library(lubridate)
+library(tidyverse)
 
-gold <- read.csv("C:/Users/QuentinGOLLENTZ/Documents/PERSO/quarto_blog/posts/prediction_cours_or/data/monthly.csv")
+path <- getwd()
+gold <- read.csv(paste0(path,"/data/monthly.csv"))
 
 gold <- gold %>%
   mutate(
@@ -145,12 +253,24 @@ gold <- gold %>%
   ) %>%
   arrange(Date)
 
-# Extract double vector
+ggplot(gold, aes(x = Date, y = Price)) +
+  geom_line(color = "#0072B2", linewidth = 1) +
+  labs(
+    title = "Cours de l'or en dollar",
+    x = "Mois",
+    y = "Prix"
+  ) +
+  theme_minimal()
+
+#Modelisation
 y <- gold$Price %>% as.double()
+# Mise en log
+y <- log(y)
 
-plot(gold$Date, y, type = "l", col = "black", lwd = 2,
-     main = "Cours de l'or mois par mois",
-     xlab = "Date", ylab = "Prix de l'or")
-
+ss <- AddLocalLinearTrend(list(), y)	
+ss <- AddSeasonal(ss, y, nseasons = 12)
+model1 <- bsts(y,state.specification = ss,niter = 1000)
+pred_r <- predict(model1, horizon = 12)
+plot(pred_r)
 
 ```

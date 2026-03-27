@@ -3,11 +3,11 @@ title: "Test de déploiement d'application Rshiny dans un document Quarto"
 categories: ['Rshiny','Integration']
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
-description: "Traitement des données du 15-05-2025"
+description: "Traitement des données du 30-12-2025"
 title-block-banner: "#ECF4FA"
 filters:
   - shinylive

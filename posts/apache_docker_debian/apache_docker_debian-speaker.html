@@ -7,8 +7,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="GOLLENTZ Quentin">
   <title>Société Alsacienne d'Artisanat de la Data – De l’utilisation d’Apache dans Docker avec Windows</title>
@@ -96,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-e5f83a74132dc4bcbd9b8dcfbe7f84ee.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-e47589ab2765e3f3698ae2a1dc05bf1f.css">
   <link rel="stylesheet" href="assets/syntax-highlight.css">
   <link rel="stylesheet" href="assets/custom.css">
   <link rel="stylesheet" href="assets/pacman.css">
@@ -323,7 +323,7 @@
     </div>
 </div>
 
-  <p class="date">03-12-2025</p>
+  <p class="date">27-03-2026</p>
 </section>
 <section id="définition-du-logiciel-libre" class="slide level2">
 <h2>Définition du logiciel libre <span class="circle"></span> <i class="fa-brands fa-r-project" style="height:120px;vertical-align:middle;"></i> <img src="img/ll-logos2.png" height="120px" style="vertical-align:middle;"></h2>
@@ -455,7 +455,7 @@ services:
 <h2>Création d’une route Apache Camel (via Talend)</h2>
 <p>Etape 1 : Mettre dans un dossier le fichier <strong>post_vote.java</strong> avec le contenu suivant</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">apache</span><span class="op">.</span><span class="im">camel</span><span class="op">.</span><span class="im">builder</span><span class="op">.</span><span class="im">RouteBuilder</span><span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">apache</span><span class="op">.</span><span class="im">camel</span><span class="op">.</span><span class="im">builder</span><span class="op">.</span><span class="im">RouteBuilder</span><span class="op">;</span></span>
 <span id="cb6-2"><a></a></span>
 <span id="cb6-3"><a></a><span class="kw">public</span> <span class="kw">class</span> post_vote <span class="kw">extends</span> RouteBuilder <span class="op">{</span></span>
 <span id="cb6-4"><a></a></span>
@@ -467,7 +467,7 @@ services:
 <span id="cb6-10"><a></a>            <span class="op">.</span><span class="fu">log</span><span class="op">(</span><span class="st">"${body}"</span><span class="op">)</span></span>
 <span id="cb6-11"><a></a>            <span class="op">.</span><span class="fu">to</span><span class="op">(</span><span class="st">"activemq:queue:VOTE?exchangePattern=InOnly"</span><span class="op">);</span></span>
 <span id="cb6-12"><a></a>    <span class="op">}</span></span>
-<span id="cb6-13"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-13"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Etape 2 : Mettre dans un dossier le fichier <strong>docker-compose.yml</strong> avec le contenu suivant</p>
 <pre><code>version: '3'
@@ -586,7 +586,7 @@ docker-compose -f karaf_docker.yml up -d</code></pre>
 <section id="test-de-lenvironnement-dévellopé" class="slide level2">
 <h2>Test de l’environnement dévellopé</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(httr)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(httr)</span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a>headers <span class="ot">=</span> <span class="fu">c</span>(</span>
 <span id="cb12-4"><a></a>  <span class="st">'Content-Type'</span> <span class="ot">=</span> <span class="st">'application/json'</span></span>
@@ -599,7 +599,7 @@ docker-compose -f karaf_docker.yml up -d</code></pre>
 <span id="cb12-11"><a></a><span class="st">}'</span>;</span>
 <span id="cb12-12"><a></a></span>
 <span id="cb12-13"><a></a>res <span class="ot">&lt;-</span> <span class="fu">VERB</span>(<span class="st">"POST"</span>, <span class="at">url =</span> <span class="st">"http://localhost:11/assemblee_nationale"</span>, <span class="at">body =</span> body, <span class="fu">add_headers</span>(headers))</span>
-<span id="cb12-14"><a></a><span class="fu">headers</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-14"><a></a><span class="fu">headers</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$server
 [1] "Jetty(12.0.12)"
@@ -821,7 +821,7 @@ attr(,"class")
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -972,13 +972,14 @@ attr(,"class")
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
