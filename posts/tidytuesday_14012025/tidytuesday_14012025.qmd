@@ -1,6 +1,6 @@
 ---
 title: "Tidytuesday 14-01-2025 : Données des conférences useR"
-categories: ['Nettoyage des données','Analyse des données']
+categories: [R,tidyverse, ggplot]
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/

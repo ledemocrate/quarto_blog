@@ -1,7 +1,6 @@
 ---
-title: "Tidytuesday 03-03-2026 : ??"
-categories: ['Nettoyage des données','Analyse des données']
-tags: ['data-science', 'r', 'python', 'pgvector']
+title: "Tidytuesday 03-03-2026 : Données des tortues"
+categories: [R,tidyverse, ggplot]
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/

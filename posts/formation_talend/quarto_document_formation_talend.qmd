@@ -1,5 +1,6 @@
 ---
 title: "De l'utilisation de Talend pour l'OpenData de l'Assemblée Nationale"
+categories: ['Talend', 'OpenData']
 subtitle: "Formation DATA"
 author:
     name: GOLLENTZ Quentin

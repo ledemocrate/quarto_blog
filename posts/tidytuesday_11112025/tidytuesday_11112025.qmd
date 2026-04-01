@@ -1,6 +1,6 @@
 ---
-title: "Tidytuesday 11-11-2025 : ??"
-categories: ['Nettoyage des données','Analyse des données']
+title: "Tidytuesday 11-11-2025 : Données de la tuberculose"
+categories: [R,tidyverse, ggplot]
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/

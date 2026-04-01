@@ -1,11 +1,12 @@
 ---
-title: "Présentation d'une BDD de type vectorielle"
+title: "De la données non structurées en base de données structurées"
 subtitle: "Application aux données de dossier législatif"
-categories: ['data science', 'R','python','pgvector','postgresql','tidydata']
+categories: ['R','python','postgresql','pgvector','vector', 'ollama']
 author:
     name: GOLLENTZ Quentin
 date: last-modified
 date-format: "DD-MM-YYYY"
+description: "Type de donnée vectoriel"
 title-block-banner: "#ECF4FA"
 format: revealjs
 ---

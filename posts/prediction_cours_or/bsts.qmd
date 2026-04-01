@@ -1,6 +1,6 @@
 ---
-title: "Prédiction de série temporelle"
-categories: ['Série temporelle', 'BSTS']
+title: "De l'approche bayésienne au modèle de série temporelle"
+categories: ['R', 'BSTS', 'gold']
 author:
   name: GOLLENTZ Quentin
 #  url: https://www.linkedin.com/in/quentin-gollentz-697993172/

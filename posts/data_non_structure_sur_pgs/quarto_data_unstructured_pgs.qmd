@@ -1,13 +1,14 @@
 ---
 title: "De la données non structurées en base de données structurées"
-subtitle: "Application aux données géographiques"
-categories: ['data science', 'R','python','geojson','postgresql','tidydata']
+subtitle: "Application aux données de dossier législatif"
+categories: ['R','python','postgresql','postgis','geojson','geometry']
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
     email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
+description: "Type de donnée géographique"
 title-block-banner: "#ECF4FA"
 bibliography: references.bib
 format: 

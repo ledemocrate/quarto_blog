@@ -1,13 +1,13 @@
 ---
-title: "Création d'un graphique de type SANSEY"
-categories: ['Graphique','Budget']
+title: "De la création d'un graphique de type SANSEY pour les données de type BUDGET"
+categories: ['R','Sansey','Budget']
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
     email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
-description: "Graphique d'un budget"
+description: "Application d'un graphique sur mes données de budget"
 title-block-banner: "#ECF4FA"
 format: 
   html:

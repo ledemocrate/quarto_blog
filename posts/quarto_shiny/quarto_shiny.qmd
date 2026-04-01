@@ -1,13 +1,13 @@
 ---
-title: "Test de déploiement d'application Rshiny dans un document Quarto"
-categories: ['Rshiny','Integration']
+title: "De l'intégration d'une application Rshiny dans un document Quarto"
+categories: ['R','RShiny', 'Quarto', 'VISA']
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
     email: quentin.gollentz@outlook.com
 date: last-modified
 date-format: "DD-MM-YYYY"
-description: "Traitement des données du 30-12-2025"
+description: "Traitement des données du 30-12-2025 : Données des VISA"
 title-block-banner: "#ECF4FA"
 filters:
   - shinylive
