@@ -5,5 +5,7 @@
 
 /.quarto/
 /posts/formation_talend/video/
+/posts/data_non_structure_sur_pgs/config_local.py
+/posts/apache_docker_debian/config_local.R
 
 **/*.quarto_ipynb

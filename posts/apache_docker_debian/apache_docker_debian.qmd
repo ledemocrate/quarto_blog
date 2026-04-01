@@ -358,6 +358,10 @@ docker-compose -f karaf_docker.yml up -d
 ```{R}
 library(httr)
 
+source("config_local.R")
+
+api_url <- API_URL
+
 headers = c(
   'Content-Type' = 'application/json'
 )
@@ -368,7 +372,7 @@ body = '{
   "depute_code": "QUENTIN"
 }';
 
-res <- VERB("POST", url = "http://176.148.154.67:1400/assemblee_nationale/post_vote", body = body, add_headers(headers))
+res <- VERB("POST", url = api_url, body = body, add_headers(headers))
 headers(res)
 ```
 

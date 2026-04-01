@@ -264,11 +264,14 @@ from sqlalchemy import create_engine
 import geopy as gp
 
 
-db = 'bdd_democratie'  
-host_db = '176.148.154.67'   
-db_port = '5432'  
-db_user = "goldentzgrahamz"  
-db_password = '02680000'
+import config_local as cfg
+
+db = cfg.db
+host_db = cfg.host_db
+db_port = cfg.db_port
+db_user = cfg.db_user
+db_password = cfg.db_password
+
 
 
 conn = psycopg2.connect(

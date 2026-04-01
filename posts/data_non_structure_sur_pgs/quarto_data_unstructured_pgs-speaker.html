@@ -626,27 +626,30 @@ First 10 features:
 <span id="cb19-5"><a></a><span class="im">import</span> geopy <span class="im">as</span> gp</span>
 <span id="cb19-6"><a></a></span>
 <span id="cb19-7"><a></a></span>
-<span id="cb19-8"><a></a>db <span class="op">=</span> <span class="st">'bdd_democratie'</span>  </span>
-<span id="cb19-9"><a></a>host_db <span class="op">=</span> <span class="st">'176.148.154.67'</span>   </span>
-<span id="cb19-10"><a></a>db_port <span class="op">=</span> <span class="st">'5432'</span>  </span>
-<span id="cb19-11"><a></a>db_user <span class="op">=</span> <span class="st">"goldentzgrahamz"</span>  </span>
-<span id="cb19-12"><a></a>db_password <span class="op">=</span> <span class="st">'02680000'</span></span>
-<span id="cb19-13"><a></a></span>
-<span id="cb19-14"><a></a></span>
-<span id="cb19-15"><a></a>conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(</span>
-<span id="cb19-16"><a></a>    host<span class="op">=</span>host_db,</span>
-<span id="cb19-17"><a></a>    database<span class="op">=</span>db,</span>
-<span id="cb19-18"><a></a>    user<span class="op">=</span>db_user,</span>
-<span id="cb19-19"><a></a>    port <span class="op">=</span> db_port,</span>
-<span id="cb19-20"><a></a>    password<span class="op">=</span>db_password)</span>
-<span id="cb19-21"><a></a></span>
-<span id="cb19-22"><a></a>engine <span class="op">=</span> create_engine(<span class="st">"postgresql://"</span><span class="op">+</span> db_user <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_password <span class="op">+</span> <span class="st">"@"</span> <span class="op">+</span> host_db <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_port <span class="op">+</span> <span class="st">"/"</span> <span class="op">+</span> db)  </span>
-<span id="cb19-23"><a></a></span>
-<span id="cb19-24"><a></a>adress <span class="op">=</span> <span class="st">"24 parc de la vallée, 68530 Buhl"</span></span>
-<span id="cb19-25"><a></a>locator <span class="op">=</span> gp.Nominatim(user_agent<span class="op">=</span><span class="st">"myGeocoder"</span>)</span>
+<span id="cb19-8"><a></a><span class="im">import</span> config_local <span class="im">as</span> cfg</span>
+<span id="cb19-9"><a></a></span>
+<span id="cb19-10"><a></a>db <span class="op">=</span> cfg.db</span>
+<span id="cb19-11"><a></a>host_db <span class="op">=</span> cfg.host_db</span>
+<span id="cb19-12"><a></a>db_port <span class="op">=</span> cfg.db_port</span>
+<span id="cb19-13"><a></a>db_user <span class="op">=</span> cfg.db_user</span>
+<span id="cb19-14"><a></a>db_password <span class="op">=</span> cfg.db_password</span>
+<span id="cb19-15"><a></a></span>
+<span id="cb19-16"><a></a></span>
+<span id="cb19-17"><a></a></span>
+<span id="cb19-18"><a></a>conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(</span>
+<span id="cb19-19"><a></a>    host<span class="op">=</span>host_db,</span>
+<span id="cb19-20"><a></a>    database<span class="op">=</span>db,</span>
+<span id="cb19-21"><a></a>    user<span class="op">=</span>db_user,</span>
+<span id="cb19-22"><a></a>    port <span class="op">=</span> db_port,</span>
+<span id="cb19-23"><a></a>    password<span class="op">=</span>db_password)</span>
+<span id="cb19-24"><a></a></span>
+<span id="cb19-25"><a></a>engine <span class="op">=</span> create_engine(<span class="st">"postgresql://"</span><span class="op">+</span> db_user <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_password <span class="op">+</span> <span class="st">"@"</span> <span class="op">+</span> host_db <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> db_port <span class="op">+</span> <span class="st">"/"</span> <span class="op">+</span> db)  </span>
 <span id="cb19-26"><a></a></span>
-<span id="cb19-27"><a></a>location <span class="op">=</span> locator.geocode(adress)</span>
-<span id="cb19-28"><a></a>location.longitude</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-27"><a></a>adress <span class="op">=</span> <span class="st">"24 parc de la vallée, 68530 Buhl"</span></span>
+<span id="cb19-28"><a></a>locator <span class="op">=</span> gp.Nominatim(user_agent<span class="op">=</span><span class="st">"myGeocoder"</span>)</span>
+<span id="cb19-29"><a></a></span>
+<span id="cb19-30"><a></a>location <span class="op">=</span> locator.geocode(adress)</span>
+<span id="cb19-31"><a></a>location.longitude</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>7.179495</code></pre>
 </div>
