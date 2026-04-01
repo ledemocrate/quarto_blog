@@ -1,7 +1,10 @@
 # Options specified here will apply to all posts in this folder
 
+lang: fr
+encoding: "UTF-8"
+
 # freeze computational output
-freeze: true
+#freeze: true
 
 # Enable banner style title blocks
 title-block-banner: false

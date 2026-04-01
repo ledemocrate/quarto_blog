@@ -2,18 +2,18 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/sankey_graph/budget.html",
+      "/posts/apache_docker_debian/apache_docker_debian.html",
+      "/posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html",
+      "/posts/tidytuesday_30122025/tidytuesday_30122025.html",
       "/posts/prediction_cours_or/bsts.html",
       "/posts/tidytuesday_03032026/tidytuesday_03032026.html",
       "/posts/tidytuesday_14012025/tidytuesday_14012025.html",
       "/posts/quarto_shiny/quarto_shiny.html",
       "/posts/democratie_empirique/democratie_empirique.html",
       "/posts/formation_talend/quarto_document_formation_talend.html",
-      "/posts/sankey_graph/budget.html",
       "/posts/tidytuesday_11112025/tidytuesday_11112025.html",
-      "/posts/tidytuesday_30122025/tidytuesday_30122025.html",
-      "/posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.html",
       "/posts/graphe_inter_vote/graphe_inter_vote.html",
-      "/posts/apache_docker_debian/apache_docker_debian.html",
       "/posts/data_vector_sur_pgs/bdd_vectorielle.html"
     ]
   }

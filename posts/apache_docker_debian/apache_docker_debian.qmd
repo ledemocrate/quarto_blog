@@ -4,8 +4,8 @@ subtitle: "Création d'une route POST_VOTE"
 categories: ['Apache Camel', 'Apache Kafka','Apache ActiveMQ','Apache Karaf','Docker','Talend','Debian']
 author:
     name: GOLLENTZ Quentin
-    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
-    email: quentin.gollentz@daka-team.com
+#    url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+    email: quentin.gollentz@outlook.com
     affiliations:
         name: DAKA-TEAM
         url: https://www.linkedin.com/company/daka%E2%80%A2tec/
@@ -205,7 +205,7 @@ docker-compose -f docker-compose.yml up -d
 
 Etape 1 : Mettre dans un dossier le fichier **post_vote.java** avec le contenu suivant  
 
-```{java}
+```java
 import org.apache.camel.builder.RouteBuilder;
 
 public class post_vote extends RouteBuilder {
@@ -367,7 +367,7 @@ body = '{
   "depute_code": "QUENTIN"
 }';
 
-res <- VERB("POST", url = "http://localhost:11/assemblee_nationale", body = body, add_headers(headers))
+res <- VERB("POST", url = "http://176.148.154.67:1400/assemblee_nationale/post_vote", body = body, add_headers(headers))
 headers(res)
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "Tidytuesday 30-12-2025 : Données des nouvelles de Nöel"
-categories: ['Nettoyage des données','Analyse des données']
+categories: [R,tidyverse, ggplot]
 author:
     name: GOLLENTZ Quentin
 #    url: https://www.linkedin.com/in/quentin-gollentz-697993172/

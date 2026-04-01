@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="fr"><head>
 <link href="../../hansi.jpg" rel="icon" type="image/jpeg">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
@@ -313,7 +313,7 @@ GOLLENTZ Quentin
   <p class="date">27-03-2026</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
-<h2 id="toc-title">Table of contents</h2>
+<h2 id="toc-title">Table des matières</h2>
 <ul>
 <li><a href="#/présentation-dun-vecteur" id="/toc-présentation-dun-vecteur">Présentation d’un vecteur</a></li>
 <li><a href="#/transformation-dun-texte-en-vecteur" id="/toc-transformation-dun-texte-en-vecteur">Transformation d’un texte en vecteur</a></li>
@@ -364,11 +364,11 @@ GOLLENTZ Quentin
 <span id="cb1-3"><a></a><span class="kw">EXPOSE</span> 11434</span>
 <span id="cb1-4"><a></a></span>
 <span id="cb1-5"><a></a><span class="kw">ENTRYPOINT</span> [<span class="st">"ollama"</span>]</span>
-<span id="cb1-6"><a></a><span class="kw">CMD</span> [<span class="st">"serve"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a></a><span class="kw">CMD</span> [<span class="st">"serve"</span>]</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <p>👉 Etape 2 : Lancer les commandes suivantes:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource docker number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>docker build -t embeddings .</span>
 <span id="cb2-2"><a></a>docker run -d -p 11434:11434 --name embeddings embeddings</span>
-<span id="cb2-3"><a></a>docker exec -it embeddings ollama pull all-minilm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a></a>docker exec -it embeddings ollama pull all-minilm</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="stockage-des-vecteurs" class="slide level2">
 <h2>Stockage des vecteurs</h2>
@@ -391,9 +391,9 @@ GOLLENTZ Quentin
 <span id="cb3-8"><a></a><span class="at">      </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> postgres</span></span>
 <span id="cb3-9"><a></a><span class="at">      </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> mydb</span></span>
 <span id="cb3-10"><a></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb3-11"><a></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"5432:5432"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-11"><a></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"5432:5432"</span></span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <p>👉 Etape 2 : Lancer les commandes suivantes:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource docker number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a> docker-compose up -d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource docker number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a> docker-compose up -d</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mise-en-place-de-pgvector-suite" class="slide level2">
 <h2>Mise en place de pgvector (Suite)</h2>
@@ -405,7 +405,7 @@ GOLLENTZ Quentin
 <span id="cb5-5"><a></a>    id_dossier TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, </span>
 <span id="cb5-6"><a></a>    titre TEXT,</span>
 <span id="cb5-7"><a></a>    embedding vector(<span class="dv">384</span>) <span class="co">--384 est la taille pour le modèle all-minilm</span></span>
-<span id="cb5-8"><a></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-8"><a></a>);</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="cas-dapplication-opendata-de-lassemblée-nationale" class="slide level2">
 <h2>Cas d’application : OpenData de l’Assemblée Nationale</h2>
@@ -467,7 +467,7 @@ GOLLENTZ Quentin
 <span id="cb6-48"><a></a>    <span class="fu">req_perform</span>()</span>
 <span id="cb6-49"><a></a>  </span>
 <span id="cb6-50"><a></a>  <span class="fu">return</span>(<span class="fu">resp_body_json</span>(resp)<span class="sc">$</span>embedding)</span>
-<span id="cb6-51"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-51"><a></a>}</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="insertion-des-titre-de-dossier-dans-la-bdd" class="slide level2">
 <h2>Insertion des titre de dossier dans la BDD</h2>
@@ -510,7 +510,7 @@ GOLLENTZ Quentin
 <span id="cb7-37"><a></a>  })</span>
 <span id="cb7-38"><a></a>}</span>
 <span id="cb7-39"><a></a><span class="co">#Application de la fonction pour chaque fichier de la liste</span></span>
-<span id="cb7-40"><a></a>dossier <span class="ot">&lt;-</span> <span class="fu">lapply</span>(liste_dossier, read_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-40"><a></a>dossier <span class="ot">&lt;-</span> <span class="fu">lapply</span>(liste_dossier, read_data)</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="rattachement-du-titre-du-scrutin-à-un-dossier" class="slide level2">
 <h2>Rattachement du titre du scrutin à un dossier</h2>
@@ -522,7 +522,7 @@ GOLLENTZ Quentin
 <span id="cb8-6"><a></a></span>
 <span id="cb8-7"><a></a><span class="fu">dbGetQuery</span>(con, </span>
 <span id="cb8-8"><a></a>          <span class="st">"SELECT titre FROM dossier_vecteurs ORDER BY embedding &lt;=&gt; $1 LIMIT 1;"</span>,</span>
-<span id="cb8-9"><a></a>          <span class="at">params =</span> <span class="fu">list</span>(vec_str))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-9"><a></a>          <span class="at">params =</span> <span class="fu">list</span>(vec_str))</span></code></pre></div><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></div>
 <p>👉 L’opérateur &lt;=&gt; calcule la distance cosinus.<br>
 👉 Le résultat renvoie le dossier le plus proche sémantiquement.</p>
 
@@ -766,12 +766,12 @@ GOLLENTZ Quentin
           // flash "checked"
           button.classList.add('code-copy-button-checked');
           var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
+          button.setAttribute("title", "Copié");
           let tooltip;
           if (window.bootstrap) {
             button.setAttribute("data-bs-toggle", "tooltip");
             button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
+            button.setAttribute("data-bs-title", "Copié");
             tooltip = new bootstrap.Tooltip(button, 
               { trigger: "manual", 
                 customClass: "code-copy-button-tooltip",

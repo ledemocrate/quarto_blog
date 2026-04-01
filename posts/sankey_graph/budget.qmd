@@ -34,47 +34,51 @@ editor:
 
 library(networkD3)
 library(tidyverse)
+library(readODS)
 
-
-data <- readODS::read_ods("C:/Users/Utilisateur/Documents/PROJET_PERSO/budget_allivial/data/budget_sankay.csv")
+path <- getwd()
+print(path)
+data <- read_ods(paste0(path,"/data/budget_sankey.csv"))
 
 nodes <- unique(c(data$source, data$target))
 
 # Attribuer un groupe à chaque nœud (exemple : "Revenus", "Dépenses", etc.)
 node_groups <- data.frame(
   name = nodes,
-  group = c("REVENUE", 
-            "REVENUE",
-            "REVENUE",
-            "REVENUE",
-            "REVENUE",
-            "REVENUE",
-            "REVENUE",
-            "REVENUE",
-            "DEPENSE",
-            "DEPENSE",
-            "INVESTISSEMENT",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "DEPENSE",
-            "INVESTISSEMENT",
-            "INVESTISSEMENT",
-            "INVESTISSEMENT",
-            "INVESTISSEMENT",
-            "DEPENSE",
-            "DEPENSE")
+group  = c(
+  "REVENUE",            # 1  RECETTE FIXE
+  "REVENUE",            # 2  SALAIRE NET
+  "REVENUE",            # 3  RECETTE
+  "DEPENSE",            # 4  DEPENSE FIXE
+  "REVENUE",            # 5  RECETTE VARIABLE
+  "DEPENSE",            # 6  DEPENSE VARIABLE
+  "REVENUE",            # 7  REMBOURSEMENT CREANCE
+  "INVESTISSEMENT",     # 8  INVESTISSEMENT
+  "DEPENSE",            # 9  LOISIRS
+  "REVENUE",            # 10 AIDE TRANSPORT
+  "REVENUE",            # 11 DIVIDENDE ET INTERET
+  "REVENUE",            # 12 TICKET RESTAURANT
+  "DEPENSE",            # 13 LOYER + CHARGE
+  "DEPENSE",            # 14 IMPREVU
+  "DEPENSE",            # 15 FRAIS DE TRANSPORT
+  "DEPENSE",            # 16 FRAIS DE NOURRITURE
+  "INVESTISSEMENT",     # 17 PRÊT
+  "INVESTISSEMENT",     # 18 THESAURISATION
+  "INVESTISSEMENT",     # 19 BOURSE
+  "INVESTISSEMENT",     # 20 EPARNE
+  "DEPENSE",            # 21 DEUTSCHKURS
+  "DEPENSE",            # 22 FRAIS MEDICAUX
+  "DEPENSE",            # 23 FRAIS CHAT
+  "DEPENSE",            # 24 IMPOT
+  "DEPENSE",            # 25 FRAIS DE NOEL
+  "DEPENSE",            # 26 TELEPHONE MOBILE
+  "DEPENSE",            # 27 ELECTRICITE
+  "DEPENSE",            # 28 BBOX
+  "DEPENSE",            # 29 BANQUE
+  "DEPENSE",            # 30 ASSURANCE HABITATION
+  "DEPENSE",            # 31 FRAIS DE VELO
+  "DEPENSE"             # 32 VOCABLE
+)
 )
 
 # Préparation des données
