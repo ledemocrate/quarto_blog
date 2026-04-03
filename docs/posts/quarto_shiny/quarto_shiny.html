@@ -43,11 +43,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-d1897f967d4dc882e6c3c4aa210b578e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-f843d79f83df8128835548d9c2869205.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <meta name="shinylive:serviceworker_dir" content="../..">
-<script src="../../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
-<script src="../../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
-<link href="../../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/shinylive-0.10.8/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="../../site_libs/quarto-contrib/shinylive-0.10.8/shinylive/run-python-blocks.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/shinylive-0.10.8/shinylive/shinylive.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -83,109 +83,57 @@ ul.task-list li input[type="checkbox"] {
       }
 </style>
 <script>
-
   
-
   function getGiscusTheme() {
-
   const quartoTheme = localStorage.getItem("quarto-color-scheme");
-
   const giscusTheme = quartoTheme === "alternate" ? "dark" : "light";
-
   // const giscusTheme = quartoTheme === "alternate" ? "dark" : "assets/giscus-light-custom.css";
-
   return giscusTheme;
-
 }
-
-
 
 function setGiscusTheme() {
-
   function sendMessage(message) {
-
     const iframe = document.querySelector('iframe.giscus-frame');
-
     if (!iframe) return;
-
     iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-
   }
-
   sendMessage({
-
     setConfig: {
-
       theme: getGiscusTheme(),
-
     },
-
   });
-
 }
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
-
   const giscusAttributes = {
-
     "src": "https://giscus.app/client.js",
-
     "data-repo": "ledemocrate/blog_comment",
-
     "data-repo-id": "R_kgDOJ4CCXA",
-
     "data-category": "General",
-
     "data-category-id": "DIC_kwDOJ4CCXM4CXvqe",
-
     "data-mapping": "pathname",
-
     "data-strict": "0",
-
     "data-reactions-enabled": "1",
-
     "data-emit-metadata": "0",
-
     "data-input-position": "top",
-
     "data-theme": getGiscusTheme(),
-
     "data-lang": "en",
-
     "crossorigin": "anonymous",
-
     "async": "",
-
   };
 
-
-
   // Dynamically create script tag
-
   const giscusScript = document.createElement("script");
-
   Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
-
   document.body.appendChild(giscusScript);
 
-
-
   // Update giscus theme when theme switcher is clicked
-
   const toggle = document.querySelector('.quarto-color-scheme-toggle');
-
   if (toggle) {
-
     toggle.addEventListener('click', setGiscusTheme);
-
   }
-
 });
-
   
-
 </script>
 
 
