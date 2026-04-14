@@ -257,7 +257,7 @@ if (FALSE) {
   library(munsell)
 }
 
-articles &lt;- read.csv("articles.csv")
+articles &lt;- read.csv("https://raw.githubusercontent.com/ledemocrate/quarto_blog/refs/heads/main/posts/inflation_calcul/data/articles.csv")
 
 # Conversion de la date
 articles$date &lt;- as.Date(substr(articles$code_ticket, 1, 8), format = "%Y%m%d")

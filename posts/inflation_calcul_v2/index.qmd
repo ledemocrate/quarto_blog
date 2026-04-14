@@ -37,7 +37,7 @@ if (FALSE) {
   library(munsell)
 }
 
-articles <- read.csv("articles.csv")
+articles <- read.csv("https://raw.githubusercontent.com/ledemocrate/quarto_blog/refs/heads/main/posts/inflation_calcul/data/articles.csv")
 
 # Conversion de la date
 articles$date <- as.Date(substr(articles$code_ticket, 1, 8), format = "%Y%m%d")
