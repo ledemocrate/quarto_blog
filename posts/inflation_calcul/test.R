@@ -1,9 +1,8 @@
+
 library(tidyverse)
 library(pdftools)
 
 path <- getwd()
-txt   <- pdf_text(paste0(path,"/FACTURE/","Ticket de caisse_02032026-141721.pdf"))
-txt
 
 liste_facture <- paste0(path,"/FACTURE/",list.files(paste0(path,"/FACTURE/")))
 analyse_ticket_u <- function(pdf_file) {
@@ -156,6 +155,13 @@ analyse_ticket_u <- function(pdf_file) {
 }
 
 result <- lapply(liste_facture, analyse_ticket_u)
+facture <- bind_rows(result[[]]$facture)
+
+## Bind.rows
 
 
+ticket <- bind_rows(lapply(result, `[[`, "ticket"))
+articles <- bind_rows(lapply(result, `[[`, "articles"))
 
+lapply(result, `[[`, "ticket")
+`[[`(result[1] "ticket")

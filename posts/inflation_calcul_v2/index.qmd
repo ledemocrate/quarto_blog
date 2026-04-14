@@ -1,0 +1,84 @@
+---
+title: "De la récupération des données de PDF au calcul de l'inflation - Partie Shiny"
+categories: ['R', 'Shiny', 'Inflation']
+author:
+  name: GOLLENTZ Quentin
+#  url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+  email: quentin.gollentz@outlook.com
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Récupération de données issus de PDF"
+title-block-banner: "#ECF4FA"
+filters:
+  - shinylive
+shinylive:
+  files:
+    - data/articles.csv
+
+---
+
+## Création d'un dashboard de réprésentation de l'inflation 
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+
+library(bslib)
+library(shiny)
+library(readr)
+library(utils)
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(jsonlite)
+library(maps)
+library(ggplot2)
+if (FALSE) {
+  library(munsell)
+}
+
+articles <- read.csv("articles.csv")
+
+# Conversion de la date
+articles$date <- as.Date(substr(articles$code_ticket, 1, 8), format = "%Y%m%d")
+
+ui <- fluidPage(
+  titlePanel("Évolution du prix des articles"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "article",
+        "Choisir un article :",
+        choices = sort(unique(articles$nom))
+      )
+    ),
+    
+    mainPanel(
+      plotOutput("plot_prix")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  data_filtre <- reactive({
+    articles %>% filter(nom == input$article)
+  })
+  
+  output$plot_prix <- renderPlot({
+    ggplot(data_filtre(), aes(x = date, y = prix_unitaire)) +
+      geom_line(color = "blue") +
+      geom_point(size = 3) +
+      labs(
+        title = paste("Prix unitaire de :", input$article),
+        x = "Date",
+        y = "Prix (€)"
+      ) +
+      theme_minimal()
+  })
+}
+
+shinyApp(ui, server)
+```
+

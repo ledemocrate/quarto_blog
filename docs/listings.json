@@ -3,6 +3,7 @@
     "listing": "/blog.html",
     "items": [
       "/posts/inflation_calcul/inflation_calcul.html",
+      "/posts/inflation_calcul_v2/index.html",
       "/posts/tidytuesday_03032026/tidytuesday_03032026.html",
       "/posts/tidytuesday_11112025/tidytuesday_11112025.html",
       "/posts/sankey_graph/budget.html",

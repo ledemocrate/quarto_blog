@@ -240,3 +240,23 @@ result[[1]]$ticket
 ```{r}
 result[[1]]$articles
 ```
+
+## Rassemblement des data.frame
+
+L'objectif est maitenant de réduire la liste des factures en deux data;frame distinct à savoir celui du ticket et celui des articles.
+
+- Ticket 
+```{r}
+ticket <- bind_rows(lapply(result, `[[`, "ticket"))
+write.csv(ticket, "../inflation_calcul/data/ticket.csv", row.names = FALSE)
+head(ticket,6)
+```
+
+- Articles : 
+```{r}
+articles <- bind_rows(lapply(result, `[[`, "articles"))
+write.csv(articles, "../inflation_calcul/data/articles.csv", row.names = FALSE)
+head(articles,6)
+```
+
+## Création d'un dashboard de réprésentation de l'inflation 

@@ -109,5 +109,11 @@
   },
   "posts/inflation_calcul/inflation_calcul.qmd": {
     "inflation_calcul.html": "29bd96fd"
+  },
+  "posts/inflation_calcul_v2/inflation_calcul_v2.qmd": {
+    "inflation_calcul_v2.html": "1ad7be32"
+  },
+  "posts/inflation_calcul_v2/index.qmd": {
+    "index.html": "95ef6ec9"
   }
 }
