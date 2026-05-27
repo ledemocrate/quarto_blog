@@ -115,5 +115,14 @@
   },
   "posts/inflation_calcul_v2/index.qmd": {
     "index.html": "95ef6ec9"
+  },
+  "posts/tidytuesday_12052026/tidytuesday_12052026.qmd": {
+    "tidytuesday_12052026.html": "555619ff"
+  },
+  "posts/tidytuesday_12052026/index.qmd": {
+    "index.html": "f0eafa6c"
+  },
+  "posts/quarto_shiny/index.qmd": {
+    "index.html": "c2f3c56b"
   }
 }

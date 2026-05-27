@@ -28,6 +28,6 @@ format:
   html:
     theme: litera
     css: styles.css
-
-
-
+    
+execute:
+  python: ~/.venvs/quarto/bin/python

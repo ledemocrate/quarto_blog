@@ -13,9 +13,7 @@ title-block-banner: "#ECF4FA"
 format: 
   html:
     code-fold: true
-    embed-resources: true
     smooth-scroll: true
-    theme: cosmo
     fontcolor: black
     toc: true
     toc-location: left

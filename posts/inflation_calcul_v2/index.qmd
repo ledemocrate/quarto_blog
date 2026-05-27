@@ -1,5 +1,6 @@
 ---
 title: "De la récupération des données de PDF au calcul de l'inflation - Partie Shiny"
+format: html
 categories: ['R', 'Shiny', 'Inflation']
 author:
   name: GOLLENTZ Quentin
@@ -14,7 +15,6 @@ filters:
 shinylive:
   files:
     - data/articles.csv
-
 ---
 
 ## Création d'un dashboard de réprésentation de l'inflation 
@@ -22,6 +22,7 @@ shinylive:
 ```{shinylive-r}
 #| standalone: true
 #| viewerHeight: 600
+
 
 library(bslib)
 library(shiny)

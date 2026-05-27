@@ -9,3 +9,4 @@
 /posts/apache_docker_debian/config_local.R
 
 **/*.quarto_ipynb
+.positai
