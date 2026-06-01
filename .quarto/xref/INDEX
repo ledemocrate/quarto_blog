@@ -1,128 +1,59 @@
 {
-  "about.qmd": {
-    "about.html": "f05e69c1"
+  "blog.qmd": {
+    "blog.html": "530bf803"
   },
   "index.qmd": {
-    "index.html": "f46c2a05"
-  },
-  "posts/post-with-code/index.qmd": {
-    "index.html": "1f067ce8"
-  },
-  "posts/welcome/index.qmd": {
-    "index.html": "e96f7c46"
-  },
-  "blog.qmd": {
-    "blog.html": "b0a8021a"
-  },
-  "posts/formation_data_talend/quarto_document_formation_talend.qmd": {
-    "quarto_document_formation_talend.html": "1068fd98"
-  },
-  "posts/formation_data_talend/new_post.qmd": {
-    "new_post.html": "2237fee9"
-  },
-  "posts/test/quarto_document_formation_talend.qmd": {
-    "quarto_document_formation_talend.html": "6ed08e1e"
-  },
-  "posts/formation_talend/quarto_document_formation_talend.qmd": {
-    "quarto_document_formation_talend.html": "d2bef26c"
-  },
-  "posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.qmd": {
-    "quarto_data_unstructured_pgs.html": "795a4d0f"
-  },
-  "posts/democratie_empirique/democratie_empirique.qmd": {
-    "democratie_empirique.html": "86c3612a"
-  },
-  "posts/graphe_inter_vote/graphe_inter_vote.qmd": {
-    "graphe_inter_vote.html": "cf70e37e"
-  },
-  "posts/crypthographie_homomorphe/democratie_empirique.qmd": {
-    "democratie_empirique.html": "ca4d4469"
-  },
-  "posts/du_contrat_social/du_contrat_social.qmd": {
-    "du_contrat_social.html": "f97abe98"
-  },
-  "posts/data_non_structure_sur_pgs_bis/quarto_data_unstructured_pgs_bis.qmd": {
-    "quarto_data_unstructured_pgs_bis.html": "1060cdfd"
+    "index.html": "e42e0dd8"
   },
   "posts/apache_docker_debian/apache_docker_debian.qmd": {
-    "apache_docker_debian.html": "2fee3722"
+    "apache_docker_debian.html": "10a2bbec"
   },
-  "docs/posts/tidytuesday_20240804/tidytuesday_20240804.qmd": {
-    "tidytuesday_20240804.html": "201fac33"
-  },
-  "posts/tidytuesday_20240804/tidytuesday_20240804.qmd": {
-    "tidytuesday_20240804.html": "1ba208d7"
-  },
-  "posts/kaggle/escort_analysis.qmd": {
-    "escort_analysis.html": "299e3e71"
-  },
-  "posts/test/test.qmd": {
-    "test.html": "c4c1ca23"
-  },
-  "posts/tidytuesday_14052025/tidytuesday_15052025.qmd": {
-    "tidytuesday_15052025.html": "723d3529"
-  },
-  "posts/tidytuesday_10092025/tidytuesday_10092025.qmd": {
-    "tidytuesday_10092025.html": "f20c33d3"
-  },
-  "posts/test_github_rshiny/test.qmd": {
-    "test.html": "d8323971"
-  },
-  "posts/quarto_shiny/quarto_shiny.qmd": {
-    "quarto_shiny.html": "52634958"
-  },
-  "posts/tidytuesday_3012025/tidytuesday_30122025.qmd": {
-    "tidytuesday_30122025.html": "93676225"
-  },
-  "posts/tidytuesday_14112025/tidytuesday_14112025.qmd": {
-    "tidytuesday_14112025.html": "50237db5"
-  },
-  "posts/sankey_graph/budget.qmd": {
-    "budget.html": "d540eefc"
+  "posts/data_non_structure_sur_pgs/quarto_data_unstructured_pgs.qmd": {
+    "quarto_data_unstructured_pgs.html": "634e2ff6"
   },
   "posts/data_vector_sur_pgs/bdd_vectorielle.qmd": {
-    "bdd_vectorielle.html": "cde16106"
+    "bdd_vectorielle.html": "25036236"
   },
-  "posts/tidytuesday_03032026/tidytuesday_03032026.qmd": {
-    "tidytuesday_03032026.html": "74b80044"
+  "posts/democratie_empirique/democratie_empirique.qmd": {
+    "democratie_empirique.html": "c838ba41"
   },
-  "posts/tidytuesday_03032026/index.qmd": {
-    "index.html": "a48d0471"
+  "posts/formation_talend/quarto_document_formation_talend.qmd": {
+    "quarto_document_formation_talend.html": "6c861374"
   },
-  "posts/prediction_cours_or/bsts.qmd": {
-    "bsts.html": "7dfde6cd"
-  },
-  "posts/tidytuesday_14052025/tidytuesday_14012025.qmd": {
-    "tidytuesday_14012025.html": "99d589fa"
-  },
-  "posts/tidytuesday_30122025/tidytuesday_30122025.qmd": {
-    "tidytuesday_30122025.html": "7d683513"
-  },
-  "posts/tidytuesday_11112025/tidytuesday_11112025.qmd": {
-    "tidytuesday_11112025.html": "7e14987b"
-  },
-  "posts/tidytuesday_14012025/tidytuesday_14012025.qmd": {
-    "tidytuesday_14012025.html": "bf6dbe05"
-  },
-  "SECURITY.md": {
-    "SECURITY.html": "b0ee2792"
+  "posts/graphe_inter_vote/graphe_inter_vote.qmd": {
+    "graphe_inter_vote.html": "9e0079f0"
   },
   "posts/inflation_calcul/inflation_calcul.qmd": {
-    "inflation_calcul.html": "29bd96fd"
-  },
-  "posts/inflation_calcul_v2/inflation_calcul_v2.qmd": {
-    "inflation_calcul_v2.html": "1ad7be32"
+    "inflation_calcul.html": "be3a91a2"
   },
   "posts/inflation_calcul_v2/index.qmd": {
-    "index.html": "95ef6ec9"
+    "index.html": "7a477759"
   },
-  "posts/tidytuesday_12052026/tidytuesday_12052026.qmd": {
-    "tidytuesday_12052026.html": "555619ff"
-  },
-  "posts/tidytuesday_12052026/index.qmd": {
-    "index.html": "f0eafa6c"
+  "posts/prediction_cours_or/bsts.qmd": {
+    "bsts.html": "ae8f60a8"
   },
   "posts/quarto_shiny/index.qmd": {
-    "index.html": "c2f3c56b"
+    "index.html": "192e99c2"
+  },
+  "posts/sankey_graph/budget.qmd": {
+    "budget.html": "3b091f8d"
+  },
+  "posts/tidytuesday_03032026/tidytuesday_03032026.qmd": {
+    "tidytuesday_03032026.html": "6e383b85"
+  },
+  "posts/tidytuesday_11112025/tidytuesday_11112025.qmd": {
+    "tidytuesday_11112025.html": "f19fae0a"
+  },
+  "posts/tidytuesday_12052026/index.qmd": {
+    "index.html": "98d864c4"
+  },
+  "posts/tidytuesday_14012025/tidytuesday_14012025.qmd": {
+    "tidytuesday_14012025.html": "277cc617"
+  },
+  "posts/tidytuesday_30122025/tidytuesday_30122025.qmd": {
+    "tidytuesday_30122025.html": "1659c6d8"
+  },
+  "SECURITY.md": {
+    "SECURITY.html": "6f127fcc"
   }
 }
