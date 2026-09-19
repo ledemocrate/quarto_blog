@@ -55,5 +55,11 @@
   },
   "SECURITY.md": {
     "SECURITY.html": "6f127fcc"
+  },
+  "posts/densite_bureau_tabac/index.qmd": {
+    "index.html": "99a5aa28"
+  },
+  "posts/mix_sound/index.qmd": {
+    "index.html": "b35f21eb"
   }
 }

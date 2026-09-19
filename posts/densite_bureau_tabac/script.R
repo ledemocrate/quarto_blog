@@ -1,0 +1,76 @@
+library(tidyverse)
+library(readr)
+
+# Charger les données
+data <- read_csv2("DS_SIDE_CREA_ENT_DEP_REG_NAT_CJ_2025_data.csv")
+
+# Filtrer pour ne garder que les données totales (_T) ou spécifiques
+data_2024 <- data %>%
+  filter(GEO_OBJECT == "DEP", TIME_PERIOD == 2024) %>%
+  group_by(GEO) %>%
+  summarise(total_creations = sum(OBS_VALUE, na.rm = TRUE))
+
+# Convertir GEO en nom de région/département (optionnel)
+# Exemple : Ajouter une colonne avec le nom de la région à partir du code GEO
+# (nécessite un tableau de correspondance code → nom)
+
+library(giscoR)
+library(sf)
+library(ggplot2)
+library(dplyr)
+library(viridis)
+
+departements_sf <- gisco_get_nuts(
+  country = "France",  # Filtrer pour la France
+  nuts_level = 3,     # NUTS 2 = régions
+  year = 2021,        # Année de référence
+  resolution = 10     # Résolution (10 = haute)
+)
+
+# Table de correspondance entre le numéro INSEE et le nom du département
+departements_correspondance <- data.frame(
+  GEO = c(
+    "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+    "11", "12", "13", "14", "15", "16", "17", "18", "19", "21",
+    "22", "23", "24", "25", "26", "27", "28", "29", "30", "31",
+    "32", "33", "34", "35", "36", "37", "38", "39", "40", "41",
+    "42", "43", "44", "45", "46", "47", "48", "49", "50", "51",
+    "52", "53", "54", "55", "56", "57", "58", "59", "60", "61",
+    "62", "63", "64", "65", "66", "67", "68", "69", "70", "71",
+    "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
+    "82", "83", "84", "85", "86", "87", "88", "89", "90", "91",
+    "92", "93", "94", "95", "971", "972", "973", "974", "976"
+  ),
+  NAME_LATN = c(
+    "Ain", "Aisne", "Allier", "Alpes-de-Haute-Provence", "Hautes-Alpes", "Alpes-Maritimes",
+    "Ardèche", "Ardennes", "Ariège", "Aube", "Aude", "Aveyron", "Bouches-du-Rhône",
+    "Calvados", "Cantal", "Charente", "Charente-Maritime", "Cher", "Corrèze", "Côte-d'Or",
+    "Côtes-d'Armor", "Creuse", "Dordogne", "Doubs", "Drôme", "Eure", "Eure-et-Loir",
+    "Finistère", "Gard", "Haute-Garonne", "Gers", "Gironde", "Hérault", "Ille-et-Vilaine",
+    "Indre", "Indre-et-Loire", "Isère", "Jura", "Landes", "Loir-et-Cher", "Loire",
+    "Haute-Loire", "Loire-Atlantique", "Loiret", "Lot", "Lot-et-Garonne", "Lozère",
+    "Maine-et-Loire", "Manche", "Marne", "Haute-Marne", "Mayenne", "Meurthe-et-Moselle","Moselle",
+    "Morbihan", "Moselle", "Nièvre", "Nord", "Oise", "Orne", "Pas-de-Calais", "Puy-de-Dôme",
+    "Pyrénées-Atlantiques", "Hautes-Pyrénées", "Pyrénées-Orientales", "Bas-Rhin", "Haut-Rhin",
+    "Rhône", "Haute-Saône", "Saône-et-Loire", "Sarthe", "Savoie", "Haute-Savoie", "Paris",
+    "Seine-Maritime", "Seine-et-Marne", "Yvelines", "Deux-Sèvres", "Somme", "Tarn", "Tarn-et-Garonne",
+    "Var", "Vaucluse", "Vendée", "Vienne", "Haute-Vienne", "Vosges", "Yonne", "Territoire de Belfort",
+    "Essonne", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne", "Val-d'Oise",
+    "Guadeloupe", "Martinique", "Guyane", "La Réunion", "Mayotte"
+  ),
+  stringsAsFactors = FALSE
+)
+
+departements_sf <- left_join(departements_sf, departements_correspondance, by = "NAME_LATN")
+
+departements_sf <- left_join(departements_sf, data_2024, by = "GEO")
+
+ggplot(departements_sf) +
+  geom_sf(aes(fill = total_creations), color = "white", size = 0.1) +
+  scale_fill_viridis(
+    option = "plasma",
+    direction = -1,
+    name = "Nombre de créations d'entreprises en 2024"
+  ) +
+  labs(title = "Créations d'entreprises par département en 2024") +
+  theme_minimal()

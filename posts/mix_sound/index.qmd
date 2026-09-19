@@ -1,0 +1,97 @@
+---
+title: "Du mixage d'un son avec R"
+author:
+  name: GOLLENTZ Quentin
+#  url: https://www.linkedin.com/in/quentin-gollentz-697993172/
+  email: quentin.gollentz@outlook.com
+date: last-modified
+date-format: "DD-MM-YYYY"
+description: "Création d'une boucle de SKINS INTRO BY SEAGEL"
+title-block-banner: "#ECF4FA"
+format: 
+  html:
+    code-fold: true
+    smooth-scroll: true
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Summary
+    toc-depth: 3
+    html-math-method: katex
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Mixage d'un son avec R
+
+## Introduction
+
+Pour être tout à fait transparant, je ne suis pas très à l'aise dans l'univers de la musique.
+A l'époque de l'école c'était une matière qui me faisait baisser ma moyenne générale.   
+Pour être plus transpartant bien qu'étant un consommateur actif je reste dans la passivité et n'ai jamais fait plus que vaguement fredonné mes musiques.
+Je pensait naievement que "rapper" était une activité simple, mais que nenni ; j'ai appris suite à une soirée avec des amis dans laquelle on s'est mis à rapper qu'il est plus difficille d'écrire des textes que ce que l'on pensee et qu'il est encore plus difficille de les chanter. 
+
+Néanmoins il y a un son que j'aime bien mais seulement une partie et j'aimerais la bouclé.
+Ne connaissant rien à la musique mais ayant vaguement des connaiasances dans la science des données.
+
+ON va considérer la musique comme étant une donné, pour êtr plus précis comme une suite dee chiffres, un vecteur.
+Donc l'opération mathématique de mon souhait consite à couper le vecteur pour la partie intéressante et la bouclé.
+
+---
+
+## Découpage du son
+
+
+```{r}
+#| warning: false
+
+# install.packages("signal")
+# install.packages("tuneR")
+
+# install.packages("av")   # pour décoder les MP3
+
+library(tuneR)
+library(signal)
+
+
+audio <- readMP3("skins_tune.mp3")
+x <- audio@left
+fs <- audio@samp.rate
+x <- audio@left   # signal en numérique
+fs <- audio@samp.rate  # fréquence d'échantillonnage
+
+t1 <- 24   # début en secondes
+t2 <- 90   # fin en secondes
+
+i1 <- floor(t1 * fs)
+i2 <- floor(t2 * fs)
+
+segment <- x[i1:i2]
+```
+
+## Bouclage du son
+
+```{r}
+segment_loop <- segment[ rep(1:length(segment), times = 5) ]
+audio_loop <- Wave(left = segment_loop, samp.rate = fs, bit = audio@bit)
+writeWave(audio_loop, "segment_loop_5x.wav")
+```
+
+
+## Intégration du son dans le document
+
+```{r}
+html_tag_audio <- function(file, type = c("wav")) {
+  type <- match.arg(type)
+  htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = file,
+      type = glue::glue("audio/{type}", type = type)
+    )
+  )
+}
+
+html_tag_audio("segment_loop_5x.wav", type = "wav")
+```
